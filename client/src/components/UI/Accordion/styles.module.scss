@@ -1,0 +1,28 @@
+.button {
+  cursor: pointer;
+  user-select: none;
+}
+
+.content {
+  overflow: hidden;
+  transition-property: max-height;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.btn_icon {
+  width: 12px;
+  height: 12px;
+
+  stroke: var(--gray-900);
+  stroke-width: 1.5;
+
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transform: rotate(270deg);
+}
+
+.btn_icon_active {
+  transform: rotate(90deg);
+}

@@ -1,0 +1,31 @@
+.input_wrap {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+
+  &:checked ~ .custom_radio {
+      background: var(--primary);
+      border: 2px solid var(--primary);
+  }
+}
+
+.custom_radio {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--gray-200);
+  border-radius: 100px;
+
+  span {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--white);
+    border-radius: 100px;
+  }
+}

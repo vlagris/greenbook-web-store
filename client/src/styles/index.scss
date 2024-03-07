@@ -1,0 +1,15 @@
+@import "reset";
+@import "fonts";
+@import "variables";
+@import "scrollBar";
+@import "container";
+@import "buttons";
+
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.body_overflow {
+  overflow: hidden;
+}

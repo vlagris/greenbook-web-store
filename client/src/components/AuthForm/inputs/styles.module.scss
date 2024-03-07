@@ -1,0 +1,47 @@
+.wrap {
+  width: 100%;
+}
+
+.input_wrap {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--gray-100);
+  border-radius: 6px;
+  color: var(--gray-900);
+  outline: none;
+
+  &::placeholder {
+    color: var(--gray-400);
+  }
+}
+
+.input_error {
+  border-color:var(--red);
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--gray-900);
+  stroke-width: 0.5px;
+}
+
+.error_description {
+  margin-top: 6px;
+  color: var(--red);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+}
