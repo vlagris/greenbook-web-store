@@ -1,11 +1,12 @@
 import React from 'react';
+import {clsx} from "clsx";
 import classes from "@components/Pagination/styles.module.scss";
-import {joinClasses} from "@/utils/joinClasses.ts";
+
 
 function EllipsisButton() {
 
   return (
-     <button className={joinClasses([classes.btn_page, classes.disabled])}>
+     <button className={clsx(classes.btn_page, classes.disabled)}>
        ...
      </button>
   );

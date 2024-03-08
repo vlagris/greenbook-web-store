@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
+import {clsx} from "clsx";
 import Portal from "@components/UI/Modal/Portal";
 import classes from "./styles.module.scss";
-import {joinClasses} from "@/utils/joinClasses.ts";
 
 interface ModalProps {
   children: React.ReactNode,
@@ -38,7 +38,7 @@ function Modal({ children, show, onHide, className }: ModalProps) {
         <Portal>
           <div
             onClick={handleClick}
-            className={className? joinClasses([classes.overlay, className]) : classes.overlay}
+            className={clsx(classes.overlay, className)}
           >
             {children}
           </div>

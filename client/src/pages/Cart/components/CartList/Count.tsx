@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {clsx} from "clsx";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
 import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
 import {updateItemInCart} from "@/store/cart/cart.slice.ts";
@@ -46,7 +47,7 @@ function Count({quantity: initialQuantity, id}: CountProps) {
   return (
     <div className={classes.count}>
       <button
-        className={classes.count_btn + " " + classes.count_minus}
+        className={clsx(classes.count_btn, classes.count_minus)}
         onClick={handleButton(quantity - 1)}
       />
       <input
@@ -56,7 +57,7 @@ function Count({quantity: initialQuantity, id}: CountProps) {
         onBlur={handleBlur}
       />
       <button
-        className={classes.count_btn + " " + classes.count_plus}
+        className={clsx(classes.count_btn, classes.count_plus)}
         onClick={handleButton(quantity + 1)}
       />
     </div>

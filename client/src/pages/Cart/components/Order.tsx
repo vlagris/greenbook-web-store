@@ -1,7 +1,8 @@
 import React from 'react';
+import {clsx} from "clsx";
 import classes from "@pages/Cart/styles.module.scss";
 import {currency} from "@/constants.ts";
-import {joinClasses} from "@/utils/joinClasses.ts";
+
 
 function Order({total}: {total: number}) {
   return (
@@ -29,7 +30,9 @@ function Order({total}: {total: number}) {
         </div>
       </div>
 
-      <button className={joinClasses(["btn-large", classes.order_btn])}>Перейти к оформлению</button>
+      <button className={clsx("btn-large", classes.order_btn)}>
+        Перейти к оформлению
+      </button>
 
     </div>
   );

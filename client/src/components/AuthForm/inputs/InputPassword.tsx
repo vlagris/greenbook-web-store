@@ -1,21 +1,20 @@
 import React, {useState} from 'react';
+import {clsx} from "clsx";
 import classes from "@components/AuthForm/inputs/styles.module.scss";
 // @ts-ignore
 import EyeOn from "@assets/icons/eye-open.svg?react";
 // @ts-ignore
 import EyeOff from "@assets/icons/eye-off.svg?react";
-import {joinClasses} from "@/utils/joinClasses.ts";
 
 
 function InputPassword({error = false, errorMessage = "", ...props}) {
   const [show, setShow] = useState(false);
-  const className = error? joinClasses([classes.input, classes.input_error]) : classes.input;
 
   return (
     <div className={classes.wrap}>
       <div className={classes.input_wrap}>
         <input
-          className={className}
+          className={clsx(classes.input, error && classes.input_error)}
           autoComplete="off"
           {...props}
           type={show ? "text" : "password"}

@@ -1,12 +1,12 @@
 import React from 'react';
+import {clsx} from "clsx";
 // @ts-ignore
 import classes from "@pages/Cart/styles.module.scss";
 import {Link} from "react-router-dom";
-import {joinClasses} from "@/utils/joinClasses.ts";
 
 function EmptyCart() {
   return (
-    <div className={joinClasses([classes.cart, classes.cart_empty])}>
+    <div className={clsx(classes.cart, classes.cart_empty)}>
       <h2 className={classes.title}>
         В корзине пока пусто
       </h2>

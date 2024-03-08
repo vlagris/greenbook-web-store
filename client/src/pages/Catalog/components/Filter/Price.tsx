@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import classes from "./styles.module.scss";
-import {useParams, useSearchParams} from "react-router-dom";
-import * as api from "@/services/api";
+import {useSearchParams} from "react-router-dom";
+
 
 
 interface PriceProps {
