@@ -1,15 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "@/store/cart/cart.slice";
-import userDataReducer from "@/store/userData/userData.slice";
-import GenresReducer from "@/store/genres/genres.slice";
+import { authReducer } from "@/store/auth";
+import { cartReducer } from "@/store/cart";
+import { genresReducer } from "@/store/genres";
+import { listenerMiddleware } from "@/store/listenerMiddleware.ts";
+
+
+
+const initialMiddleware = [listenerMiddleware.middleware];
 
 export const store = configureStore({
   reducer: {
-    userData: userDataReducer,
-    genres: GenresReducer,
+    auth: authReducer,
+    genres: genresReducer,
     cart: cartReducer,
   },
-
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(initialMiddleware),
 });
 
 

@@ -1,5 +1,6 @@
 import {mainApi} from "@/services/api/mainApi.ts";
 import {Genre} from "@/types.ts";
+import {createHttpError} from "@/utils/createHttpError.ts";
 
 
 type GenreResponse = {
@@ -25,7 +26,6 @@ export async function getGenres() {
     const res = await mainApi.get<GenreResponse[]>('/genres/');
     return genresResponseAdepter(res.data);
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }

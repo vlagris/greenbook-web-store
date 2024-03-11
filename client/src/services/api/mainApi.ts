@@ -1,7 +1,7 @@
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
 import {API_URL} from "@/constants.ts";
-import {refreshToken, selectToken} from "@/store/userData/userData.slice.ts";
+import {fetchToken, userDataSelectors} from "../../store/auth";
 import {store} from "@/store/store.ts";
 
 export const mainApi = axios.create({
@@ -11,33 +11,32 @@ export const mainApi = axios.create({
 
 mainApi.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = `Bearer ${selectToken(store.getState())}`
-    return config
+    config.headers.Authorization = `Bearer ${userDataSelectors.token(store.getState())}`
+    return config;
   }
 )
 
 mainApi.interceptors.response.use((response) => {
+  const {user, token, loading} = userDataSelectors.state(store.getState());
 
-  // const {user, token} = store.getState().userData;
-  //
-  // if (!user.id) {
-  //   return response;
-  // }
-  // if (!token.token) {
-  //   store.dispatch(refreshToken());
-  //   return response;
-  // }
-  //
-  // const decode = jwtDecode(token.token);
-  // let expTime = 0;
-  // const curTime = new Date().getTime()
-  //
-  // if (decode.exp) {
-  //   expTime = decode.exp * 1000;
-  // }
-  // if (expTime - curTime <= 120000) {
-  //   store.dispatch(refreshToken());
-  // }
+  if (!user.id) {
+    return response;
+  }
+  if (!token.value && !loading) {
+    store.dispatch(fetchToken());
+    return response;
+  }
+
+  const decode = jwtDecode(token.value);
+  let expTime = 0;
+  const curTime = new Date().getTime()
+
+  if (decode.exp) {
+    expTime = decode.exp * 1000;
+  }
+  if (expTime - curTime <= 120000) {
+    store.dispatch(fetchToken());
+  }
 
   return response;
 }, async (error) => {
@@ -49,9 +48,9 @@ mainApi.interceptors.response.use((response) => {
     error.config &&
     !error.config._isRetry
   ) {
-    await store.dispatch(refreshToken());
+    await store.dispatch(fetchToken());
     return mainApi.request(originalRequest);
   }
 
   return Promise.reject(error);
-})
+});

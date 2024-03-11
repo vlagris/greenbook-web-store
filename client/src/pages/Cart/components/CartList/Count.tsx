@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {clsx} from "clsx";
-import classes from "@pages/Cart/components/CartList/styles.module.scss";
 import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {updateItemInCart} from "@/store/cart/cart.slice.ts";
+import {updateItemInCart} from "@/store/cart";
+import classes from "@pages/Cart/components/CartList/styles.module.scss";
 
 interface CountProps {
   quantity: number,

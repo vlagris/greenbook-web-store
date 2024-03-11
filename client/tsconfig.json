@@ -22,14 +22,12 @@
     "allowSyntheticDefaultImports": true,
 
     /* Alias */
-    "types": ["node"],
+    "types": ["node", "jest"],
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@assets/*": ["./src/assets/*"],
-      "@pages/*": ["./src/pages/*"],
+      "@pages/*": ["./src/pages/*"]
     }
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  }
 }

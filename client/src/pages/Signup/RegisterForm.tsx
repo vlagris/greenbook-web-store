@@ -6,7 +6,7 @@ import UseFormField from "@/hooks/useFormField.ts";
 import validator from "validator";
 import {ErrorType, HttpError} from "@/types.ts";
 import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {register} from "@/store/userData/userData.slice.ts";
+import {register} from "../../store/auth";
 import {formErrorMessage} from "@/constants.ts";
 
 function RegisterForm() {

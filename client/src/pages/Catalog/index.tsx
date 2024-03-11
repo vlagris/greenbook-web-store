@@ -8,14 +8,14 @@ import Filter from "@pages/Catalog/components/Filter";
 import ProductList from "@pages/Catalog/components/ProductList.tsx";
 import useApi from "@/hooks/useApi.ts";
 import Loader from "@components/Loader";
-import classes from "./styles.module.scss";
 import {useAppSelector} from "@/hooks/useTypedReduxHooks.ts";
-import {selectGenres} from "@/store/genres/genres.slice.ts";
+import { genresSelectors } from "@/store/genres";
+import classes from "./styles.module.scss";
 
 
 const LIMIT = 15;
 function Catalog() {
-  const genres = useAppSelector(selectGenres);
+  const genres = useAppSelector(genresSelectors.genres);
   const [genre, setGenre] = useState<Genre>();
   const [crumbs, setCrumbs] = useState<Crumb[]>([]);
   const {data, error, loading, request} = useApi<Books>();

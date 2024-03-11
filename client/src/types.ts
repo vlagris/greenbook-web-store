@@ -76,13 +76,10 @@ export type Token = {
   value: string,
 };
 
-export type TokenState = Token & {
-  loading: boolean
-};
-
-export type UserDataState = {
+export type authState = {
+  loading: boolean,
   user: User,
-  token: TokenState
+  token: Token,
 }
 
 export type AuthRequest = {
@@ -98,7 +95,12 @@ export type UpdateCartItem = {
 export type AsyncThunkConfig<R> = {
   state: RootState,
   dispatch: AppDispatch,
-  rejectValue: R
+  extra?: unknown;
+  rejectValue: R,
+  serializedErrorType?: unknown;
+  pendingMeta?: unknown;
+  fulfilledMeta?: unknown;
+  rejectedMeta?: unknown;
 }
 
 export type ResponseError = {

@@ -3,13 +3,13 @@ import CartList from "@pages/Cart/components/CartList";
 import Order from "@pages/Cart/components/Order.tsx";
 import {useAppSelector} from "@/hooks/useTypedReduxHooks.ts";
 import {useEffect, useState} from "react";
-import {selectCart, selectCartLoading} from "@/store/cart/cart.slice.ts";
+import { cartSelectors } from "@/store/cart";
 import Loader from "@components/Loader";
 import EmptyCart from "@pages/Cart/components/EmptyCart.tsx";
 
 function Cart() {
-  const cart = useAppSelector(selectCart);
-  const cartLoading = useAppSelector(selectCartLoading);
+  const cart = useAppSelector(cartSelectors.cart);
+  const cartLoading = useAppSelector(cartSelectors.loading);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {

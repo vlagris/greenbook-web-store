@@ -1,10 +1,10 @@
 import { RouterProvider } from "react-router-dom";
-import {router} from "@/routes";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {useEffect} from "react";
-import {getGenres} from "@/store/genres/genres.slice.ts";
-import {getCart} from "@/store/cart/cart.slice.ts";
-import {refreshToken} from "@/store/userData/userData.slice.ts";
+import { router } from "@/routes";
+import { useAppDispatch } from "@/hooks/useTypedReduxHooks.ts";
+import { useEffect } from "react";
+import { fetchGenres } from "@/store/genres";
+import { fetchCart } from "@/store/cart";
+import { fetchToken } from "@/store/auth";
 
 
 
@@ -13,9 +13,9 @@ function App() {
 
   useEffect(() => {
     const requestLoading = async () => {
-      dispatch(getGenres());
-      await dispatch(refreshToken());
-      dispatch(getCart());
+      dispatch(fetchGenres());
+      await dispatch(fetchToken());
+      dispatch(fetchCart());
     }
 
     requestLoading();

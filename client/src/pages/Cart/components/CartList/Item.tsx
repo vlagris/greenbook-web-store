@@ -1,11 +1,11 @@
 import Count from "@pages/Cart/components/CartList/Count.tsx";
+import {CartItem} from "@/types.ts";
+import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
+import {removeItemFromCart} from "@/store/cart";
+import {currency} from "@/constants.ts";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
 // @ts-ignore
 import CloseIcon from "@assets/icons/close.svg?react";
-import {CartItem} from "@/types.ts";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {removeItemFromCart} from "@/store/cart/cart.slice.ts";
-import {currency} from "@/constants.ts";
 
 
 function Item({item}: {item: CartItem}) {

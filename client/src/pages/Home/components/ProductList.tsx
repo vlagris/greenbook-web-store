@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {Book} from "@/types.ts";
 import useApi from "@/hooks/useApi.ts";
-import Card from "@components/card";
+import Card from "../../../components/Card";
 import Loader from "@components/Loader";
 import * as api from "@/services/api";
 import classes from "./../styles.module.scss";

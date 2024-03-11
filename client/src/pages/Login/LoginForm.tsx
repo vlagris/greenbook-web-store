@@ -5,7 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import UseFormField from "@/hooks/useFormField.ts";
 import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
 import {ErrorType, HttpError} from "@/types.ts";
-import {login} from "@/store/userData/userData.slice";
+import {login} from "../../store/auth";
 import {formErrorMessage} from "@/constants.ts";
 
 

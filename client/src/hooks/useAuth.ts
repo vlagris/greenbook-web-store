@@ -1,9 +1,9 @@
 import {useAppSelector} from "@/hooks/useTypedReduxHooks";
-import {selectUser} from "@/store/userData/userData.slice.ts";
+import {userDataSelectors} from "../store/auth";
 
 
 function useAuth() {
-  const user = useAppSelector(selectUser);
+  const user = useAppSelector(userDataSelectors.user);
 
   return {isAuth: !!user.id};
 }

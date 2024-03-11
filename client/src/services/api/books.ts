@@ -1,5 +1,6 @@
 import {mainApi} from "@/services/api/mainApi.ts";
 import {Book, Books, BookResponse} from "@/types.ts";
+import {createHttpError} from "@/utils/createHttpError.ts";
 
 
 type BooksResponse = {
@@ -22,58 +23,50 @@ function bookResponseAdepter(data: BookResponse): Book {
       }
     }
 }
-
 function BooksByGenreResponseAdepter(data: BooksResponse): Books {
   const items = data.items.map((book): Book => bookResponseAdepter(book));
-
   return {
     items,
     totalItems: data.totalItems
   }
 }
-
 function BooksRecommendedResponseAdepter(data: BookResponse[]): Book[] {
   return data.map((book): Book => bookResponseAdepter(book));
 }
+
+
 
 interface IGetBooksByGenre {
   pathName: string,
   limit: number,
   offset?: number
 }
-
-interface IGetBooksRecommended {
-  limit: number,
-}
-
 export async function getBooksByGenre(requestData: IGetBooksByGenre) {
+  const params = {
+    pathName: requestData.pathName,
+    limit: requestData.limit,
+    offset: requestData.offset
+  };
   try {
-    const params = {
-      pathName: requestData.pathName,
-      limit: requestData.limit,
-      offset: requestData.offset
-    };
-
     const res = await mainApi.get<BooksResponse>('/books/', {params});
     return BooksByGenreResponseAdepter(res.data);
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }
 
 
-export async function getBooksRecommended(requestData: IGetBooksRecommended) {
-  try {
-    const params = {
-      limit: requestData.limit,
-    };
 
+interface IGetBooksRecommended {
+  limit: number,
+}
+export async function getBooksRecommended(requestData: IGetBooksRecommended) {
+  const params = { limit: requestData.limit };
+  try {
     const res = await mainApi.get<BookResponse[]>('/books/recommended', {params});
     return BooksRecommendedResponseAdepter(res.data);
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }
 

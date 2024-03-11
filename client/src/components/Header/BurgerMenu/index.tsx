@@ -2,14 +2,14 @@ import {useState} from "react";
 import {NavLink} from "react-router-dom";
 import Modal from "@components/UI/Modal";
 import {useAppSelector} from "@/hooks/useTypedReduxHooks.ts";
+import { genresSelectors } from "@/store/genres";
 import classes from "./styles.module.scss";
-import {selectGenres} from "@/store/genres/genres.slice.ts";
 import BurgerButton from "@components/Header/BurgerMenu/BurgerButton.tsx";
 
 
 
 function BurgerMenu() {
-  const genres = useAppSelector(selectGenres);
+  const genres = useAppSelector(genresSelectors.genres);
   const [show, setShow] = useState(false);
 
 

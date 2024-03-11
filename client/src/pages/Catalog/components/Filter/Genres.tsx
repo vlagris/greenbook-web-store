@@ -2,11 +2,11 @@ import React from 'react';
 import {clsx} from "clsx";
 import {NavLink} from "react-router-dom";
 import {useAppSelector} from "@/hooks/useTypedReduxHooks.ts";
-import {selectGenres} from "@/store/genres/genres.slice.ts";
 import classes from "./styles.module.scss";
+import { genresSelectors } from '@/store/genres';
 
 function Genres() {
-  const genres = useAppSelector(selectGenres);
+  const genres = useAppSelector(genresSelectors.genres);
 
   return (
     <ul className={classes.genres_list}>

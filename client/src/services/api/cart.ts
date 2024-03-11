@@ -1,24 +1,23 @@
 import {mainApi} from "@/services/api/mainApi.ts";
 import {BookResponse, Cart, CartItem, UpdateCartItem} from "@/types.ts";
+import {createHttpError} from "@/utils/createHttpError.ts";
 
 
 type CartItemResponse = {
   bookId: BookResponse,
   quantity: number
 };
-
 type CartItemRequest = {
   bookId: string,
   quantity: number
 };
-
 type CartResponse = {
   items: CartItemResponse[]
 };
-
 type CartRequest = {
   items: CartItemRequest[]
 };
+
 
 
 function cartItemResponseAdapter(data: CartItemResponse): CartItem {
@@ -36,7 +35,6 @@ function cartResponseAdapter(data: CartResponse): Cart {
     totalQuantity += item.quantity;
     return cartItemResponseAdapter(item)
   });
-
   return {
     items,
     totalQuantity
@@ -49,7 +47,6 @@ function cartRequestAdapter(data: CartItem[]): CartRequest {
     bookId: item.id,
     quantity: item.quantity
   }));
-
   return { items };
 }
 
@@ -59,8 +56,7 @@ export async function getCart() {
     const res = await mainApi.get<CartResponse>('/cart/');
     return cartResponseAdapter(res.data);
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }
 
@@ -70,8 +66,7 @@ export async function createCart(requestData: CartItem[]) {
     const res = await mainApi.post<CartResponse>('/cart/', formattedRequestData);
     return cartResponseAdapter(res.data);
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }
 
@@ -81,9 +76,8 @@ export async function addCartItem(requestData: string) {
     console.log(res.data);
     return cartItemResponseAdapter(res.data);
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
-  }
+    return createHttpError(err as Error);
+}
 }
 
 export async function removeCartItem(requestData: string) {
@@ -92,9 +86,8 @@ export async function removeCartItem(requestData: string) {
     console.log(res.status);
     // return cartItemResponseAdapter(res.data);
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
-  }
+    return createHttpError(err as Error);
+}
 }
 
 export async function updateCartItem(requestData: UpdateCartItem) {
@@ -103,7 +96,6 @@ export async function updateCartItem(requestData: UpdateCartItem) {
     console.log(res.data);
     return cartItemResponseAdapter(res.data);
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }

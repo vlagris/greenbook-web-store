@@ -1,40 +1,38 @@
 import {mainApi} from "@/services/api/mainApi.ts";
-import {AuthRequest, ErrorType, Token, UserDataState} from "@/types.ts";
-import axios, {AxiosError} from "axios";
-import {data} from "autoprefixer";
+import {AuthRequest, ErrorType, Token, authState, User} from "@/types.ts";
+import {isAxiosError} from "axios";
+import {createHttpError} from "@/utils/createHttpError.ts";
 
 
-type AuthResponse  = {
-  user: {
-    _id: string,
-    email: string,
-  },
-  accessToken: string,
-  expiresIn: string
-};
-
-type RefreshTokenResponse = {
+type userResponse = {
+  _id: string,
+  email: string,
+}
+type TokenResponse = {
   accessToken: string,
 }
+type AuthResponse  = {
+  user: userResponse,
+} & TokenResponse;
 
 
 
-function authResponseAdapter(data: AuthResponse): UserDataState {
+function userResponseAdapter(data: userResponse): User {
   return {
-    user: {
-      id: data.user._id,
-      email: data.user.email,
-    },
-    token: {
-      value: data.accessToken,
-      loading: false
-    }
+    id: data._id,
+    email: data.email,
   };
 }
-
-function refreshTokenResponseAdapter(data: RefreshTokenResponse): Token {
+function tokenResponseAdapter(data: TokenResponse): Token {
   return {
     value: data.accessToken,
+  };
+}
+function authResponseAdapter(data: AuthResponse): authState {
+  return {
+    loading: false,
+    user: userResponseAdapter(data.user),
+    token: tokenResponseAdapter(data)
   };
 }
 
@@ -45,88 +43,37 @@ export async function register(requestData: AuthRequest) {
     const res = await mainApi.post<AuthResponse>('/auth/signup', requestData);
     return authResponseAdapter(res.data);
   } catch (err) {
-    console.log(err);
-    if (axios.isAxiosError(err)) {
-      switch (err.response?.status) {
-        case 400:
-          return Promise.reject({
-            type: err.response?.data?.error_code,
-            message: err.response?.data?.error_message
-          });
-        case 403:
-          return Promise.reject({
-            type: ErrorType.NOT_AUTH,
-            message: err.response?.data?.error_message
-          });
-        case 404:
-          return Promise.reject({
-            type: ErrorType.NOT_FOUND,
-            message: err.response?.data?.error_message
-          });
-        case 500:
-          return Promise.reject({
-            type: ErrorType.SERVER_ERROR,
-            message: err.response?.data?.error_message
-          });
-      }
-    }
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }
+
 
 export async function login(requestData: AuthRequest) {
   try {
     const res = await mainApi.post<AuthResponse>('/auth/login', requestData);
     return authResponseAdapter(res.data);
   } catch (err) {
-    console.log(err);
-
-    if (axios.isAxiosError(err)) {
-      switch (err.response?.status) {
-        case 400:
-          return Promise.reject({
-            type: err.response?.data?.error_code,
-            message: err.response?.data?.error_message
-          });
-        case 403:
-          return Promise.reject({
-            type: ErrorType.NOT_AUTH,
-            message: err.response?.data?.error_message
-          });
-        case 404:
-          return Promise.reject({
-            type: ErrorType.NOT_FOUND,
-            message: err.response?.data?.error_message
-          });
-        case 500:
-          return Promise.reject({
-            type: ErrorType.SERVER_ERROR,
-            message: err.response?.data?.error_message
-          });
-      }
-    }
-
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }
+
 
 export async function logout() {
   try {
     await mainApi.get('/auth/logout');
     return true;
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }
 
-export async function refreshToken() {
+
+export async function getToken() {
   try {
-    const res = await mainApi.get<RefreshTokenResponse>('/auth/token');
+    const res = await mainApi.get<TokenResponse>('/auth/token');
     console.log(res.data);
-    return refreshTokenResponseAdapter(res.data);
+    return tokenResponseAdapter(res.data);
   } catch (err) {
-    console.log(err);
-    return Promise.reject(err);
+    return createHttpError(err as Error);
   }
 }

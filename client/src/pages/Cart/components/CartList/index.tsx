@@ -2,13 +2,13 @@ import classes from "@pages/Cart/components/CartList/styles.module.scss";
 import Item from "@pages/Cart/components/CartList/Item.tsx";
 import {CartItem} from "@/types.ts";
 import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {getCart} from "@/store/cart/cart.slice.ts";
+import {fetchCart} from "@/store/cart";
 
 function CartList({items}: {items: CartItem[]}) {
   const dispatch = useAppDispatch();
 
   function handleCartUpdate() {
-    dispatch(getCart());
+    dispatch(fetchCart());
   }
 
   return (
