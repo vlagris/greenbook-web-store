@@ -1,7 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import classes from "@components/Breadcrumbs/styles.module.scss";
-// @ts-ignore
+import classes from "./styles.module.scss";
 import ArrowBottom from "@assets/icons/arrow-right.svg?react";
 
 

@@ -4,9 +4,8 @@ import {addItemToCart} from "@/store/cart";
 import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
 import {currency} from "@/constants.ts";
 import classes from "./styles.module.scss";
-// @ts-ignore
+
 import StarIcon from '@assets/icons/star.svg?react';
-// @ts-ignore
 import HeartIcon from '@assets/icons/heart.svg?react';
 // import BagIcon from '@assets/bag.svg?react';
 

@@ -1,8 +1,7 @@
-import {cartItemAdapter} from "@/store/cart/reducer.ts";
-import {createSelector} from "@reduxjs/toolkit";
-import {RootState} from "@/store/store.ts";
-import {Cart} from "@/types.ts";
-
+import { cartItemAdapter } from "@/store/cart/reducer.ts";
+import { createSelector } from "@reduxjs/toolkit";
+import type { Cart } from "@/types.ts";
+import type { RootState } from "@/store/store.ts";
 
 const { selectAll } = cartItemAdapter.getSelectors();
 

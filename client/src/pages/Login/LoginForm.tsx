@@ -1,12 +1,12 @@
 import React from 'react';
-import {Form, FormButton, FormCheckbox, FormInput, FormInputPassword} from "@components/AuthForm";
-import classes from "@pages/Login/styles.module.scss";
-import {Link, useNavigate} from "react-router-dom";
+import { Form, FormButton, FormCheckbox, FormInput, FormInputPassword } from "@components/AuthForm";
+import { Link, useNavigate } from "react-router-dom";
 import UseFormField from "@/hooks/useFormField.ts";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {ErrorType, HttpError} from "@/types.ts";
-import {login} from "../../store/auth";
-import {formErrorMessage} from "@/constants.ts";
+import { useAppDispatch } from "@/hooks/useTypedReduxHooks.ts";
+import { ErrorType, HttpError } from "@/types.ts";
+import { login } from "@/store/auth";
+import { formErrorMessage } from "@/constants.ts";
+import classes from "@pages/Login/styles.module.scss";
 
 
 function LoginForm() {

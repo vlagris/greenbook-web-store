@@ -1,5 +1,5 @@
 import {FormEvent, ReactNode} from 'react';
-import classes  from "@components/AuthForm/Form/styles.module.scss";
+import classes  from "./styles.module.scss";
 
 
 interface IForm {

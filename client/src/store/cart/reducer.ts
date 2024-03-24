@@ -1,5 +1,6 @@
-import { createEntityAdapter, createReducer, PayloadAction } from "@reduxjs/toolkit";
-import { Book, Cart, CartItem, CartState, UpdateCartItem } from "@/types.ts";
+import { createEntityAdapter, createReducer } from "@reduxjs/toolkit";
+import type { ActionReducerMapBuilder, PayloadAction } from "@reduxjs/toolkit";
+import type { Book, Cart, CartItem, CartState, UpdateCartItem } from "@/types.ts";
 import {
   addCart,
   addCartFromStorage,
@@ -19,9 +20,11 @@ const initialState: CartState =  {
   loading: true
 };
 
+
+
 export const cartReducer = createReducer(
   initialState,
-  (builder) => {
+  (builder: ActionReducerMapBuilder<CartState>) => {
   builder
     .addCase(addCart, (state: CartState, {payload}: PayloadAction<Cart>) => {
       cartItemAdapter.setAll(state.items, payload.items);
@@ -42,6 +45,7 @@ export const cartReducer = createReducer(
     .addCase(removeCart, (state: CartState) => {
       state.items = initialState.items;
       state.totalQuantity = initialState.totalQuantity;
+      state.loading = false;
     })
 
     .addCase(addCartItem, (state: CartState, {payload}: PayloadAction<Book>) => {
@@ -49,15 +53,14 @@ export const cartReducer = createReducer(
         return;
       }
 
-      const cartItem: CartItem = {
+      cartItemAdapter.upsertOne(state.items, {
         id: payload.id,
         title: payload.title,
         price: payload.price,
         image: payload.image,
         quantity: 1
-      }
+      });
 
-      cartItemAdapter.upsertOne(state.items, cartItem);
       state.totalQuantity += 1;
     })
 
@@ -79,4 +82,4 @@ export const cartReducer = createReducer(
       state.totalQuantity -= OldQuantity;
       state.totalQuantity += quantity;
     })
-})
+});

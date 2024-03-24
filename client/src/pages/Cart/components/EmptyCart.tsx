@@ -1,6 +1,5 @@
 import React from 'react';
 import {clsx} from "clsx";
-// @ts-ignore
 import classes from "@pages/Cart/styles.module.scss";
 import {Link} from "react-router-dom";
 

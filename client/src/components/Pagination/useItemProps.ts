@@ -1,7 +1,6 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from "react-router-dom";
 import {ItemProps, PaginationItemTypes} from "@components/Pagination/Item.tsx";
-import {useSearchParams} from "react-router-dom";
-
 
 
 
@@ -9,7 +8,6 @@ function useItemProps({totalPages}: {totalPages: number}) {
   const [itemsProps, setItemsProps] = useState<ItemProps[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
-
 
 
   function handleClick(pageNumber: number) {
@@ -55,38 +53,23 @@ function useItemProps({totalPages}: {totalPages: number}) {
     }
 
     for(let i = start; i <= end; i++) {
-      let itemProps: ItemProps = {
-        type: PaginationItemTypes.page,
-        page: i,
-        onClick: handleClick(i)
-      };
+      let itemProps: ItemProps = { type: PaginationItemTypes.page, page: i, onClick: handleClick(i) };
       if (i == currentPage) {
-        itemProps = {
-          type: PaginationItemTypes.current,
-          page: i,
-        };
+        itemProps = { type: PaginationItemTypes.current, page: i };
       }
       nextItemsProps.push(itemProps)
     }
 
     if(start > 2) {
       nextItemsProps.unshift(
-        {
-          type: PaginationItemTypes.page,
-          page: 1,
-          onClick: handleClick(1)
-        },
+        { type: PaginationItemTypes.page, page: 1, onClick: handleClick(1) },
         { type: PaginationItemTypes.ellipsis }
       );
     }
     if(end < totalPages - 1) {
       nextItemsProps.push(
         { type: PaginationItemTypes.ellipsis },
-        {
-          page: totalPages,
-          type: PaginationItemTypes.page,
-          onClick: handleClick(totalPages)
-        }
+        { type: PaginationItemTypes.page, page: totalPages, onClick: handleClick(totalPages) }
       );
     }
 

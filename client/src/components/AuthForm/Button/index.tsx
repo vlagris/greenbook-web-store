@@ -1,6 +1,6 @@
 import React from 'react';
 import {clsx} from "clsx";
-import classes from "@components/AuthForm/Button/styles.module.scss";
+import classes from "./styles.module.scss";
 
 
 function Button({children, ...props}: {children: React.ReactNode}) {

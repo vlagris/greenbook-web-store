@@ -1,9 +1,8 @@
 import {Link} from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
-// @ts-ignore
-import MapPinIcon from '@assets/icons/map-pin.svg?react';
-import classes from "./styles.module.scss";
 import {currency} from "@/constants.ts";
+import classes from "./styles.module.scss";
+import MapPinIcon from '@assets/icons/map-pin.svg?react';
 
 function HeaderTop() {
   const {isAuth} = useAuth();

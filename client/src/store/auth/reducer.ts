@@ -1,28 +1,28 @@
-import {createReducer} from "@reduxjs/toolkit";
-import {ErrorType, authState} from "@/types.ts";
-import {setUser, setToken, setLoading, removeAuth, fetchToken} from "@/store/auth/actions.ts";
+import { createReducer } from "@reduxjs/toolkit";
+import { authState } from "@/types.ts";
+import { setUser, setToken, setLoading, removeAuth } from "@/store/auth/actions.ts";
 import * as LocalStorage from "@/services/localStorage";
 
 
 const emptyState: authState  = {
-  loading: false,
   user: {
     id: "",
     email: ""
   },
   token: {
     value: "",
-  }
+  },
+  loading: false,
 }
 const initialState: authState  = {
-  loading: false,
   user: {
     id: LocalStorage.userId.get() || "",
     email: ""
   },
   token: {
     value: "",
-  }
+  },
+  loading: false,
 }
 
 
@@ -52,4 +52,5 @@ export const authReducer = createReducer(
       //     state.token.value = "";
       //   }
       // })
-})
+});
+

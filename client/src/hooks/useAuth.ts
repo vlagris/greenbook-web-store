@@ -1,11 +1,11 @@
-import {useAppSelector} from "@/hooks/useTypedReduxHooks";
-import {userDataSelectors} from "../store/auth";
+import { useAppSelector } from "@/hooks/useTypedReduxHooks";
+import { authSelectors } from "@/store/auth";
 
 
 function useAuth() {
-  const user = useAppSelector(userDataSelectors.user);
+  const id = useAppSelector(authSelectors.userId);
 
-  return {isAuth: !!user.id};
+  return { isAuth: !!id };
 }
 
 export default useAuth;

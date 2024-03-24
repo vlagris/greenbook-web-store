@@ -1,8 +1,8 @@
 import axios from "axios";
 import {jwtDecode} from "jwt-decode";
-import {API_URL} from "@/constants.ts";
-import {fetchToken, userDataSelectors} from "../../store/auth";
 import {store} from "@/store/store.ts";
+import { fetchToken, authSelectors } from "@/store/auth";
+import {API_URL} from "@/constants.ts";
 
 export const mainApi = axios.create({
   withCredentials: true,
@@ -11,13 +11,13 @@ export const mainApi = axios.create({
 
 mainApi.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = `Bearer ${userDataSelectors.token(store.getState())}`
+    config.headers.Authorization = `Bearer ${authSelectors.token(store.getState())}`
     return config;
   }
-)
+);
 
 mainApi.interceptors.response.use((response) => {
-  const {user, token, loading} = userDataSelectors.state(store.getState());
+  const {user, token, loading} = authSelectors.state(store.getState());
 
   if (!user.id) {
     return response;

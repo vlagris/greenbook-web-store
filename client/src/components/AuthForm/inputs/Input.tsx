@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "@components/AuthForm/inputs/styles.module.scss";
+import classes from "./styles.module.scss";
 import {clsx} from "clsx";
 
 

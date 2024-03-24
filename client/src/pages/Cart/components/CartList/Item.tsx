@@ -4,7 +4,6 @@ import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
 import {removeItemFromCart} from "@/store/cart";
 import {currency} from "@/constants.ts";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
-// @ts-ignore
 import CloseIcon from "@assets/icons/close.svg?react";
 
 

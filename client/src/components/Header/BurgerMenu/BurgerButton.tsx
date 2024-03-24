@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from "@components/Header/BurgerMenu/styles.module.scss";
+import classes from "./styles.module.scss";
 
 function BurgerButton({onClick}: {onClick: () => void}) {
   return (

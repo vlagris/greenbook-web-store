@@ -1,6 +1,5 @@
 import {mainApi} from "@/services/api/mainApi.ts";
-import {AuthRequest, ErrorType, Token, authState, User} from "@/types.ts";
-import {isAxiosError} from "axios";
+import {AuthRequest, Token, authState, User} from "@/types.ts";
 import {createHttpError} from "@/utils/createHttpError.ts";
 
 

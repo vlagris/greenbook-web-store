@@ -1,8 +1,8 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
-import type { RootState, AppDispatch } from "@/store/store.ts";
-import * as userDataSelectors from "@/store/auth/selectors.ts";
+import { cartSelectors } from "@/store/cart";
+import { authSelectors } from "@/store/auth";
 import * as LocalStorage from "@/services/localStorage";
-import * as cartSelectors from "@/store/cart/selectors.ts";
+import type { RootState, AppDispatch } from "@/store/store.ts";
 
 
 export const listenerMiddleware = createListenerMiddleware();
@@ -15,10 +15,10 @@ const startAppListening = listenerMiddleware.startListening.withTypes<
 
 startAppListening({
   predicate: (_, currentState, previousState) => {
-    return userDataSelectors.userId(currentState) !== userDataSelectors.userId(previousState);
+    return authSelectors.userId(currentState) !== authSelectors.userId(previousState);
   },
   effect: (_, listenerApi) => {
-    LocalStorage.userId.set(userDataSelectors.userId(listenerApi.getState()));
+    LocalStorage.userId.set(authSelectors.userId(listenerApi.getState()));
   }
 });
 

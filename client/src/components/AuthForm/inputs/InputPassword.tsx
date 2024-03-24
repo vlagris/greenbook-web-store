@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {clsx} from "clsx";
-import classes from "@components/AuthForm/inputs/styles.module.scss";
-// @ts-ignore
+import classes from "./styles.module.scss";
 import EyeOn from "@assets/icons/eye-open.svg?react";
-// @ts-ignore
 import EyeOff from "@assets/icons/eye-off.svg?react";
 
 

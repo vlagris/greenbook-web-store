@@ -1,13 +1,13 @@
 import React from 'react';
-import classes from "@pages/Signup/styles.module.scss";
 import {Form, FormButton, FormCheckbox, FormInput, FormInputPassword} from "@components/AuthForm";
 import {Link, useNavigate} from "react-router-dom";
 import UseFormField from "@/hooks/useFormField.ts";
 import validator from "validator";
 import {ErrorType, HttpError} from "@/types.ts";
 import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {register} from "../../store/auth";
+import {register} from "@/store/auth";
 import {formErrorMessage} from "@/constants.ts";
+import classes from "@pages/Signup/styles.module.scss";
 
 function RegisterForm() {
   const dispatch = useAppDispatch();

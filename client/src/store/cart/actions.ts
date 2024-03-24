@@ -1,8 +1,8 @@
-import {createAction, createAsyncThunk} from "@reduxjs/toolkit";
-import {AsyncThunkConfig, Book, Cart, UpdateCartItem} from "@/types.ts";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
+import type { AsyncThunkConfig, Book, Cart, UpdateCartItem } from "@/types.ts";
+import { cartSelectors } from "@/store/cart";
+import { authSelectors } from "@/store/auth";
 import * as api from "@/services/api";
-import {cartSelectors} from "@/store/cart";
-import { userDataSelectors } from "../auth";
 
 
 export const addCart = createAction<Cart>("cart/addCart");
@@ -19,7 +19,7 @@ const createAppAsyncThunk = createAsyncThunk.withTypes<AsyncThunkConfig<string>>
 export const fetchCart = createAppAsyncThunk(
   `cart/fetchCart`,
   async (_,  {getState, dispatch}) => {
-    if (!userDataSelectors.userId(getState())) {
+    if (!authSelectors.userId(getState())) {
       dispatch(addCartFromStorage());
       return;
     }
@@ -57,7 +57,7 @@ export const addItemToCart = createAppAsyncThunk(
     } else {
       dispatch(addCartItem(book))
 
-      if (userDataSelectors.userId(getState())) {
+      if (authSelectors.userId(getState())) {
         await api.addCartItem(book.id);
       }
     }
@@ -67,7 +67,7 @@ export const addItemToCart = createAppAsyncThunk(
 export const removeItemFromCart = createAppAsyncThunk(
   `cart/removeItemFromCart`,
   async (cartItemId: string,  {getState, dispatch}) => {
-    if (userDataSelectors.userId(getState())) {
+    if (authSelectors.userId(getState())) {
       await api.removeCartItem(cartItemId);
     }
     dispatch(removeCartItem(cartItemId));
@@ -77,7 +77,7 @@ export const removeItemFromCart = createAppAsyncThunk(
 export const updateItemInCart = createAppAsyncThunk(
   `cart/updateCartItem`,
   async (data: UpdateCartItem,  {getState, dispatch}) => {
-    if (userDataSelectors.userId(getState())) {
+    if (authSelectors.userId(getState())) {
       await api.updateCartItem(data);
     }
     dispatch(updateCartItemQuantity(data));

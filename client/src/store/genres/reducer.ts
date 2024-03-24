@@ -13,4 +13,4 @@ export const genresReducer = createReducer(
     builder.addCase(fetchGenres.fulfilled, (state: GenresState, {payload}) => {
       state.items = payload;
     })
-})
+});

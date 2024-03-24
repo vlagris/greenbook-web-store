@@ -1,4 +1,4 @@
-import classes from "@components/Breadcrumbs/styles.module.scss";
+import classes from "./styles.module.scss";
 import Item from "@components/Breadcrumbs/Item";
 
 

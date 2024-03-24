@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import {clsx} from "clsx";
 import {ItemContext} from "@components/UI/Accordion/ItemContext.ts";
-// @ts-ignore
 import ArrowIcon from "@assets/icons/arrow-right.svg?react"
 import classes from "./styles.module.scss";
 

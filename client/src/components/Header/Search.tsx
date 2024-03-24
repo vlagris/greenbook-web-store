@@ -1,4 +1,3 @@
-// @ts-ignore
 import SearchLogo from '@assets/icons/search.svg?react';
 import classes from "./styles.module.scss";
 

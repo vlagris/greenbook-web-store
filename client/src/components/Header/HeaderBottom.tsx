@@ -2,19 +2,15 @@ import React from 'react';
 import {Link} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "@/hooks/useTypedReduxHooks";
-import {logout} from "../../store/auth";
+import {logout} from "@/store/auth";
 import useAuth from "@/hooks/useAuth";
 import BurgerMenu from "@components/Header/BurgerMenu";
 import Search from "@components/Header/Search";
 import { cartSelectors } from "@/store/cart";
 
-
 import classes from "./styles.module.scss";
-// @ts-ignore
 import HeartIcon from '@assets/icons/heart.svg?react';
-// @ts-ignore
-import BagIcon  from '@assets/icons/bag.svg?react';
-// @ts-ignore
+import BagIcon from '@assets/icons/bag.svg?react';
 import LogoutIcon from '@assets/icons/logout.svg?react';
 // import BagIcon from '@assets/bag.svg?react';
 // import UserIcon from '@assets/auth.svg?react';

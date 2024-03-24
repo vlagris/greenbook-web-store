@@ -1,8 +1,8 @@
 import {createAction, createAsyncThunk} from "@reduxjs/toolkit";
 import {AsyncThunkConfig, AuthRequest, ErrorType, HttpError, User, Token} from "@/types.ts";
-import * as api from "@/services/api";
 import {createCart, fetchCart, removeCart} from "@/store/cart";
 import * as authSelectors from "@/store/auth/selectors.ts";
+import * as api from "@/services/api";
 
 
 export const setUser = createAction<User>("auth/setUser");
@@ -74,6 +74,7 @@ export const fetchToken = createAppAsyncThunk(
   async (_, {getState, rejectWithValue, dispatch}) => {
     if (!authSelectors.userId(getState())) {
       dispatch(removeAuth());
+      dispatch(removeCart());
       return rejectWithValue({type: ErrorType.NOT_AUTH});
     }
 
