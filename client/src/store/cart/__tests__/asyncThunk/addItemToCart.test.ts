@@ -1,6 +1,6 @@
 import { getAsyncThunkCalls } from "@/utils/utilsForTests.tsx";
 import { addItemToCart, addCartItem } from "@/store/cart/actions.ts";
-import { storeState } from "@/store/cart/__tests__/cartActions.test.ts";
+import {cartItem, storeState} from "@/store/cart/__tests__/cartActions.test.ts";
 import * as apiCart from "@/services/api/cart.ts";
 
 
@@ -19,10 +19,10 @@ const book = {
 
 
 describe('cart asyncThunk addItemToCart', () => {
-  const mockedAddCartItem = jest.spyOn(apiCart, "addCartItem");
+  const mockedAddCartItem = jest.spyOn(apiCart, "addCartItem").mockResolvedValue(cartItem);
 
   afterEach(() => {
-    mockedAddCartItem.mockClear()
+    mockedAddCartItem.mockClear();
   });
 
   it('should add cart item without sending api request', async () => {

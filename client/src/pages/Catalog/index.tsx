@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import {Books, Genre} from "@/types.ts";
 import * as api from "@/services/api";
@@ -8,7 +8,7 @@ import Filter from "@pages/Catalog/components/Filter";
 import ProductList from "@pages/Catalog/components/ProductList.tsx";
 import useApi from "@/hooks/useApi.ts";
 import Loader from "@components/Loader";
-import {useAppSelector} from "@/hooks/useTypedReduxHooks.ts";
+import { useAppSelector } from "@/hooks/useTypedReduxHooks.ts";
 import { genresSelectors } from "@/store/genres";
 import classes from "./styles.module.scss";
 
@@ -18,7 +18,7 @@ function Catalog() {
   const genres = useAppSelector(genresSelectors.genres);
   const [genre, setGenre] = useState<Genre>();
   const [crumbs, setCrumbs] = useState<Crumb[]>([]);
-  const {data, error, loading, request} = useApi<Books>();
+  const {data, error, loading, query} = useApi<Books>();
   const {pathName} = useParams();
   const [searchParams] = useSearchParams();
 
@@ -31,11 +31,14 @@ function Catalog() {
     }
   }, [genres, pathName]);
 
+
   useEffect(() => {
     const page = Number(searchParams.get("page")) || 1;
     const offset = (page - 1) * LIMIT;
 
-    request(api.getBooksByGenre, {pathName, limit: LIMIT, offset});
+    if(pathName) {
+      query(() => api.getBooksByGenre({pathName: pathName, limit: LIMIT, offset}));
+    }
   }, [pathName, searchParams]);
 
 
@@ -58,8 +61,7 @@ function Catalog() {
               <Filter/>
               <ProductList books={data.items} totalPages={Math.ceil(data.totalItems / LIMIT)}/>
             </div>
-
-            </div>
+          </div>
         }
       </Loader>
     </main>

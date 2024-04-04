@@ -6,7 +6,7 @@ import classes from "./styles.module.scss";
 
 
 function Icon() {
-  const {show} = useContext(ItemContext);
+  const { show } = useContext(ItemContext);
 
 
   return (

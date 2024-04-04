@@ -17,7 +17,7 @@ function InputPassword({error = false, errorMessage = "", ...props}) {
           {...props}
           type={show ? "text" : "password"}
         />
-        <button type="button" className={classes.btn} onClick={() => setShow(!show)}>
+        <button type="button" className={classes.btn} onClick={() => setShow(!show)} data-testid="toggleVisibility">
           {show ?
             <EyeOff className={classes.icon}/>
             :

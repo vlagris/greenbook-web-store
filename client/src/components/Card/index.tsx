@@ -7,7 +7,6 @@ import classes from "./styles.module.scss";
 
 import StarIcon from '@assets/icons/star.svg?react';
 import HeartIcon from '@assets/icons/heart.svg?react';
-// import BagIcon from '@assets/bag.svg?react';
 
 
 function Card({book}: {book: Book}) {

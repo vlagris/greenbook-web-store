@@ -10,7 +10,6 @@ interface CheckboxProps {
 
 function Checkbox({children, isChecked}: CheckboxProps) {
   const [checked, setChecked] = useState(isChecked);
-
   function handleClick(): void {
     if (typeof isChecked === "boolean") {
       setChecked(!checked);
@@ -21,13 +20,12 @@ function Checkbox({children, isChecked}: CheckboxProps) {
     <label className={classes.checkbox_label}>
       <input
         type="checkbox"
+        role="checkbox"
         className={classes.checkbox}
         onChange={handleClick}
-        checked={checked}
+        defaultChecked={checked}
       />
-
       {children}
-
     </label>
   );
 }

@@ -8,6 +8,7 @@ function Button({children, ...props}: {children: React.ReactNode}) {
   return (
     <button
       type="submit"
+      role="submit"
       className={clsx("btn", classes.btn)}
       {...props}
     >

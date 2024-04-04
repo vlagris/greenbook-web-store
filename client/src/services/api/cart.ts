@@ -73,7 +73,6 @@ export async function createCart(requestData: CartItem[]) {
 export async function addCartItem(requestData: string) {
   try {
     const res = await mainApi.post<CartItemResponse>(`/cart/${requestData}`);
-    console.log(res.data);
     return cartItemResponseAdapter(res.data);
   } catch (err) {
     return createHttpError(err as Error);
@@ -83,8 +82,7 @@ export async function addCartItem(requestData: string) {
 export async function removeCartItem(requestData: string) {
   try {
     const res = await mainApi.delete<CartItemResponse>(`/cart/${requestData}`);
-    console.log(res.status);
-    // return cartItemResponseAdapter(res.data);
+    return cartItemResponseAdapter(res.data);
   } catch (err) {
     return createHttpError(err as Error);
 }
@@ -93,7 +91,6 @@ export async function removeCartItem(requestData: string) {
 export async function updateCartItem(requestData: UpdateCartItem) {
   try {
     const res = await mainApi.patch<CartItemResponse>(`/cart/${requestData.id}`, {quantity: requestData.quantity});
-    console.log(res.data);
     return cartItemResponseAdapter(res.data);
   } catch (err) {
     return createHttpError(err as Error);

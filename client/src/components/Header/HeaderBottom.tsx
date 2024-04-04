@@ -1,8 +1,8 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import {useAppDispatch, useAppSelector} from "@/hooks/useTypedReduxHooks";
-import {logout} from "@/store/auth";
+import { useAppDispatch, useAppSelector } from "@/hooks/useTypedReduxHooks";
+import { logout } from "@/store/auth";
 import useAuth from "@/hooks/useAuth";
 import BurgerMenu from "@components/Header/BurgerMenu";
 import Search from "@components/Header/Search";
@@ -19,8 +19,8 @@ import LogoutIcon from '@assets/icons/logout.svg?react';
 
 function HeaderBottom() {
   const cartTotalQuantity = useAppSelector(cartSelectors.totalQuantity);
-  const {isAuth} = useAuth();
   const dispatch = useAppDispatch();
+  const {isAuth} = useAuth();
 
   async function handleLogout() {
     dispatch(logout());
@@ -53,7 +53,7 @@ function HeaderBottom() {
             </span>
           </Link>
           {isAuth &&
-            <button className={classes.navbar_item} onClick={handleLogout}>
+            <button className={classes.navbar_item} onClick={handleLogout} data-testid="logout">
               <LogoutIcon className={classes.icon_fill}/>
             </button>
           }

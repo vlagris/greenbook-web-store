@@ -1,7 +1,7 @@
-import * as apiCart from "@/services/api/cart.ts";
 import { getAsyncThunkCalls } from "@/utils/utilsForTests.tsx";
 import { updateCartItemQuantity, updateItemInCart } from "@/store/cart";
 import { cartItem, storeState } from "@/store/cart/__tests__/cartActions.test.ts";
+import * as apiCart from "@/services/api/cart.ts";
 
 describe('cart asyncThunk updateItemInCart', () => {
   const mockedApiUpdateCartItem = jest.spyOn(apiCart, "updateCartItem");

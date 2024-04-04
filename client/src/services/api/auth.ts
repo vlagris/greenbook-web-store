@@ -1,6 +1,6 @@
-import {mainApi} from "@/services/api/mainApi.ts";
-import {AuthRequest, Token, authState, User} from "@/types.ts";
-import {createHttpError} from "@/utils/createHttpError.ts";
+import { mainApi } from "@/services/api/mainApi.ts";
+import { AuthRequest, Token, authState, User } from "@/types.ts";
+import { createHttpError } from "@/utils/createHttpError.ts";
 
 
 type userResponse = {
@@ -70,7 +70,6 @@ export async function logout() {
 export async function getToken() {
   try {
     const res = await mainApi.get<TokenResponse>('/auth/token');
-    console.log(res.data);
     return tokenResponseAdapter(res.data);
   } catch (err) {
     return createHttpError(err as Error);

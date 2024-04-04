@@ -1,7 +1,7 @@
-import * as apiCart from "@/services/api/cart.ts";
 import {getAsyncThunkCalls} from "@/utils/utilsForTests.tsx";
 import {addCart, addCartFromStorage, fetchCart} from "@/store/cart";
 import {cart, storeState} from "@/store/cart/__tests__/cartActions.test.ts";
+import * as apiCart from "@/services/api/cart.ts";
 
 
 

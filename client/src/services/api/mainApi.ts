@@ -1,22 +1,28 @@
-import axios from "axios";
-import {jwtDecode} from "jwt-decode";
-import {store} from "@/store/store.ts";
+import axios, {AxiosResponse, InternalAxiosRequestConfig} from "axios";
+import { jwtDecode } from "jwt-decode";
+import { store } from "@/store/store.ts";
 import { fetchToken, authSelectors } from "@/store/auth";
-import {API_URL} from "@/constants.ts";
+import { API_URL } from "@/constants.ts";
+
+
 
 export const mainApi = axios.create({
   withCredentials: true,
-  baseURL: API_URL,
+  baseURL: API_URL
 });
 
-mainApi.interceptors.request.use(
-  (config) => {
-    config.headers.Authorization = `Bearer ${authSelectors.token(store.getState())}`
-    return config;
-  }
-);
 
-mainApi.interceptors.response.use((response) => {
+
+export function onFulfilledRequest(config: InternalAxiosRequestConfig) {
+  config.headers.Authorization = `Bearer ${authSelectors.token(store.getState())}`;
+  return config;
+}
+
+mainApi.interceptors.request.use(onFulfilledRequest);
+
+
+
+export function onFulfilledResponse(response: AxiosResponse) {
   const {user, token, loading} = authSelectors.state(store.getState());
 
   if (!user.id) {
@@ -39,12 +45,14 @@ mainApi.interceptors.response.use((response) => {
   }
 
   return response;
-}, async (error) => {
+}
+
+export async function onRejectedResponse(error: any) {
   const originalRequest = {...error.config};
   originalRequest._isRetry = true;
 
   if (
-    error.response.state === 401 &&
+    error.response?.status === 401 &&
     error.config &&
     !error.config._isRetry
   ) {
@@ -53,4 +61,6 @@ mainApi.interceptors.response.use((response) => {
   }
 
   return Promise.reject(error);
-});
+}
+
+mainApi.interceptors.response.use(onFulfilledResponse, onRejectedResponse);

@@ -17,7 +17,6 @@ export const router = createBrowserRouter([
         <Error/>
       </Layout>
     ),
-    handle: { crumb: (): string => "Главная" },
     children: [
       {
         index: true,

@@ -4,19 +4,24 @@ import {PaginationItemTypes} from "@components/Pagination/Item.tsx";
 import * as reactRouterDom from "react-router-dom";
 
 
-function createUseSearchParams(page: number) {
-  return [new URLSearchParams(`q=URLUtils.searchParams&page=${page}`), () => {}];
-}
 
 describe('useItemProps', () => {
+  const mockedSetSearchParams = jest.fn();
+  function createUseSearchParams(page: number): any {
+    return [new URLSearchParams(`q=URLUtils.searchParams&page=${page}`), mockedSetSearchParams];
+  }
+
   const mockedUseSearchParams = jest.spyOn(reactRouterDom, "useSearchParams")
-    .mockReturnValue([new URLSearchParams(), () => {}]);
+    .mockReturnValue(createUseSearchParams(0));
+
 
   afterEach(() => {
+    mockedSetSearchParams.mockClear();
     mockedUseSearchParams.mockClear();
   })
 
-  it('should ', () => {
+
+  it('should return pagination props with one page', () => {
     const {result} = renderHook(() => useItemProps({ totalPages: 1 }));
 
     const expected = [
@@ -28,7 +33,8 @@ describe('useItemProps', () => {
     expect(result.current.itemsProps).toEqual(expected);
   });
 
-  it('should ', () => {
+
+  it('should return pagination props with ten pages with the current first page', () => {
     const {result} = renderHook(() => useItemProps({ totalPages: 10 }));
 
     const expected = [
@@ -47,8 +53,7 @@ describe('useItemProps', () => {
   });
 
 
-  it('should ', () => {
-    // @ts-ignore
+  it('should return pagination props with ten pages with the current fifth page', () => {
     mockedUseSearchParams.mockReturnValue(createUseSearchParams(5))
     const {result} = renderHook(() => useItemProps({ totalPages: 10 }));
 
@@ -67,8 +72,8 @@ describe('useItemProps', () => {
     expect(result.current.itemsProps).toEqual(expected);
   });
 
-  it('should ', () => {
-    // @ts-ignore
+
+  it('should return pagination props with ten pages with the current tenth page', () => {
     mockedUseSearchParams.mockReturnValue(createUseSearchParams(10))
     const {result} = renderHook(() => useItemProps({ totalPages: 10 }));
 
@@ -85,5 +90,26 @@ describe('useItemProps', () => {
     ];
 
     expect(result.current.itemsProps).toEqual(expected);
+  });
+
+
+  it('should check the functions for the pages', () => {
+    window.scrollTo = jest.fn();
+    mockedUseSearchParams.mockReturnValue(createUseSearchParams(3));
+    const {result} = renderHook(() => useItemProps({ totalPages: 10 }));
+
+    if(result.current.itemsProps[1].onClick) {
+      result.current.itemsProps[1].onClick()
+      expect(mockedSetSearchParams).toHaveBeenCalledWith(new URLSearchParams(`q=URLUtils.searchParams`))
+      expect(window.scrollTo).toHaveBeenCalled()
+      expect(window.scrollTo).toHaveBeenCalledWith(0, 0)
+    }
+
+    if(result.current.itemsProps[3].onClick) {
+      result.current.itemsProps[3].onClick()
+      expect(mockedSetSearchParams).toHaveBeenCalledWith(new URLSearchParams(`q=URLUtils.searchParams&page=4`))
+      expect(window.scrollTo).toHaveBeenCalled()
+      expect(window.scrollTo).toHaveBeenCalledWith(0, 0)
+    }
   });
 });

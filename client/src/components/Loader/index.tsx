@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from "./styles.module.scss";
 import Error from "@pages/Error";
-import {HttpError} from "@/types.ts";
+import { HttpError } from "@/types.ts";
 
 
 interface LoaderProps {

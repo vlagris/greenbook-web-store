@@ -22,7 +22,7 @@
     "allowSyntheticDefaultImports": true,
 
     /* Alias */
-    "types": ["node", "jest"],
+    "types": ["node", "jest", "@testing-library/jest-dom"],
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],

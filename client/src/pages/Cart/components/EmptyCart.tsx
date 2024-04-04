@@ -1,7 +1,7 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import {clsx} from "clsx";
 import classes from "@pages/Cart/styles.module.scss";
-import {Link} from "react-router-dom";
 
 function EmptyCart() {
   return (

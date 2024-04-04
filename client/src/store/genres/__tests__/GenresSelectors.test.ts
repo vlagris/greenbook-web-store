@@ -14,7 +14,7 @@ const storeState = {
 }
 
 describe('genres selectors', () => {
-  it('should select genres from state object', () => {
+  it('should return select genres from state', () => {
     const result = genresSelectors.genres(storeState);
 
     expect(result).toEqual([genre]);

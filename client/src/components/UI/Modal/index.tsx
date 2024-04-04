@@ -12,14 +12,13 @@ interface ModalProps {
 
 function Modal({ children, show, onHide, className }: ModalProps) {
 
-
   useEffect(() => {
     if (!show) {
       document.body.className = "";
       document.body.style.paddingRight = "";
       return;
     }
-    if (document.body.offsetHeight > window.innerHeight) {
+    if (document.body.offsetWidth < window.innerWidth) {
       document.body.style.paddingRight = "6px";
     }
     document.body.className = "body_overflow";
@@ -36,10 +35,7 @@ function Modal({ children, show, onHide, className }: ModalProps) {
     <>
       {show &&
         <Portal>
-          <div
-            onClick={handleClick}
-            className={clsx(classes.overlay, className)}
-          >
+          <div className={clsx(classes.overlay, className)} onClick={handleClick}>
             {children}
           </div>
         </Portal>

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ItemContext} from "@components/UI/Accordion/ItemContext.ts";
+import { ItemContext } from "@components/UI/Accordion/ItemContext.ts";
 
 
 interface ItemProps {

@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {clsx} from "clsx";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {updateItemInCart} from "@/store/cart";
+import React, { useEffect, useState } from 'react';
+import { clsx } from "clsx";
+import { useAppDispatch } from "@/hooks/useTypedReduxHooks.ts";
+import { updateItemInCart } from "@/store/cart";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
 
 interface CountProps {
@@ -21,7 +21,7 @@ function Count({quantity: initialQuantity, id}: CountProps) {
 
   function handleButton(newQuantity: number) {
     return () => {
-      if (newQuantity >= 1) {
+      if (newQuantity > 0) {
         dispatch(updateItemInCart({id, quantity: newQuantity }));
         setQuantity(newQuantity);
       }

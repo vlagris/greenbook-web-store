@@ -10,7 +10,6 @@ export function createLocalStorageController<T>(StorageName: string) {
     },
     remove() {
       return localStorage.removeItem(this.storageName);
-
     }
   }
 }

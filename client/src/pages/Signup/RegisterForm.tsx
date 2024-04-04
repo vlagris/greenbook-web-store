@@ -44,9 +44,6 @@ function RegisterForm() {
         case ErrorType.BAD_REQUEST:
         case ErrorType.INVALID_DATA:
         case ErrorType.NOT_VALIDATION:
-          email.setError(true);
-          pass.setError(true);
-          break;
         case ErrorType.EMAIL_BUSY:
           email.setError(true);
           pass.setError(true);

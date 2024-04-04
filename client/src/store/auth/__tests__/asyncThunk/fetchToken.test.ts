@@ -10,7 +10,7 @@ describe('auth asyncThunk fetchToken', () => {
 
   afterEach(() => {
     mockedApiGetToken.mockClear();
-  })
+  });
 
   it('should fetchToken resolved', async () => {
     const calls = await getAsyncThunkCalls(fetchToken(), emptyStoreState);

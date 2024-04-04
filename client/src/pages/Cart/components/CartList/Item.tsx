@@ -2,6 +2,7 @@ import Count from "@pages/Cart/components/CartList/Count.tsx";
 import {CartItem} from "@/types.ts";
 import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
 import {removeItemFromCart} from "@/store/cart";
+import {formatPrice} from "@/utils/formatPrice.ts";
 import {currency} from "@/constants.ts";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
 import CloseIcon from "@assets/icons/close.svg?react";
@@ -9,7 +10,7 @@ import CloseIcon from "@assets/icons/close.svg?react";
 
 function Item({item}: {item: CartItem}) {
   const dispatch = useAppDispatch();
-  const subtotal = (item.price * item.quantity).toFixed(0)
+  const subtotal = formatPrice(item.price * item.quantity);
 
 
   function handleRemove() {
@@ -46,7 +47,7 @@ function Item({item}: {item: CartItem}) {
         </div>
 
         <div className={classes.col}>
-          <button className={classes.item_btn_remove} onClick={handleRemove}>
+          <button className={classes.item_btn_remove} onClick={handleRemove} role="removeButton">
             <CloseIcon className={classes.item_btn_remove_icon}/>
           </button>
         </div>

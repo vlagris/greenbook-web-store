@@ -4,7 +4,7 @@ import {PaginationItemTypes} from "@components/Pagination/Item.tsx";
 import {fireEvent} from "@testing-library/react";
 
 describe('arrowButton pagination component', () => {
-  it('should ', () => {
+  it('should return the arrowButton to the right', () => {
     const onClick = jest.fn();
     const component = renderWithProviders(<ArrowButton type={PaginationItemTypes.next} onClick={onClick}/>);
     const button = component.container.querySelectorAll('button')[0];
@@ -18,7 +18,7 @@ describe('arrowButton pagination component', () => {
     expect(onClick).toHaveBeenCalled();
   });
 
-  it('should ', () => {
+  it('should return the disabled arrowButton to the left', () => {
     const component = renderWithProviders(<ArrowButton type={PaginationItemTypes.prev}/>);
     const button = component.container.querySelectorAll('button')[0];
     const svgIcon = component.container.querySelectorAll('.arrow')[0];

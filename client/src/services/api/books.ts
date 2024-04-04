@@ -42,13 +42,8 @@ interface IGetBooksByGenre {
   offset?: number
 }
 export async function getBooksByGenre(requestData: IGetBooksByGenre) {
-  const params = {
-    pathName: requestData.pathName,
-    limit: requestData.limit,
-    offset: requestData.offset
-  };
   try {
-    const res = await mainApi.get<BooksResponse>('/books/', {params});
+    const res = await mainApi.get<BooksResponse>('/books/', {params: requestData});
     return BooksByGenreResponseAdepter(res.data);
   } catch (err) {
     return createHttpError(err as Error);
@@ -61,9 +56,8 @@ interface IGetBooksRecommended {
   limit: number,
 }
 export async function getBooksRecommended(requestData: IGetBooksRecommended) {
-  const params = { limit: requestData.limit };
   try {
-    const res = await mainApi.get<BookResponse[]>('/books/recommended', {params});
+    const res = await mainApi.get<BookResponse[]>('/books/recommended', {params: requestData});
     return BooksRecommendedResponseAdepter(res.data);
   } catch (err) {
     return createHttpError(err as Error);

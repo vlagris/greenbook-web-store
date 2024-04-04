@@ -38,7 +38,7 @@ function CartList({items}: {items: CartItem[]}) {
 
       <div className={classes.bottom}>
         <button className={classes.btn}>Вернуться в католог</button>
-        <button className={classes.btn} onClick={handleCartUpdate}>
+        <button className={classes.btn} onClick={handleCartUpdate} role="cartUpdate">
           Обновить
         </button>
       </div>

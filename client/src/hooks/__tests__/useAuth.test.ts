@@ -15,6 +15,4 @@ describe('useAuth', () => {
 
     expect(useAuth()).toEqual({ isAuth: true });
   });
-
-
 });

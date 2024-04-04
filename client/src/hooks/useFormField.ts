@@ -8,7 +8,7 @@ export type FormField = {
   setError: React.Dispatch<React.SetStateAction<boolean>>,
   isValid: () => boolean,
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  onBlur: () => void
+  onBlur: () => boolean
 }
 
 export type FieldValidate = (state: string) => boolean;
@@ -19,7 +19,7 @@ interface UseFormFieldProps {
   validate?: FieldValidate
 }
 
-function UseFormField({initialState = "", required = false, validate}: UseFormFieldProps): FormField {
+function useFormField({initialState = "", required = false, validate}: UseFormFieldProps): FormField {
   const [value, setValue] = useState(initialState);
   const [error, setError] = useState( false);
   const validator = useRef<FieldValidate>(() => true);
@@ -32,8 +32,7 @@ function UseFormField({initialState = "", required = false, validate}: UseFormFi
   }, [validate]);
 
 
-
-  function onBlur() {
+  function onBlur(): boolean {
     let result = true;
     if (value) {
       result = validator.current(value);
@@ -66,4 +65,4 @@ function UseFormField({initialState = "", required = false, validate}: UseFormFi
   };
 }
 
-export default UseFormField;
+export default useFormField;
