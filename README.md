@@ -1,28 +1,21 @@
-<p align="center">
-      <img src="Project Logo Url" width="726">
+## GreenBook
+
+<p>
+    <img alt="NPM Badge" src="https://img.shields.io/badge/v10.2.3-green?label=npm&color=blue">
 </p>
 
-<p align="center">
-   <img src="" alt="Unity Version">
-   <img src="" alt="Game Version">
-   <img src="" alt="License">
-</p>
+Веб приложение интернет-магазина электронных книг. В проиложении есть категории с возможностью фильтровать и сортировать книги. В нем также можно зарегистрироваться или аторизоваться.
+Еще в приложении есть карзина в катрую можно довалять и сохранять книги.
 
-## About
-
-About Text Here
-
-## Documentation
-
-Documentation Here
-
-## Distribute
-
-- [Service Name](Page Link)
+## Tech Stack
+- TypeScript
+- React
+- Redux
+- React-router
+- SASS
+- Jest
+- Vite
+- Express
 
 
-## Developers
 
-- [Delevoper Name](GitHub Profile Link)
-
-## License    
