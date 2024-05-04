@@ -1,27 +1,38 @@
-import BookModel from "../models/book.js";
-import GenreModel from "../models/genre.js";
 import {errors} from "../constants.js";
+import {bookModel, genreModel, authorModel} from "../models/index.js";
 
 export async function getByGenre(req, res) {
   try {
     const skip = req.query.offset || 0;
-    const limit = req.query.limit;
+    const limit = req.query.limit || 15;
     const genrePathName = req.query.pathName;
 
     if(!genrePathName) {
       return res.status(404).json(errors.BAD_REQUEST);
     }
 
-    const genre = await GenreModel.findOne({pathName: genrePathName});
 
-    if(!genre) {
+    const {count, rows: books} = await bookModel.findAndCountAll({
+      limit: limit,
+      offset: skip,
+      include: [
+        {
+          model: authorModel,
+          attributes: ["id", "name", "pathName"],
+          through: { attributes: [] }
+        },
+        {
+          where: { pathName: genrePathName },
+          model: genreModel,
+          attributes: ["id", "name", "pathName"],
+          through: { attributes: [] }
+        },
+      ],
+    })
+
+    if(!books) {
       return res.status(404).json(errors.BAD_REQUEST);
     }
-
-    const genreId = genre._id;
-    const books = await BookModel.find({genres: genreId}, null, {skip, limit});
-    const count = await BookModel.countDocuments({genres: genreId});
-
 
     res.status(200).json({
       items: books,
@@ -33,11 +44,27 @@ export async function getByGenre(req, res) {
   }
 }
 
+
 export async function getRecommended(req, res) {
   try {
     const limit = req.query.limit || 50;
 
-    const books = await BookModel.find({}, null, {limit});
+    const books = await bookModel.findAll({
+      limit: limit,
+      include: [
+        {
+          model: authorModel,
+          attributes: ["id", "name", "pathName"],
+          through: { attributes: [] }
+        },
+        {
+          model: genreModel,
+          attributes: ["id", "name", "pathName"],
+          through: { attributes: [] }
+        },
+      ],
+    })
+
 
     res.status(200).json(books);
   } catch (err) {

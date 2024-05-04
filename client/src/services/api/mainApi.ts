@@ -23,12 +23,12 @@ mainApi.interceptors.request.use(onFulfilledRequest);
 
 
 export function onFulfilledResponse(response: AxiosResponse) {
-  const {user, token, loading} = authSelectors.state(store.getState());
+  const {user, token} = authSelectors.state(store.getState());
 
   if (!user.id) {
     return response;
   }
-  if (!token.value && !loading) {
+  if (!token.value) {
     store.dispatch(fetchToken());
     return response;
   }

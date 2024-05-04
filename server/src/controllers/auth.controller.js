@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
-import UserModel from "../models/user.js";
-import UserSessionModel from "../models/userSession.js";
+import {userModel, userSessionModel} from "../models/index.js";
 import jwt from "jsonwebtoken";
 import { generateTokens, filterUser } from "../utils/index.js";
 import {errors} from "../constants.js";
@@ -9,22 +8,24 @@ import {errors} from "../constants.js";
 
 export async function signup(req, res) {
   try {
-    const isUseEmail = await UserModel.findOne({ email: req.body.email });
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const isUseEmail = await userModel.findOne({ where: { email } });
+
     if (isUseEmail) {
       return res.status(400).json(errors.EMAIL_BUSY);
     }
 
     const salt = await bcrypt.genSalt(11);
-    const passwordHash = await bcrypt.hash(req.body.password, salt);
+    const passwordHash = await bcrypt.hash(password, salt);
 
-    const doc = new UserModel({
-      email: req.body.email,
-      passwordHash,
+    const user = await userModel.create({
+      email,
+      passwordHash
     });
-    const user = await doc.save();
 
-    const userData = filterUser(user._doc);
-    const {accessToken, refreshToken} = await generateTokens(user._doc);
+    const {accessToken, refreshToken} = await generateTokens(user);
 
 
     res
@@ -35,7 +36,7 @@ export async function signup(req, res) {
       })
       .status(200)
       .json({
-        user: userData,
+        user: user,
         accessToken,
       });
   } catch (err) {
@@ -48,21 +49,24 @@ export async function signup(req, res) {
 
 export async function login(req, res) {
   try {
+    const email = req.body.email;
+    const password = req.body.password;
 
-    const user = await UserModel.findOne({ email: req.body.email });
+    const user = await userModel.findOne({ where: { email: email } });
+
 
     if (!user) {
       return res.status(400).json(errors.INVALID_DATA);
     }
 
-    const isValidPass = await bcrypt.compare(req.body.password, user.passwordHash);
+    const isValidPass = await bcrypt.compare(password, user.passwordHash);
 
     if (!isValidPass) {
       return res.status(400).json(errors.INVALID_DATA);
     }
 
-    const userData = filterUser(user._doc);
-    const {accessToken, refreshToken} = await generateTokens(user._doc);
+    // const userData = filterUser(user._doc);
+    const {accessToken, refreshToken} = await generateTokens(user);
 
 
     res
@@ -73,7 +77,7 @@ export async function login(req, res) {
       })
       .status(200)
       .json({
-        user: userData,
+        user: user,
         accessToken,
       });
   } catch (err) {
@@ -108,6 +112,7 @@ export async function refreshToken(req, res) {
       return res.status(403).json(errors.NO_REFRESH_TOKEN);
     }
 
+
     const decoded = jwt.verify(
       refreshToken,
       process.env.REFRESH_TOKEN_SECRET_KEY,
@@ -123,8 +128,14 @@ export async function refreshToken(req, res) {
       return res.status(403).json(errors.INVALID_REFRESH_TOKEN);
     }
 
-    const userSession = await UserSessionModel.findOne({token: refreshToken}).populate("userId");
-    const user = userSession?.userId || null;
+
+    const userSession = await userSessionModel.findOne({
+      where: { token: refreshToken } ,
+      include: {
+        model: userModel,
+      }
+    });
+    const user = userSession.User || null;
 
 
     if (!userSession || !user) {
@@ -132,8 +143,8 @@ export async function refreshToken(req, res) {
     }
 
 
-
     const {accessToken: newAccessToken, refreshToken: newRefreshToken} = await generateTokens(user);
+
 
     res.cookie("refreshToken", newRefreshToken, {
         secure: true,
@@ -141,9 +152,7 @@ export async function refreshToken(req, res) {
         expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 60)),
       })
       .status(200)
-      .json({
-        accessToken: newAccessToken,
-      })
+      .json({ accessToken: newAccessToken })
 
   } catch (err) {
     console.log(err);

@@ -3,36 +3,37 @@ import {BookResponse, Cart, CartItem, UpdateCartItem} from "@/types.ts";
 import {createHttpError} from "@/utils/createHttpError.ts";
 
 
-type CartItemResponse = {
-  bookId: BookResponse,
-  quantity: number
+type CartItemResponse = BookResponse & {
+  itemQuantity: {
+    quantity: number
+  }
 };
+
 type CartItemRequest = {
   bookId: string,
   quantity: number
 };
 type CartResponse = {
-  items: CartItemResponse[]
+  Books: CartItemResponse[]
 };
-type CartRequest = {
-  items: CartItemRequest[]
-};
+
+type CartRequest = CartItemRequest[];
 
 
 
 function cartItemResponseAdapter(data: CartItemResponse): CartItem {
   return {
-    id: data.bookId._id,
-    title: data.bookId.title,
-    price: data.bookId.price,
-    image: data.bookId.image,
-    quantity: data.quantity
+    id: data.id,
+    title: data.title,
+    price: data.price,
+    image: data.image,
+    quantity: data.itemQuantity.quantity
   }
 }
 function cartResponseAdapter(data: CartResponse): Cart {
   let totalQuantity = 0;
-  const items = data.items.map(item => {
-    totalQuantity += item.quantity;
+  const items = data.Books.map(item => {
+    totalQuantity += item.itemQuantity.quantity;
     return cartItemResponseAdapter(item)
   });
   return {
@@ -43,11 +44,10 @@ function cartResponseAdapter(data: CartResponse): Cart {
 
 
 function cartRequestAdapter(data: CartItem[]): CartRequest {
-  const items: CartItemRequest[] = data.map(item => ({
+  return data.map(item => ({
     bookId: item.id,
     quantity: item.quantity
   }));
-  return { items };
 }
 
 

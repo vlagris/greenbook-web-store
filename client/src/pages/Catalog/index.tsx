@@ -4,10 +4,9 @@ import {Books, Genre} from "@/types.ts";
 import * as api from "@/services/api";
 
 import Breadcrumbs, {Crumb} from "@components/Breadcrumbs";
-import Filter from "@pages/Catalog/components/Filter";
-import ProductList from "@pages/Catalog/components/ProductList.tsx";
 import useApi from "@/hooks/useApi.ts";
 import Loader from "@components/Loader";
+import CatalogMain from "@pages/Catalog/components/CatalogMain.tsx";
 import { useAppSelector } from "@/hooks/useTypedReduxHooks.ts";
 import { genresSelectors } from "@/store/genres";
 import classes from "./styles.module.scss";
@@ -57,10 +56,7 @@ function Catalog() {
               }
             </div>
 
-            <div className={classes.main}>
-              <Filter/>
-              <ProductList books={data.items} totalPages={Math.ceil(data.totalItems / LIMIT)}/>
-            </div>
+            <CatalogMain books={data} limit={LIMIT}/>
           </div>
         }
       </Loader>

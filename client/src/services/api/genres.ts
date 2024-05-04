@@ -1,19 +1,12 @@
 import {mainApi} from "@/services/api/mainApi.ts";
-import {Genre} from "@/types.ts";
+import {Genre, GenreResponse} from "@/types.ts";
 import {createHttpError} from "@/utils/createHttpError.ts";
-
-
-type GenreResponse = {
-  _id: string,
-  name: string,
-  pathName: string,
-};
 
 
 function genresResponseAdepter(data: GenreResponse[]): Genre[] {
   return data.map((genre): Genre => {
     return {
-      id: genre._id,
+      id: genre.id,
       name: genre.name,
       pathName: genre.pathName
     }

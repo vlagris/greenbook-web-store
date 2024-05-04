@@ -25,7 +25,6 @@ export const register = createAppAsyncThunk(
 
     } catch (err) {
       return rejectWithValue(err as HttpError);
-
     } finally {
       dispatch(setLoading(false));
     }
@@ -76,6 +75,9 @@ export const fetchToken = createAppAsyncThunk(
       dispatch(removeAuth());
       dispatch(removeCart());
       return rejectWithValue({type: ErrorType.NOT_AUTH});
+    }
+    if (authSelectors.state(getState()).loading) {
+      return rejectWithValue({type: ErrorType.BAD_REQUEST});
     }
 
     dispatch(setLoading(true));

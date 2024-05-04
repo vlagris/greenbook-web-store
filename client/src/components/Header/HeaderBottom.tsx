@@ -6,14 +6,12 @@ import { logout } from "@/store/auth";
 import useAuth from "@/hooks/useAuth";
 import BurgerMenu from "@components/Header/BurgerMenu";
 import Search from "@components/Header/Search";
+import UserMenu from "@components/Header/UserMenu/UserMenu.tsx";
 import { cartSelectors } from "@/store/cart";
 
 import classes from "./styles.module.scss";
 import HeartIcon from '@assets/icons/heart.svg?react';
 import BagIcon from '@assets/icons/bag.svg?react';
-import LogoutIcon from '@assets/icons/logout.svg?react';
-// import BagIcon from '@assets/bag.svg?react';
-// import UserIcon from '@assets/auth.svg?react';
 
 
 
@@ -53,9 +51,7 @@ function HeaderBottom() {
             </span>
           </Link>
           {isAuth &&
-            <button className={classes.navbar_item} onClick={handleLogout} data-testid="logout">
-              <LogoutIcon className={classes.icon_fill}/>
-            </button>
+            <UserMenu handleLogout={handleLogout}/>
           }
         </div>
       </div>

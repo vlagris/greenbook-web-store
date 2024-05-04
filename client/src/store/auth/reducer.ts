@@ -44,13 +44,5 @@ export const authReducer = createReducer(
         state.user = emptyState.user;
         state.token = emptyState.token;
       })
-      // .addCase(fetchToken.rejected, (state: authState, {payload}) => {
-      //   if (payload?.type === ErrorType.NOT_AUTH) {
-      //     state.user = emptyState.user;
-      //     state.token = emptyState.token;
-      //   } else {
-      //     state.token.value = "";
-      //   }
-      // })
 });
 

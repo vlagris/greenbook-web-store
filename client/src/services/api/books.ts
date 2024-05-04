@@ -11,15 +11,15 @@ type BooksResponse = {
 
 function bookResponseAdepter(data: BookResponse): Book {
     return {
-      id: data._id,
+      id: data.id,
       title: data.title,
       price: data.price,
-      genres: data.genres,
-      authors: data.authors,
+      genres: data.Genres,
+      authors: data.Authors,
       image: data.image,
       rating: {
-        rate: data.rating.rate,
-        count: data.rating.count,
+        rate: data.rating_rate,
+        count: data.rating_count,
       }
     }
 }
@@ -30,7 +30,7 @@ function BooksByGenreResponseAdepter(data: BooksResponse): Books {
     totalItems: data.totalItems
   }
 }
-function BooksRecommendedResponseAdepter(data: BookResponse[]): Book[] {
+function BooksResponseAdepter(data: BookResponse[]): Book[] {
   return data.map((book): Book => bookResponseAdepter(book));
 }
 
@@ -58,7 +58,7 @@ interface IGetBooksRecommended {
 export async function getBooksRecommended(requestData: IGetBooksRecommended) {
   try {
     const res = await mainApi.get<BookResponse[]>('/books/recommended', {params: requestData});
-    return BooksRecommendedResponseAdepter(res.data);
+    return BooksResponseAdepter(res.data);
   } catch (err) {
     return createHttpError(err as Error);
   }

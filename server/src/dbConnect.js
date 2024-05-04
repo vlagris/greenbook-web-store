@@ -1,20 +1,14 @@
-import mongoose from "mongoose";
+import 'dotenv/config'
+import {Sequelize} from "sequelize";
 
-function dbConnect() {
-  mongoose.connection.on("connected", () => {
-    console.log("DB connected");
-  });
+export const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: `${process.env.SQLITE_STORAGE_PATH + process.env.SQLITE_STORAGE_NAME}`
+});
 
-  mongoose.connection.on("error", (err) => {
-    console.log("DB error : " + err);
-  });
-
-  mongoose.connection.on("disconnected", () => {
-    console.log("DB disconnected");
-  });
-
-  mongoose.connect(process.env.MONGO_CONNECTION_STRING);
+try {
+  await sequelize.authenticate()
+  console.log('Соединение с БД было успешно установлено')
+} catch (e) {
+  console.log('Невозможно выполнить подключение к БД: ', e)
 }
-
-
-export default dbConnect;

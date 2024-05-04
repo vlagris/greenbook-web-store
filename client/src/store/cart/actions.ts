@@ -67,18 +67,18 @@ export const addItemToCart = createAppAsyncThunk(
 export const removeItemFromCart = createAppAsyncThunk(
   `cart/removeItemFromCart`,
   async (cartItemId: string,  {getState, dispatch}) => {
+    dispatch(removeCartItem(cartItemId));
     if (authSelectors.userId(getState())) {
       await api.removeCartItem(cartItemId);
     }
-    dispatch(removeCartItem(cartItemId));
   });
 
 
 export const updateItemInCart = createAppAsyncThunk(
   `cart/updateCartItem`,
   async (data: UpdateCartItem,  {getState, dispatch}) => {
+    dispatch(updateCartItemQuantity(data));
     if (authSelectors.userId(getState())) {
       await api.updateCartItem(data);
     }
-    dispatch(updateCartItemQuantity(data));
   });

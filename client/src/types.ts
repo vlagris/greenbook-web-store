@@ -22,12 +22,30 @@ export type Genre = {
   pathName: string,
 }
 
+export type GenreResponse = {
+  id: string,
+  name: string,
+  pathName: string,
+};
+
+export type Author = {
+  id: string,
+  name: string,
+  pathName: string,
+}
+
+export type AuthorResponse = {
+  id: string,
+  name: string,
+  pathName: string,
+};
+
 export type Book = {
   id: string,
   title: string,
   price: number,
-  genres: string[],
-  authors: string[],
+  genres: Genre[],
+  authors: Author[],
   image: string,
   rating: {
     rate: number,
@@ -41,16 +59,14 @@ export type Books = {
 }
 
 export type BookResponse = {
-  _id: string,
+  id: string,
   title: string,
   price: number,
-  genres: string[],
-  authors: string[],
+  Genres: GenreResponse[],
+  Authors: AuthorResponse[],
   image: string,
-  rating: {
-    rate: number,
-    count: number,
-  }
+  rating_rate: number,
+  rating_count: number,
 }
 
 export type CartItem = Pick<Book, "id" | "title" | "price" | "image"> & {

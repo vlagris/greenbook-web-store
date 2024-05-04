@@ -1,37 +1,39 @@
 import jwt from "jsonwebtoken";
-import UserSessionModel from "../models/userSession.js";
+import userSessionModel from "../models/userSession.model.js";
 
 export async function generateTokens(user) {
-  // try {
-    const payload = { id: user._id };
+  const userId = user.id;
+  const payload = { id: userId };
 
-    const accessToken = jwt.sign(
-      payload,
-      process.env.ACCESS_TOKEN_SECRET_KEY,
-      {
-        expiresIn: "15m",
-      }
-    );
+  const accessToken = jwt.sign(
+    payload,
+    process.env.ACCESS_TOKEN_SECRET_KEY,
+    {
+      expiresIn: "15m",
+    }
+  );
 
-    const refreshToken = jwt.sign(
-      payload,
-      process.env.REFRESH_TOKEN_SECRET_KEY,
-      {
-        expiresIn: "60d",
-      }
-    );
+  const refreshToken = jwt.sign(
+    payload,
+    process.env.REFRESH_TOKEN_SECRET_KEY,
+    {
+      expiresIn: "60d",
+    }
+  );
 
-    await UserSessionModel.deleteOne({
-      userId: user._id
-    });
-    await new UserSessionModel({
-      userId: user._id,
-      token: refreshToken
-    }).save();
+  const userSession = await userSessionModel.findOne({
+    where: {
+      userId: userId
+    },
+  });
 
-    return {accessToken, refreshToken};
 
-  // } catch (err) {
-  //
-  // }
+  if (userSession) {
+    await userSession.update({ token: refreshToken });
+  } else {
+    await userSessionModel.create({ token: refreshToken, userId: userId });
+  }
+
+
+  return {accessToken, refreshToken};
 }

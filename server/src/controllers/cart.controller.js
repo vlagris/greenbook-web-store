@@ -1,13 +1,19 @@
-import CartModel, {CartItemModel} from "../models/cart.js";
 import {errors} from "../constants.js";
-// import BookModel from "../models/book.js";
+import {bookModel, cartModel, cartItemModel} from "../models/index.js";
 
 
 export async function getCart(req, res) {
   try {
-    const cart = await CartModel.findOne({
-      userId: req.userId
-    }).populate("items.bookId");
+    const cart = await cartModel.findOne({
+      where: { userId: req.userId },
+      include: {
+        model: bookModel,
+        through: {
+          attributes: ['quantity'],
+          as: 'itemQuantity'
+        }
+      }
+    });
 
     res.json(cart);
   } catch (err) {
@@ -16,24 +22,43 @@ export async function getCart(req, res) {
   }
 }
 
+
 export async function createCart(req, res) {
   try {
     const userId = req.userId;
-    const cartItems = req.body.items || [];
+    const cartItemsData = req.body || [];
 
-    const doc = new CartModel({
-      userId: userId,
-      items: []
-    });
 
-    cartItems.forEach(cartItem => {
-      const cartItemDoc = new CartItemModel(cartItem);
-      doc.items.push(cartItemDoc);
+     const emptyCart = await cartModel.create(
+      { userId: userId }
+    );
+
+
+    const cartItems = cartItemsData.map(item => {
+      return {
+        bookId: item.bookId,
+        cartId: emptyCart.id,
+        quantity: item.quantity,
+      }
     })
 
-    const cart = await doc.save();
 
-    res.json("cart");
+    await cartItemModel.bulkCreate(cartItems);
+
+
+    const cart = await cartModel.findOne({
+      where: { userId },
+      include: {
+        model: bookModel,
+        through: {
+          attributes: ['quantity'],
+          as: 'itemQuantity'
+        }
+      }
+    });
+
+
+    res.json(cart);
   } catch (err) {
     console.log(err);
     res.status(500).json(errors.SERVER_ERROR);
@@ -42,45 +67,48 @@ export async function createCart(req, res) {
 
 export async function addItem(req, res) {
   try {
+    const userId = req.userId;
     const bookId = req.params.id;
 
     if (!bookId) {
       return res.status(400).json(errors.BAD_REQUEST);
     }
 
-    // const book = await BookModel.findById(bookId);
+    const cart = await cartModel.findOne({ where: { userId } });
 
-    const cartItem = new CartItemModel({
-      bookId: bookId,
-      quantity: 1
+    const cartItem = await cartItemModel.findOne({
+      where: {
+        bookId: bookId,
+        cartId: cart.id,
+      }
     });
 
-    await CartModel.updateOne(
-      {
-        userId: req.userId
-      },
-      {
-        $push: {
-          items: cartItem
+
+    if (cartItem) {
+      await cartItemModel.update({
+        quantity: cartItem.quantity + 1
+      }, {
+        where: {
+          bookId: bookId,
+          cartId: cart.id,
         }
+      });
+    } else {
+      await cartItemModel.create({
+        cartId: cart.id,
+        bookId: bookId
+      });
+    }
+
+
+    const newCartItem = await cartItemModel.findOne({
+      where: {
+        bookId: bookId,
+        cartId: cart.id,
       }
-    );
+    });
 
-    const cart = await CartModel.findOne({
-      userId: req.userId,
-    }, {
-        items: {
-          $elemMatch: {
-            bookId: bookId
-          }
-      }
-    }).populate("items.bookId");
-
-
-    console.log(cart._doc.items[0]);
-
-
-    res.status(200).json(cart._doc.items[0]);
+    res.status(200).json(newCartItem);
   } catch (err) {
     console.log(err);
     res.status(500).json(errors.SERVER_ERROR);
@@ -90,6 +118,7 @@ export async function addItem(req, res) {
 
 export async function updateItem(req, res) {
   try {
+    const userId = req.userId;
     const bookId = req.params.id;
     const quantity = req.body.quantity;
 
@@ -97,34 +126,40 @@ export async function updateItem(req, res) {
       return res.status(400).json(errors.BAD_REQUEST);
     }
 
-    await CartModel.updateOne({
-      userId: req.userId,
-      "items.bookId": bookId
-    }, {
-      "$set": {
-        "items.$.quantity": quantity
+
+    const cart = await cartModel.findOne({
+      where: { userId },
+      include: {
+        model: bookModel,
+        where: { id: bookId },
       }
     });
 
 
-    const cart = await CartModel.findOne({
-      userId: req.userId,
-    }, {
-      items: {
-        $elemMatch: {
-          bookId: bookId
-        }
-      }
-    }).populate("items.bookId");
-
-
-    const cartItem = cart.items[0];
-
-    if (!cartItem) {
-      res.status(400).json({
+    if (!cart) {
+      return res.status(400).json({
         message: "Item not found"
       });
     }
+
+
+    await cartItemModel.update({
+      quantity
+    }, {
+      where: {
+        bookId: bookId,
+        cartId: cart.id,
+      }
+    });
+
+
+    const cartItem = await cartItemModel.findOne({
+      where: {
+        bookId: bookId,
+        cartId: cart.id,
+      }
+    });
+
 
   res.status(200).json(cartItem);
   } catch (err) {
@@ -135,22 +170,36 @@ export async function updateItem(req, res) {
 
 export async function removeItem(req, res) {
   try {
+    const userId = req.userId;
     const bookId = req.params.id;
 
     if (!bookId) {
       return res.status(400).json(errors.BAD_REQUEST);
     }
 
-    const cart = await CartModel.findOne({userId: req.userId});
 
-    cart.items.forEach((item, index) => {
-      if (item.bookId.toString() === bookId) {
-        cart.items.splice(index, 1);
+    const cart = await cartModel.findOne({
+      where: { userId },
+      include: {
+        model: bookModel,
+        where: { id: bookId },
       }
     });
 
 
-    await cart.save();
+    if (!cart) {
+      return res.status(400).json({
+        message: "Item not found"
+      });
+    }
+
+
+    await cartItemModel.destroy({
+      where: {
+        bookId: bookId,
+        cartId: cart.id,
+      }
+    });
 
 
     res.status(200).end();

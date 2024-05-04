@@ -1,5 +1,5 @@
 
 export function filterUser(user) {
-  const {passwordHash: passHash, ...userData } = user;
+  const {passwordHash, ...userData } = user;
   return userData;
 }

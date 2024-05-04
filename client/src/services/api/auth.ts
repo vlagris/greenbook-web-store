@@ -4,7 +4,7 @@ import { createHttpError } from "@/utils/createHttpError.ts";
 
 
 type userResponse = {
-  _id: string,
+  id: string,
   email: string,
 }
 type TokenResponse = {
@@ -18,7 +18,7 @@ type AuthResponse  = {
 
 function userResponseAdapter(data: userResponse): User {
   return {
-    id: data._id,
+    id: data.id,
     email: data.email,
   };
 }
