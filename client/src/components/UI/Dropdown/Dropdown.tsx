@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {DropdownContext} from "@components/UI/Dropdown/DropdownContext.ts";
 import classes from "@components/UI/Dropdown/styles.module.scss";
 
@@ -7,6 +7,7 @@ export type ItemStates = {
   active: number | string,
   focus: number | string,
 }
+
 
 interface CustomSelectProps {
   children?: React.ReactNode,

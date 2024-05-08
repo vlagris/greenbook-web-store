@@ -11,6 +11,7 @@ export const setLoading = createAction<boolean>("auth/setLoading");
 export const removeAuth = createAction<undefined>("auth/clearAuth");
 
 
+
 const createAppAsyncThunk = createAsyncThunk.withTypes<AsyncThunkConfig<HttpError>>()
 
 export const register = createAppAsyncThunk(
@@ -29,6 +30,7 @@ export const register = createAppAsyncThunk(
       dispatch(setLoading(false));
     }
   });
+
 
 
 export const login = createAppAsyncThunk(
@@ -50,6 +52,7 @@ export const login = createAppAsyncThunk(
   });
 
 
+
 export const logout = createAppAsyncThunk(
   `auth/logout`,
   async (_, {rejectWithValue, dispatch}) => {
@@ -66,6 +69,7 @@ export const logout = createAppAsyncThunk(
       dispatch(setLoading(false));
     }
   });
+
 
 
 export const fetchToken = createAppAsyncThunk(

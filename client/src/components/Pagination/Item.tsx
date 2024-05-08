@@ -2,6 +2,7 @@ import PageButton from "@components/Pagination/PageButton";
 import ArrowButton from "@components/Pagination/ArrowButton.tsx";
 import CurrentPageButton from "@components/Pagination/CurrentPageButton.tsx";
 import EllipsisButton from "@components/Pagination/EllipsisButton.tsx";
+import {PaginationOnClick} from "@components/Pagination/index.tsx";
 
 export enum PaginationItemTypes {
   page,
@@ -19,9 +20,10 @@ const ITEM_COMPONENTS_MAP = {
   [PaginationItemTypes.next]: ArrowButton,
 }
 
+
 export interface ItemProps {
   type: PaginationItemTypes,
-  onClick?: () => void,
+  onClick?: PaginationOnClick,
   page?: number,
 }
 

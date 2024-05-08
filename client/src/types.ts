@@ -1,21 +1,6 @@
 import {EntityState} from "@reduxjs/toolkit";
 import {AppDispatch, RootState} from "@/store/store.ts";
 
-export type Product = {
-  id: string,
-  name: string,
-  price: number
-  category: {
-    id: number,
-    name: string,
-  },
-  image: string,
-  rating: {
-    rate: number,
-    count: number,
-  },
-}
-
 export type Genre = {
   id: string,
   name: string,
@@ -55,7 +40,9 @@ export type Book = {
 
 export type Books = {
   items: Book[],
-  totalItems: number
+  total: number,
+  minPrice: number,
+  maxPrice: number,
 }
 
 export type BookResponse = {
@@ -122,6 +109,11 @@ export type AsyncThunkConfig<R> = {
 export type ResponseError = {
   error_message: string,
   error_code?: number,
+}
+
+export enum LocalStorageNames {
+  userId = "userId",
+  cart = "cart"
 }
 
 export enum ErrorType {

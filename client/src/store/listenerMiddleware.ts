@@ -1,7 +1,7 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 import { cartSelectors } from "@/store/cart";
 import { authSelectors } from "@/store/auth";
-import * as LocalStorage from "@/services/localStorage";
+import { objectLocalStorage } from "@/services/objectLocalStorage";
 import type { RootState, AppDispatch } from "@/store/store.ts";
 
 
@@ -18,7 +18,7 @@ startAppListening({
     return authSelectors.userId(currentState) !== authSelectors.userId(previousState);
   },
   effect: (_, listenerApi) => {
-    LocalStorage.userId.set(authSelectors.userId(listenerApi.getState()));
+    objectLocalStorage.userId.set(authSelectors.userId(listenerApi.getState()));
   }
 });
 
@@ -28,6 +28,6 @@ startAppListening({
     return JSON.stringify(cartSelectors.state(currentState)) !== JSON.stringify(cartSelectors.state(previousState));
   },
   effect: (_, listenerApi) => {
-    LocalStorage.cart.set(cartSelectors.state(listenerApi.getState()));
+    objectLocalStorage.cart.set(cartSelectors.state(listenerApi.getState()));
   }
 });

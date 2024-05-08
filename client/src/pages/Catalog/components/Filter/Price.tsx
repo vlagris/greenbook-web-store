@@ -1,62 +1,67 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {Filters} from "@pages/Catalog/useFilters.ts";
 import classes from "./styles.module.scss";
-import {useSearchParams} from "react-router-dom";
 
 
 
 interface PriceProps {
-  priceMin: number,
-  priceMax: number,
+  minPrice: number,
+  maxPrice: number,
+  filters: Filters,
+  setFilters:  React.Dispatch<React.SetStateAction<Filters>>,
 }
 
-function Price({priceMin, priceMax}: PriceProps) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [priceRange, setPriceRange] = useState(getPriceRange())
+function Price({minPrice, maxPrice, filters, setFilters}: PriceProps) {
+  const [priceRange, setPriceRange] = useState({min: minPrice, max: maxPrice})
 
-  function getPriceRange() {
-    const urlPriceRange = searchParams.get("price");
-    if (!urlPriceRange) {
-      return {min: priceMin, max: priceMax};
-    }
-    const priceRangeArray = urlPriceRange.split(';');
-    return {
-      min: Number(priceRangeArray[0]),
-      max: Number(priceRangeArray[1])
-    };
-  }
 
-  function setPriceParam() {
-    if (priceRange.min !== priceMin && priceRange.min !== priceMax) {
-      searchParams.set("price", Object.values(priceRange).join(";"));
+  useEffect(() => {
+    setPriceRange({
+      min: filters.price.min || minPrice,
+      max: filters.price.max || maxPrice
+    })
+  }, [filters]);
+
+
+  function addFilterPrice(min: number, max: number) {
+    if (min !== minPrice || max !== maxPrice) {
+      setFilters(prev => ({ ...prev, price: { min, max } }));
     } else {
-      searchParams.delete("price");
+      setFilters(prev => ({ ...prev, price: { min: null, max: null } }));
     }
-    setSearchParams(searchParams);
   }
+
 
   function handleChangePrice(type: "min" | "max") {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       setPriceRange(prev => ({...prev, [type]: Number(event.target.value)}));
     }
   }
+
+
   function isValidPriceMin() {
-    if (priceRange.min < priceMin) {
-      return setPriceRange(prev => ({...prev, min: priceMin}));
+    const newPriceRange = priceRange;
+    if (priceRange.min < minPrice) {
+      newPriceRange.min = minPrice;
+    } else if (priceRange.min > priceRange.max) {
+      newPriceRange.min = priceRange.max;
     }
-    if (priceRange.min > priceRange.max) {
-      return setPriceRange(prev => ({...prev, min: priceRange.max}));
-    }
-    setPriceParam()
+    addFilterPrice(newPriceRange.min, newPriceRange.max);
+    setPriceRange({ ...newPriceRange });
   }
+
+
   function isValidPriceMax() {
-    if (priceRange.max > priceMax) {
-      return setPriceRange(prev => ({...prev, max: priceMax}));
+    const newPriceRange = priceRange;
+    if (priceRange.max > maxPrice) {
+      newPriceRange.max = maxPrice;
+    } else if (priceRange.max < priceRange.min) {
+      newPriceRange.max = priceRange.min;
     }
-    if (priceRange.max < priceRange.min) {
-      return setPriceRange(prev => ({...prev, max: priceRange.min}));
-    }
-    setPriceParam()
+    addFilterPrice(newPriceRange.min, newPriceRange.max);
+    setPriceRange({ ...newPriceRange });
   }
+
 
   return (
     <div className={classes.price}>

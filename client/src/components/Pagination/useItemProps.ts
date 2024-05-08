@@ -1,35 +1,28 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from "react-router-dom";
 import {ItemProps, PaginationItemTypes} from "@components/Pagination/Item.tsx";
+import {PaginationOnClick} from "@components/Pagination/index.tsx";
 
 
 
-function useItemProps({totalPages}: {totalPages: number}) {
+interface UseItemProps {
+  total: number,
+  page: number,
+  onClick: PaginationOnClick
+}
+
+function useItemProps({total, page: currentPage, onClick}: UseItemProps) {
   const [itemsProps, setItemsProps] = useState<ItemProps[]>([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = Number(searchParams.get("page")) || 1;
 
 
-  function handleClick(pageNumber: number) {
-    return () => {
-      if (pageNumber > 1) {
-        searchParams.set("page", pageNumber.toString());
-      } else {
-        searchParams.delete("page");
-      }
-      setSearchParams(searchParams);
-      window.scrollTo(0, 0);
-    }
-  }
   function addArrowButton(itemsProps: ItemProps[]) {
-    const itemPrev: ItemProps = { type: PaginationItemTypes.prev };
-    const itemNext: ItemProps = { type: PaginationItemTypes.next };
+    const itemPrev: ItemProps = { type: PaginationItemTypes.prev, page: currentPage - 1 };
+    const itemNext: ItemProps = { type: PaginationItemTypes.next, page: currentPage + 1 };
 
     if (currentPage > 1) {
-      itemPrev.onClick = handleClick(currentPage - 1);
+      itemPrev.onClick = onClick;
     }
-    if (currentPage < totalPages) {
-      itemNext.onClick = handleClick(currentPage + 1);
+    if (currentPage < total) {
+      itemNext.onClick = onClick;
     }
 
     return [itemPrev, ...itemsProps, itemNext];
@@ -41,19 +34,19 @@ function useItemProps({totalPages}: {totalPages: number}) {
     let start = currentPage - 1;
     let end = currentPage + 1;
 
-    if (totalPages <= 7) {
+    if (total <= 7) {
       start = 1;
-      end = totalPages;
-    } else if (totalPages - currentPage < 4) {
-      start = totalPages - 4;
-      end = totalPages;
+      end = total;
+    } else if (total - currentPage < 4) {
+      start = total - 4;
+      end = total;
     } else if (currentPage < 5) {
       start = 1;
       end = 5;
     }
 
     for(let i = start; i <= end; i++) {
-      let itemProps: ItemProps = { type: PaginationItemTypes.page, page: i, onClick: handleClick(i) };
+      let itemProps: ItemProps = { type: PaginationItemTypes.page, page: i, onClick: onClick };
       if (i == currentPage) {
         itemProps = { type: PaginationItemTypes.current, page: i };
       }
@@ -62,21 +55,21 @@ function useItemProps({totalPages}: {totalPages: number}) {
 
     if(start > 2) {
       nextItemsProps.unshift(
-        { type: PaginationItemTypes.page, page: 1, onClick: handleClick(1) },
+        { type: PaginationItemTypes.page, page: 1, onClick: onClick },
         { type: PaginationItemTypes.ellipsis }
       );
     }
-    if(end < totalPages - 1) {
+    if(end < total - 1) {
       nextItemsProps.push(
         { type: PaginationItemTypes.ellipsis },
-        { type: PaginationItemTypes.page, page: totalPages, onClick: handleClick(totalPages) }
+        { type: PaginationItemTypes.page, page: total, onClick: onClick }
       );
     }
 
     nextItemsProps = addArrowButton(nextItemsProps);
     setItemsProps(nextItemsProps);
 
-  }, [totalPages, currentPage]);
+  }, [total, currentPage]);
 
 
   return {itemsProps}

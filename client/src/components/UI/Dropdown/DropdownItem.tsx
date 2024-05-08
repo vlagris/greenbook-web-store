@@ -18,7 +18,7 @@ function DropdownItem({ children, id, active, onClick }: DropdownItemProps) {
     if (active) {
       setItemStates({ active: id, focus: id });
     }
-  }, []);
+  }, [active]);
 
     function handleClick() {
       setShow(false);

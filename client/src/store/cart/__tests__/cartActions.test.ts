@@ -1,5 +1,5 @@
 import { cartReducer, addCart, addCartFromStorage, addCartItem, removeCart, removeCartItem, updateCartItemQuantity } from "@/store/cart";
-import { cart as LocalStorageCart } from "@/services/localStorage";
+import { cart as LocalStorageCart } from "src/services/objectLocalStorage";
 
 
 

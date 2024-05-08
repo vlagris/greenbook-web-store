@@ -1,13 +1,25 @@
-import classes from "@components/Pagination/styles.module.scss";
+import React from "react";
 import Item from "@components/Pagination/Item.tsx";
 import useItemProps from "@components/Pagination/useItemProps.ts";
+import classes from "@components/Pagination/styles.module.scss";
+
+
+export type PaginationOnClick = (
+  event: React.MouseEvent<HTMLElement>,
+  page: number
+) => void
+
 
 interface PaginationProps {
-  totalPages: number,
+  total: number,
+  page: number,
+  onClick: PaginationOnClick
 }
 
-function Pagination({totalPages}: PaginationProps) {
-  const {itemsProps} = useItemProps({totalPages})
+
+
+function Pagination({total, page, onClick}: PaginationProps) {
+  const {itemsProps} = useItemProps({total, page, onClick})
 
 
   return (

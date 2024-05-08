@@ -9,7 +9,7 @@ import {
   removeCartItem,
   updateCartItemQuantity
 } from "@/store/cart/actions.ts";
-import * as LocalStorage from "@/services/localStorage";
+import { objectLocalStorage } from "@/services/objectLocalStorage";
 
 
 export const cartItemAdapter = createEntityAdapter<CartItem>();
@@ -33,7 +33,7 @@ export const cartReducer = createReducer(
     })
 
     .addCase(addCartFromStorage, (state: CartState) => {
-      const cart = LocalStorage.cart.get();
+      const cart = objectLocalStorage.cart.get();
 
       if (cart) {
         state.items = cart.items;

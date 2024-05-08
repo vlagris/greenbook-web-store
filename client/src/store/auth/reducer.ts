@@ -1,7 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { authState } from "@/types.ts";
 import { setUser, setToken, setLoading, removeAuth } from "@/store/auth/actions.ts";
-import * as LocalStorage from "@/services/localStorage";
+import { objectLocalStorage } from "@/services/objectLocalStorage";
+
 
 
 const emptyState: authState  = {
@@ -16,7 +17,7 @@ const emptyState: authState  = {
 }
 const initialState: authState  = {
   user: {
-    id: LocalStorage.userId.get() || "",
+    id: objectLocalStorage.userId.get() || "",
     email: ""
   },
   token: {

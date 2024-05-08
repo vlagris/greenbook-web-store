@@ -114,7 +114,7 @@ export const authorsCollection = {
 export const booksCollection = [
   {
     title: "Убийство в «Восточном экспрессе»",
-    price: 309,
+    price: 519,
     author: [authorsCollection.AgathaChristie],
     genre: [genresCollection.detective],
     image: "https://cv5.litres.ru/pub/c/cover_200/62718058.webp",
@@ -125,7 +125,7 @@ export const booksCollection = [
   },
   {
     title: "Десять негритят",
-    price: 319,
+    price: 499,
     author: [authorsCollection.AgathaChristie],
     genre: [genresCollection.detective],
     image: "https://cv4.litres.ru/pub/c/cover_200/27066343.webp",
@@ -147,7 +147,7 @@ export const booksCollection = [
   },
   {
     title: "Остаток дня",
-    price: 299,
+    price: 659,
     author: [authorsCollection.AgathaChristie],
     genre: [genresCollection.romance],
     image: "https://cv2.litres.ru/pub/c/cover_200/56412224.webp",
@@ -169,7 +169,7 @@ export const booksCollection = [
   },
   {
     title: "Эркюль Пуаро и Путаница в Гриншоре",
-    price: 229,
+    price: 429,
     author: [authorsCollection.AgathaChristie],
     genre: [genresCollection.detective],
     image: "https://cv2.litres.ru/pub/c/cover_200/8368224.webp",
@@ -180,7 +180,7 @@ export const booksCollection = [
   },
   {
     title: "Последний сеанс",
-    price: 209,
+    price: 359,
     author: [authorsCollection.AgathaChristie],
     genre: [genresCollection.detective],
     image: "https://cv6.litres.ru/pub/c/cover_200/66217762.webp",
@@ -202,7 +202,7 @@ export const booksCollection = [
   },
   {
     title: "Драма в Гриффин-холле, или Отравленный уикенд",
-    price: 249,
+    price: 538,
     author: [authorsCollection.CharlotteBrandish],
     genre: [genresCollection.detective],
     image: "https://cv8.litres.ru/pub/c/cover_200/63429581.webp",
@@ -213,7 +213,7 @@ export const booksCollection = [
   },
   {
     title: "Леди из Фроингема",
-    price: 249,
+    price: 519,
     author: [authorsCollection.CharlotteBrandish],
     genre: [genresCollection.detective],
     image: "https://cv2.litres.ru/pub/c/cover_200/66846728.webp",
@@ -224,7 +224,7 @@ export const booksCollection = [
   },
   {
     title: "Мюзик-холл на Гроув-Лейн",
-    price: 249,
+    price: 556,
     author: [authorsCollection.CharlotteBrandish],
     genre: [genresCollection.detective],
     image: "https://cv7.litres.ru/pub/c/cover_200/68639170.webp",
@@ -246,7 +246,7 @@ export const booksCollection = [
   },
   {
     title: "Потерянное наследство тамплиера",
-    price: 249,
+    price: 599,
     author: [authorsCollection.UliyaEfimova],
     genre: [genresCollection.detective],
     image: "https://cv0.litres.ru/pub/c/cover_200/64624001.webp",
@@ -257,7 +257,7 @@ export const booksCollection = [
   },
   {
     title: "Ложь без срока годности",
-    price: 249,
+    price: 599,
     author: [authorsCollection.UliyaEfimova],
     genre: [genresCollection.detective],
     image: "https://cv2.litres.ru/pub/c/cover_200/51836224.webp",
@@ -268,7 +268,7 @@ export const booksCollection = [
   },
   {
     title: "Забытая легенда Ольхона",
-    price: 249,
+    price: 479,
     author: [authorsCollection.UliyaEfimova],
     genre: [genresCollection.detective],
     image: "https://cv2.litres.ru/pub/c/cover_200/67247025.webp",
@@ -279,7 +279,7 @@ export const booksCollection = [
   },
   {
     title: "Проклятие принцессы Алтая",
-    price: 249,
+    price: 549,
     author: [authorsCollection.UliyaEfimova],
     genre: [genresCollection.detective],
     image: "https://cv2.litres.ru/pub/c/cover_200/69212824.webp",
@@ -290,7 +290,7 @@ export const booksCollection = [
   },
   {
     title: "Остров тринадцати приговоренных",
-    price: 249,
+    price: 549,
     author: [authorsCollection.UliyaEfimova],
     genre: [genresCollection.detective],
     image: "https://cv6.litres.ru/pub/c/cover_200/66665566.webp",
@@ -301,7 +301,7 @@ export const booksCollection = [
   },
   {
     title: "Волшебное свечение Ладоги",
-    price: 249,
+    price: 449,
     author: [authorsCollection.UliyaEfimova],
     genre: [genresCollection.detective],
     image: "https://cv3.litres.ru/pub/c/cover_200/63215737.webp",
@@ -312,7 +312,7 @@ export const booksCollection = [
   },
   {
     title: "Темная сторона души",
-    price: 279,
+    price: 579,
     author: [authorsCollection.ElenaMihalkova],
     genre: [genresCollection.detective],
     image: "https://cv5.litres.ru/pub/c/cover_200/169454.webp",
@@ -334,7 +334,7 @@ export const booksCollection = [
   },
   {
     title: "Неизвестный псевдоним Бога",
-    price: 249,
+    price: 549,
     author: [authorsCollection.UliyaEfimova],
     genre: [genresCollection.detective],
     image: "https://cv7.litres.ru/pub/c/cover_200/57284178.webp",
@@ -345,7 +345,7 @@ export const booksCollection = [
   },
   {
     title: "Гордость и предубеждение",
-    price: 109,
+    price: 409,
     author: [authorsCollection.JaneAusten],
     genre: [genresCollection.romance],
     image: "https://cv4.litres.ru/pub/c/cover_200/11280949.webp",
@@ -356,7 +356,7 @@ export const booksCollection = [
   },
   {
     title: "Анна Каренина",
-    price: 199,
+    price: 599,
     author: [authorsCollection.LevTolstoy],
     genre: [genresCollection.romance],
     image: "https://cv5.litres.ru/pub/c/cover_200/28057851.webp",
@@ -367,7 +367,7 @@ export const booksCollection = [
   },
   {
     title: "Бесы",
-    price: 109,
+    price: 309,
     author: [authorsCollection.FedorDostoevskiy],
     genre: [genresCollection.romance],
     image: "https://cv3.litres.ru/pub/c/cover_200/22489936.webp",
@@ -378,7 +378,7 @@ export const booksCollection = [
   },
   {
     title: "Воскресение",
-    price: 109,
+    price: 409,
     author: [authorsCollection.LevTolstoy],
     genre: [genresCollection.romance],
     image: "https://cv2.litres.ru/pub/c/cover_200/23803525.webp",
@@ -389,7 +389,7 @@ export const booksCollection = [
   },
   {
     title: "Дамское счастье",
-    price: 199,
+    price: 399,
     author: [authorsCollection.EmileZola],
     genre: [genresCollection.romance],
     image: "https://cv4.litres.ru/pub/c/cover_200/49227749.webp",
@@ -400,7 +400,7 @@ export const booksCollection = [
   },
   {
     title: "Лунный камень",
-    price: 199,
+    price: 599,
     author: [authorsCollection.WilliamCollins],
     genre: [genresCollection.romance],
     image: "https://cv6.litres.ru/pub/c/cover_200/32543568.webp",
@@ -411,7 +411,7 @@ export const booksCollection = [
   },
   {
     title: "Повесть о двух городах",
-    price: 199,
+    price: 499,
     author: [authorsCollection.CharlesDickens],
     genre: [genresCollection.romance],
     image: "https://cv9.litres.ru/pub/c/cover_200/62649591.webp",
@@ -422,7 +422,7 @@ export const booksCollection = [
   },
   {
     title: "Унесенные ветром. Том 1",
-    price: 139,
+    price: 639,
     author: [authorsCollection.MargaretMitchell],
     genre: [genresCollection.romance],
     image: "https://cv4.litres.ru/pub/c/cover_200/131243.webp",
@@ -433,7 +433,7 @@ export const booksCollection = [
   },
   {
     title: "Унесенные ветром. Том 2",
-    price: 259,
+    price: 559,
     author: [authorsCollection.MargaretMitchell],
     genre: [genresCollection.romance],
     image: "https://cv4.litres.ru/pub/c/cover_200/131244.webp",
@@ -455,7 +455,7 @@ export const booksCollection = [
   },
   {
     title: "Сияние",
-    price: 349,
+    price: 649,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.horror, genresCollection.thriller, genresCollection.mystic],
     image: "https://cv2.litres.ru/pub/c/cover_200/17195427.webp",
@@ -466,7 +466,7 @@ export const booksCollection = [
   },
   {
     title: "Позже",
-    price: 379,
+    price: 579,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.detective, genresCollection.horror, genresCollection.thriller, genresCollection.mystic],
     image: "https://cv6.litres.ru/pub/c/cover_200/66079668.webp",
@@ -488,7 +488,7 @@ export const booksCollection = [
   },
   {
     title: "Под Куполом",
-    price: 349,
+    price: 549,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.fantastic],
     image: "https://cv8.litres.ru/pub/c/cover_200/4387285.webp",
@@ -499,7 +499,7 @@ export const booksCollection = [
   },
   {
     title: "Билли Саммерс",
-    price: 499,
+    price: 699,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.detective, genresCollection.thriller],
     image: "https://cv6.litres.ru/pub/c/cover_200/67303161.webp",
@@ -510,7 +510,7 @@ export const booksCollection = [
   },
   {
     title: "Мистер Мерседес",
-    price: 349,
+    price: 749,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.detective, genresCollection.thriller],
     image: "https://cv4.litres.ru/pub/c/cover_200/8345044.webp",
@@ -521,7 +521,7 @@ export const booksCollection = [
   },
   {
     title: "Чужак",
-    price: 399,
+    price: 699,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.detective, genresCollection.thriller, genresCollection.mystic],
     image: "https://cv3.litres.ru/pub/c/cover_200/40848833.webp",
@@ -532,7 +532,7 @@ export const booksCollection = [
   },
   {
     title: "Стрелок",
-    price: 349,
+    price: 549,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.fantasy],
     image: "https://cv0.litres.ru/pub/c/cover_200/122201.webp",
@@ -543,7 +543,7 @@ export const booksCollection = [
   },
   {
     title: "Пост сдал",
-    price: 349,
+    price: 649,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.detective, genresCollection.thriller, genresCollection.mystic],
     image: "https://cv9.litres.ru/pub/c/cover_200/22074995.webp",
@@ -554,7 +554,7 @@ export const booksCollection = [
   },
   {
     title: "Доктор Сон",
-    price: 349,
+    price: 449,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.detective ,genresCollection.horror, genresCollection.thriller, genresCollection.mystic],
     image: "https://cv8.litres.ru/pub/c/cover_200/6707289.webp",
@@ -565,7 +565,7 @@ export const booksCollection = [
   },
   {
     title: "Кто нашел, берет себе",
-    price: 299,
+    price: 699,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.detective, genresCollection.horror, genresCollection.thriller, genresCollection.mystic],
     image: "https://cv2.litres.ru/pub/c/cover_200/12483328.webp",
@@ -576,7 +576,7 @@ export const booksCollection = [
   },
   {
     title: "Темная Башня",
-    price: 249,
+    price: 549,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.fantasy],
     image: "https://cv8.litres.ru/pub/c/cover_200/4887784.webp",
@@ -587,7 +587,7 @@ export const booksCollection = [
   },
   {
     title: "Мёртвая зона",
-    price: 179,
+    price: 679,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.horror, genresCollection.thriller, genresCollection.mystic],
     image: "https://cv3.litres.ru/pub/c/cover_200/4387335.webp",
@@ -598,7 +598,7 @@ export const booksCollection = [
   },
   {
     title: "Нужные вещи",
-    price: 249,
+    price: 549,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.mystic],
     image: "https://cv5.litres.ru/pub/c/cover_200/18371557.webp",
@@ -609,7 +609,7 @@ export const booksCollection = [
   },
   {
     title: "Возрождение",
-    price: 279,
+    price: 579,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.horror, genresCollection.thriller, genresCollection.mystic],
     image: "https://cv7.litres.ru/pub/c/cover_200/9361072.webp",
@@ -620,7 +620,7 @@ export const booksCollection = [
   },
   {
     title: "Бесплодные земли",
-    price: 199,
+    price: 599,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.fantasy],
     image: "https://cv0.litres.ru/pub/c/cover_200/122207.webp",
@@ -631,7 +631,7 @@ export const booksCollection = [
   },
   {
     title: "Кэрри",
-    price: 179,
+    price: 619,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.horror, genresCollection.mystic],
     image: "https://cv5.litres.ru/pub/c/cover_200/122354.webp",
@@ -653,7 +653,7 @@ export const booksCollection = [
   },
   {
     title: "Долорес Клейборн",
-    price: 249,
+    price: 549,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.detective, genresCollection.thriller],
     image: "https://cv6.litres.ru/pub/c/cover_200/122360.webp",
@@ -664,7 +664,7 @@ export const booksCollection = [
   },
   {
     title: "Извлечение троих",
-    price: 199,
+    price: 599,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.fantasy],
     image: "https://cv0.litres.ru/pub/c/cover_200/122202.webp",
@@ -675,7 +675,7 @@ export const booksCollection = [
   },
   {
     title: "Песнь Сюзанны",
-    price: 249,
+    price: 549,
     author: [authorsCollection.StephenKing],
     genre: [genresCollection.fantasy],
     image: "https://cv8.litres.ru/pub/c/cover_200/123986.webp",

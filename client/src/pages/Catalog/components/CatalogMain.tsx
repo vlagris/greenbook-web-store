@@ -1,34 +1,42 @@
 import React from 'react';
+import {useSearchParams} from "react-router-dom";
 import {Books} from "@/types.ts";
+import {Filters} from "@pages/Catalog/useFilters.ts";
 import Filter from "@pages/Catalog/components/Filter";
 import ProductList from "@pages/Catalog/components/ProductList.tsx";
 import Pagination from "@components/Pagination";
-import {CustomSelect, SelectItem} from "@components/UI/CustomSelect"
+import Sorting from "@pages/Catalog/components/Sorting.tsx";
 import classes from "@pages/Catalog/styles.module.scss";
 
 
-function CatalogMain({books, limit}: { books: Books, limit: number }) {
+interface CatalogMainProps {
+  books: Books,
+  filters: Filters,
+  setFilters:  React.Dispatch<React.SetStateAction<Filters>>,
+}
+
+function CatalogMain({books, filters, setFilters}: CatalogMainProps) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+
+
+  function paginationClick(_: any, page: number) {
+    searchParams.set("page", page.toString());
+    setSearchParams(searchParams);
+  }
+
 
 
   return (
     <div className={classes.main}>
-      <Filter/>
+      <Filter minPrice={books.minPrice} maxPrice={books.maxPrice} filters={filters} setFilters={setFilters}/>
 
       <div className={classes.content}>
 
-        <div className={classes.sorting}>
-          <CustomSelect placeholder={"Сортировать"}>
-            <SelectItem id={1} value={"Популярные"} active>Популярные</SelectItem>
-            <SelectItem id={2} value={"Высокий рейтинг"}>Высокий рейтинг</SelectItem>
-            <SelectItem id={3} value={"Сначала дешёвые"}>Сначала дешёвые</SelectItem>
-            <SelectItem id={4} value={"Сначала дорогии"}>Сначала дорогии</SelectItem>
-          </CustomSelect>
-        </div>
-
+        <Sorting filters={filters} setFilters={setFilters}/>
         <ProductList books={books.items}/>
-
         <div className={classes.pagination_wrap}>
-          <Pagination totalPages={Math.ceil(books.totalItems / limit)}/>
+          <Pagination total={Math.ceil(books.total / 15)} page={currentPage} onClick={paginationClick}/>
         </div>
 
       </div>

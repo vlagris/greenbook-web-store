@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import userSessionModel from "../models/userSession.model.js";
 
+
 export async function generateTokens(user) {
   const userId = user.id;
   const payload = { id: userId };

@@ -135,6 +135,7 @@ export async function refreshToken(req, res) {
         model: userModel,
       }
     });
+
     const user = userSession.User || null;
 
 

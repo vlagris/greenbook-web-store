@@ -5,7 +5,9 @@ import {createHttpError} from "@/utils/createHttpError.ts";
 
 type BooksResponse = {
   items: BookResponse[],
-  totalItems: number
+  total: number,
+  maxPrice: number,
+  minPrice: number,
 };
 
 
@@ -27,7 +29,9 @@ function BooksByGenreResponseAdepter(data: BooksResponse): Books {
   const items = data.items.map((book): Book => bookResponseAdepter(book));
   return {
     items,
-    totalItems: data.totalItems
+    total: data.total,
+    maxPrice: data.maxPrice,
+    minPrice: data.minPrice,
   }
 }
 function BooksResponseAdepter(data: BookResponse[]): Book[] {
@@ -36,12 +40,14 @@ function BooksResponseAdepter(data: BookResponse[]): Book[] {
 
 
 
-interface IGetBooksByGenre {
+export type GetBooksByGenre = {
   pathName: string,
   limit: number,
-  offset?: number
+  offset?: number,
+  sort?: string,
+  price?: string,
 }
-export async function getBooksByGenre(requestData: IGetBooksByGenre) {
+export async function getBooksByGenre(requestData: GetBooksByGenre) {
   try {
     const res = await mainApi.get<BooksResponse>('/books/', {params: requestData});
     return BooksByGenreResponseAdepter(res.data);
@@ -52,10 +58,10 @@ export async function getBooksByGenre(requestData: IGetBooksByGenre) {
 
 
 
-interface IGetBooksRecommended {
+interface GetBooksRecommended {
   limit: number,
 }
-export async function getBooksRecommended(requestData: IGetBooksRecommended) {
+export async function getBooksRecommended(requestData: GetBooksRecommended) {
   try {
     const res = await mainApi.get<BookResponse[]>('/books/recommended', {params: requestData});
     return BooksResponseAdepter(res.data);
