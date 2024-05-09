@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 
+
 export type FormField = {
   value: string,
   setValue: React.Dispatch<React.SetStateAction<string>>,
@@ -11,7 +12,9 @@ export type FormField = {
   onBlur: () => boolean
 }
 
+
 export type FieldValidate = (state: string) => boolean;
+
 
 interface UseFormFieldProps {
   initialState?: string,

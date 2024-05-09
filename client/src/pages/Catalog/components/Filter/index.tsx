@@ -15,9 +15,7 @@ interface FilterProps {
   setFilters:  React.Dispatch<React.SetStateAction<Filters>>,
 }
 
-
 function Filter({minPrice, maxPrice, filters, setFilters}: FilterProps) {
-
   const accordionItems = [
     { title: "Жанры", Component: () => <Genres/> },
     { title: "Цена", Component: () =>
@@ -37,13 +35,13 @@ function Filter({minPrice, maxPrice, filters, setFilters}: FilterProps) {
 
         {accordionItems.map(({title, Component}) => (
           <AccordionItem key={title} className={classes.accordion_item}>
+
             <FilterAccordionButton>{title}</FilterAccordionButton>
 
             <AccordionContent>
-
               <Component/>
-
             </AccordionContent>
+
           </AccordionItem>
         ))}
 

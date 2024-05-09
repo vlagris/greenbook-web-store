@@ -1,5 +1,5 @@
 import SearchLogo from '@assets/icons/search.svg?react';
-import classes from "./styles.module.scss";
+import classes from "../styles.module.scss";
 
 
 function Search() {

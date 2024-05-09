@@ -11,19 +11,19 @@ import classes from "./../styles.module.scss";
 function ProductList() {
   const {data, loading, query} = useApi<Book[]>()
 
+
   useEffect(() => {
     query(() => api.getBooksRecommended({limit: 40}));
   }, []);
 
+
   return (
     <Loader isLoading={loading}>
-      <Loader isLoading={loading}>
-        <div className={classes.product_list}>
-          {data && data.map((book) =>
-            <Card key={book.id} book={book}/>
-          )}
-        </div>
-      </Loader>
+      <div className={classes.product_list}>
+        {data && data.map((book) =>
+          <Card key={book.id} book={book}/>
+        )}
+      </div>
     </Loader>
   );
 }

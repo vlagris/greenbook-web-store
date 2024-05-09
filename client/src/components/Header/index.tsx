@@ -1,5 +1,5 @@
-import HeaderTop from "@components/Header/HeaderTop.tsx";
-import HeaderBottom from "@components/Header/HeaderBottom.tsx";
+import HeaderTop from "@components/Header/components/HeaderTop.tsx";
+import HeaderBottom from "@components/Header/components/HeaderBottom.tsx";
 import classes from "./styles.module.scss";
 
 function Header() {

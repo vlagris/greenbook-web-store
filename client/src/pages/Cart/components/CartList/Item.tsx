@@ -1,14 +1,19 @@
-import Count from "@pages/Cart/components/CartList/Count.tsx";
 import {CartItem} from "@/types.ts";
+import {currency} from "@/constants.ts";
 import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
 import {removeItemFromCart} from "@/store/cart";
+import Count from "@pages/Cart/components/CartList/Count.tsx";
 import {formatPrice} from "@/utils/formatPrice.ts";
-import {currency} from "@/constants.ts";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
 import CloseIcon from "@assets/icons/close.svg?react";
 
 
-function Item({item}: {item: CartItem}) {
+
+interface ItemProps {
+  item: CartItem
+}
+
+function Item({item}: ItemProps) {
   const dispatch = useAppDispatch();
   const subtotal = formatPrice(item.price * item.quantity);
 
@@ -16,6 +21,7 @@ function Item({item}: {item: CartItem}) {
   function handleRemove() {
     dispatch(removeItemFromCart(item.id));
   }
+
 
   return (
     <li className={classes.item}>

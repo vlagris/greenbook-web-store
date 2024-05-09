@@ -4,6 +4,7 @@ import { Dropdown, DropdownButton, DropdownIcon, DropdownItem, DropdownMenu, Dro
 import classes from "@pages/Catalog/styles.module.scss";
 
 
+
 const sorting = [
   { id: 1, name: "Популярные", type: "popular"},
   { id: 2, name: "Новинки", type: "new"},
@@ -11,6 +12,7 @@ const sorting = [
   { id: 4, name: "Сначала дешевые", type: "price_asc"},
   { id: 5, name: "Высокий рейтинг", type: "rating"},
 ]
+
 
 interface SortingProps {
   filters: Filters,
@@ -30,10 +32,11 @@ function Sorting({filters, setFilters}: SortingProps) {
 
   function createOnClick(type: string) {
     return () => {
-      setFilters(prev => ({...prev, sort: type }));
+      setFilters({...filters, sort: type });
       setActive(type);
     }
   }
+
 
   return (
     <div className={classes.sorting}>
@@ -48,7 +51,6 @@ function Sorting({filters, setFilters}: SortingProps) {
           </DropdownToggle>
 
           <DropdownMenu>
-
             {sorting.map(item => (
               <DropdownItem
                 key={item.id}
@@ -59,7 +61,6 @@ function Sorting({filters, setFilters}: SortingProps) {
                 {item.name}
               </DropdownItem>
             ))}
-
           </DropdownMenu>
         </Dropdown>
     </div>

@@ -1,6 +1,6 @@
 import { MemoryRouter } from "react-router-dom";
 import { renderWithProviders } from "@/utils/utilsForTests.tsx";
-import Search from "@components/Header/Search.tsx";
+import Search from "@components/Header/components/Search.tsx";
 
 
 

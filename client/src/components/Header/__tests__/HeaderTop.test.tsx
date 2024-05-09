@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { renderWithProviders } from "@/utils/utilsForTests.tsx";
-import HeaderTop from "@components/Header/HeaderTop.tsx";
+import HeaderTop from "@components/Header/components/HeaderTop.tsx";
 import * as useAuth from "@/hooks/useAuth";
 
 

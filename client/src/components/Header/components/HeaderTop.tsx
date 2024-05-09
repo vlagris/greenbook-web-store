@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/hooks/useAuth.ts";
 import {currency} from "@/constants.ts";
-import classes from "./styles.module.scss";
+import classes from "../styles.module.scss";
 import MapPinIcon from '@assets/icons/map-pin.svg?react';
 
 function HeaderTop() {

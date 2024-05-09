@@ -4,6 +4,8 @@ import { useAppDispatch } from "@/hooks/useTypedReduxHooks.ts";
 import { updateItemInCart } from "@/store/cart";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
 
+
+
 interface CountProps {
   quantity: number,
   id: string
@@ -27,21 +29,22 @@ function Count({quantity: initialQuantity, id}: CountProps) {
       }
     }
   }
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = Number(event.target.value);
     if (!isNaN(value)) {
       setQuantity(value);
     }
   }
+
   function handleBlur() {
     if (quantity < 1) {
       dispatch(updateItemInCart({id, quantity: 1 }));
       setQuantity(1);
-      return;
+    } else {
+      dispatch(updateItemInCart({id, quantity: quantity }));
     }
-    dispatch(updateItemInCart({id, quantity: quantity }));
   }
-
 
 
   return (

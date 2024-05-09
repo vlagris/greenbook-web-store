@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {Books, Genre} from "@/types.ts";
-import {GetBooksByGenre} from "@/services/api";
+import {CATALOG_CARD_LIMIT} from "@/constants.ts";
 import * as api from "@/services/api";
 
 import useApi from "@/hooks/useApi.ts";
@@ -11,24 +11,24 @@ import { genresSelectors } from "@/store/genres";
 import CatalogBreadcrumbs from "@pages/Catalog/components/CatalogBreadcrumbs.tsx";
 import useFilters from "@pages/Catalog/useFilters.ts";
 import {useParams} from "react-router-dom";
-import classes from "./styles.module.scss";
+import CatalogHeader from "@pages/Catalog/components/CatalogHeader.tsx";
 
 
 
-const LIMIT = 15;
 function Catalog() {
   const genres = useAppSelector(genresSelectors.genres);
   const [genre, setGenre] = useState<Genre>();
-  const {data: booksData, error, loading, query} = useApi<Books>();
   const {filters, setFilters, filtersParams, filtersLoading} = useFilters();
+  const {data: booksData, error, loading, query} = useApi<Books>();
   const {pathName} = useParams();
 
 
   useEffect(() => {
-    const currentGenre = genres.find(genre => genre.pathName === pathName);
-    if (currentGenre) {
-      setGenre(currentGenre);
+    if (!genres) {
+      return;
     }
+    const currentGenre = genres.find(genre => genre.pathName === pathName);
+    setGenre(currentGenre);
   }, [genres, pathName]);
 
 
@@ -36,14 +36,15 @@ function Catalog() {
     if(!pathName || filtersLoading) {
       return;
     }
-    const {page, ...newFiltersParams} = filtersParams;
-    const apiParams: GetBooksByGenre = {
-      pathName,
-      limit: LIMIT,
-      offset: ((Number(page) || 1) - 1) * LIMIT
-    }
+    const {page, ...otherFiltersParams} = filtersParams;
+    const offset = ((Number(page) || 1) - 1) * CATALOG_CARD_LIMIT
 
-    query(() => api.getBooksByGenre(Object.assign(apiParams, newFiltersParams)));
+    query(() => api.getBooksByGenre({
+      pathName,
+      offset,
+      limit: CATALOG_CARD_LIMIT,
+      ...otherFiltersParams
+    }));
   }, [filtersLoading, filtersParams, pathName]);
 
 
@@ -53,16 +54,21 @@ function Catalog() {
       <Loader isLoading={loading} error={error}>
         {booksData &&
           <div className="container">
-            <CatalogBreadcrumbs genres={genres} pathName={pathName}/>
+            <CatalogBreadcrumbs
+              genres={genres}
+              pathName={pathName}
+            />
 
-            <div className={classes.title_wrap}>
-              <h2 className={classes.title}>{genre?.name}</h2>
-              {booksData.total !== 0 &&
-                <span className={classes.books_count}>{booksData.total} книг</span>
-              }
-            </div>
+            <CatalogHeader
+              title={genre?.name}
+              total={booksData.total}
+            />
 
-            <CatalogMain books={booksData} filters={filters} setFilters={setFilters}/>
+            <CatalogMain
+              books={booksData}
+              filters={filters}
+              setFilters={setFilters}
+            />
           </div>
         }
       </Loader>

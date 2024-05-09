@@ -25,16 +25,16 @@ function Price({minPrice, maxPrice, filters, setFilters}: PriceProps) {
 
   function addFilterPrice(min: number, max: number) {
     if (min !== minPrice || max !== maxPrice) {
-      setFilters(prev => ({ ...prev, price: { min, max } }));
+      setFilters({ ...filters, price: { min, max } });
     } else {
-      setFilters(prev => ({ ...prev, price: { min: null, max: null } }));
+      setFilters({ ...filters, price: { min: null, max: null } });
     }
   }
 
 
   function handleChangePrice(type: "min" | "max") {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPriceRange(prev => ({...prev, [type]: Number(event.target.value)}));
+      setPriceRange({...priceRange, [type]: Number(event.target.value)});
     }
   }
 
@@ -47,7 +47,7 @@ function Price({minPrice, maxPrice, filters, setFilters}: PriceProps) {
       newPriceRange.min = priceRange.max;
     }
     addFilterPrice(newPriceRange.min, newPriceRange.max);
-    setPriceRange({ ...newPriceRange });
+    setPriceRange({...newPriceRange});
   }
 
 
@@ -59,7 +59,7 @@ function Price({minPrice, maxPrice, filters, setFilters}: PriceProps) {
       newPriceRange.max = priceRange.min;
     }
     addFilterPrice(newPriceRange.min, newPriceRange.max);
-    setPriceRange({ ...newPriceRange });
+    setPriceRange({...newPriceRange});
   }
 
 

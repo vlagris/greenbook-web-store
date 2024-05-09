@@ -1,8 +1,9 @@
 import classes from "./styles.module.scss";
 import NotFound from "@pages/Error/NotFound.tsx";
 
-function Error() {
 
+
+function Error() {
   return (
     <main className={classes.error}>
       <NotFound/>

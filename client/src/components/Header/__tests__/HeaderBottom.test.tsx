@@ -1,7 +1,7 @@
 import {fireEvent, screen} from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { renderWithProviders } from "@/utils/utilsForTests.tsx";
-import HeaderBottom from "@components/Header/HeaderBottom.tsx";
+import HeaderBottom from "@components/Header/components/HeaderBottom.tsx";
 import * as BurgerMenu from "@components/Header/BurgerMenu";
 import * as reduxHooks from "@/hooks/useTypedReduxHooks";
 import * as authActions from "@/store/auth/actions.ts";

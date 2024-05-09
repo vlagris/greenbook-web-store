@@ -1,32 +1,32 @@
-import classes from "@pages/Cart/components/CartList/styles.module.scss";
-import Item from "@pages/Cart/components/CartList/Item.tsx";
 import {CartItem} from "@/types.ts";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
 import {fetchCart} from "@/store/cart";
+import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
+import Item from "@pages/Cart/components/CartList/Item.tsx";
+import classes from "@pages/Cart/components/CartList/styles.module.scss";
 
-function CartList({items}: {items: CartItem[]}) {
+
+interface CartListProps {
+  items: CartItem[]
+}
+function CartList({items}: CartListProps) {
   const dispatch = useAppDispatch();
+  const colsNames = ["Товар", "Цена", "Количество", "Итог"]
+
 
   function handleCartUpdate() {
     dispatch(fetchCart());
   }
 
+
   return (
     <>
       <div className={classes.top}>
         <div className={classes.cols_wrap}>
-          <div className={classes.col}>
-            <h4 className={classes.col_name}>Товар</h4>
-          </div>
-          <div className={classes.col}>
-            <h4 className={classes.col_name}>Цена</h4>
-          </div>
-          <div className={classes.col}>
-            <h4 className={classes.col_name}>Количество</h4>
-          </div>
-          <div className={classes.col}>
-            <h4 className={classes.col_name}>Итог</h4>
-          </div>
+          {colsNames.map(colName => (
+            <div key={colName} className={classes.col}>
+              <h4 className={classes.col_name}>{colName}</h4>
+            </div>
+          ))}
         </div>
       </div>
 

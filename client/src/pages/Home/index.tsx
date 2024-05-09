@@ -1,8 +1,8 @@
 import ProductList from "@pages/Home/components/ProductList.tsx";
 
 
-function Home() {
 
+function Home() {
   return (
     <main>
       <div className="container">
