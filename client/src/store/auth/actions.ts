@@ -90,7 +90,7 @@ export const fetchToken = createAppAsyncThunk(
       dispatch(setToken(token));
 
     } catch (err) {
-      dispatch(setToken({ value: "" }));
+      dispatch(logout());
       return rejectWithValue(err as HttpError);
     } finally {
       dispatch(setLoading(false));

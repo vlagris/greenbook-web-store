@@ -27,10 +27,6 @@ const NOT_AUTH = {
   error_message: "No access."
 }
 
-const NO_REFRESH_TOKEN = {
-  error_message: "Refresh Token is required."
-}
-
 const INVALID_REFRESH_TOKEN = {
   error_message: "Refresh token is not valid. Please make a new sign in request."
 }
@@ -47,6 +43,16 @@ export const errors = {
   NOT_AUTH,
   NOT_VALIDATION,
   INVALID_DATA,
-  NO_REFRESH_TOKEN,
   INVALID_REFRESH_TOKEN
+}
+
+export const cookies = {
+  refreshToken: {
+    name: "refreshToken",
+    options: {
+      secure: true,
+      httpOnly: true,
+      expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 60)),
+    }
+  }
 }

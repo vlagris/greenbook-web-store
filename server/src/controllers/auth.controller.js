@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import {userModel, userSessionModel} from "../models/index.js";
 import jwt from "jsonwebtoken";
 import { generateTokens, filterUser } from "../utils/index.js";
-import {errors} from "../constants.js";
+import {cookies, errors} from "../constants.js";
 
 
 
@@ -28,12 +28,7 @@ export async function signup(req, res) {
     const {accessToken, refreshToken} = await generateTokens(user);
 
 
-    res
-      .cookie("refreshToken", refreshToken, {
-        secure: true,
-        httpOnly: true,
-        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 60)),
-      })
+    res.cookie(cookies.refreshToken.name, refreshToken, cookies.refreshToken.options)
       .status(200)
       .json({
         user: user,
@@ -68,13 +63,11 @@ export async function login(req, res) {
     // const userData = filterUser(user._doc);
     const {accessToken, refreshToken} = await generateTokens(user);
 
+    console.log(refreshToken)
 
-    res
-      .cookie("refreshToken", refreshToken, {
-        secure: true,
-        httpOnly: true,
-        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 60)),
-      })
+
+
+    res.cookie(cookies.refreshToken.name, refreshToken, cookies.refreshToken.options)
       .status(200)
       .json({
         user: user,
@@ -90,9 +83,7 @@ export async function login(req, res) {
 
 export async function logout(req, res) {
   try {
-    res.cookie("refreshToken", "", {
-      expires: new Date(Date.now() + 1000),
-    })
+    res.cookie(cookies.refreshToken.name, "", cookies.refreshToken.options)
       .status(200)
       .json({
         success: false
@@ -108,8 +99,9 @@ export async function refreshToken(req, res) {
   try {
     const refreshToken = req.cookies.refreshToken || null;
 
+
     if (refreshToken === null) {
-      return res.status(403).json(errors.NO_REFRESH_TOKEN);
+      return res.status(403).json(errors.INVALID_REFRESH_TOKEN);
     }
 
 
@@ -136,6 +128,7 @@ export async function refreshToken(req, res) {
       }
     });
 
+
     const user = userSession.User || null;
 
 
@@ -147,11 +140,7 @@ export async function refreshToken(req, res) {
     const {accessToken: newAccessToken, refreshToken: newRefreshToken} = await generateTokens(user);
 
 
-    res.cookie("refreshToken", newRefreshToken, {
-        secure: true,
-        httpOnly: true,
-        expires: new Date(Date.now() + (1000 * 60 * 60 * 24 * 60)),
-      })
+    res.cookie(cookies.refreshToken.name, newRefreshToken, cookies.refreshToken.options)
       .status(200)
       .json({ accessToken: newAccessToken })
 

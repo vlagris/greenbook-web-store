@@ -121,9 +121,10 @@ export enum ErrorType {
   INVALID_DATA = 1,
   NOT_VALIDATION = 2,
   EMAIL_BUSY = 3,
-  NOT_AUTH,
-  NOT_FOUND,
-  SERVER_ERROR,
+  NOT_AUTH = 4,
+  NOT_FOUND = 5,
+  SERVER_ERROR = 6,
+  INVALID_REFRESH_TOKEN = 7
 }
 
 export type HttpError = {
