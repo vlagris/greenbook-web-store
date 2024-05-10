@@ -17,13 +17,13 @@ function InputPassword({error = false, errorMessage = "", ...props}) {
           {...props}
           type={show ? "text" : "password"}
         />
-        <button type="button" className={classes.btn} onClick={() => setShow(!show)} data-testid="toggleVisibility">
+        <div className={classes.btn} onClick={() => setShow(!show)} data-testid="toggleVisibility">
           {show ?
             <EyeOff className={classes.icon}/>
             :
             <EyeOn className={classes.icon}/>
           }
-        </button>
+        </div>
       </div>
       {errorMessage && error &&
         <p className={classes.error_description}>{errorMessage}</p>
