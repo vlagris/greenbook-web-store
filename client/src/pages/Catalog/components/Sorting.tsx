@@ -2,6 +2,7 @@ import React, {useLayoutEffect, useState} from 'react';
 import {Filters} from "@pages/Catalog/useFilters.ts";
 import { Dropdown, DropdownButton, DropdownIcon, DropdownItem, DropdownMenu, DropdownToggle } from "@components/UI/Dropdown";
 import classes from "@pages/Catalog/styles.module.scss";
+import {QueryParams} from "@/hooks/useQueryParams.ts";
 
 
 
@@ -15,24 +16,24 @@ const sorting = [
 
 
 interface SortingProps {
-  filters: Filters,
-  setFilters:  React.Dispatch<React.SetStateAction<Filters>>,
+  queryParams: QueryParams,
+  setQueryParams: React.Dispatch<React.SetStateAction<QueryParams>>,
 }
 
-function Sorting({filters, setFilters}: SortingProps) {
+function Sorting({queryParams, setQueryParams}: SortingProps) {
   const [active, setActive] = useState(sorting[0].type);
 
 
   useLayoutEffect(() => {
-    if (filters.sort && filters.sort !== active) {
-      setActive(filters.sort);
+    if (queryParams.sort && queryParams.sort !== active) {
+      setActive(queryParams.sort);
     }
-  }, [filters]);
+  }, [queryParams]);
 
 
   function createOnClick(type: string) {
     return () => {
-      setFilters({...filters, sort: type });
+      setQueryParams({...queryParams, sort: type });
       setActive(type);
     }
   }

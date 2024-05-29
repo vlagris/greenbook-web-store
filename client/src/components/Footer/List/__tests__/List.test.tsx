@@ -4,8 +4,8 @@ import List from "@components/Footer/List/List.tsx";
 
 
 
-describe('List component', () => {
-  it('should return List component', () => {
+describe('Index component', () => {
+  it('should return Index component', () => {
     const component = renderWithProviders(
       <MemoryRouter initialEntries={['/']}>
         <List><div/></List>

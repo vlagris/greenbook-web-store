@@ -7,23 +7,6 @@
   width: 100%;
 }
 
-.input {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1px solid var(--gray-100);
-  border-radius: 6px;
-  color: var(--gray-900);
-  outline: none;
-
-  &::placeholder {
-    color: var(--gray-400);
-  }
-}
-
-.input_error {
-  border-color:var(--red);
-}
-
 .btn {
   position: absolute;
   top: 50%;

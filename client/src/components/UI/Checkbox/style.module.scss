@@ -1,8 +1,20 @@
+.checkbox_label {
+  display: inline-flex;
+  align-items: center;
+
+  color: var(--gray-900);
+
+  cursor: pointer;
+}
+
+
 .checkbox {
   position: relative;
+  z-index: -1;
 
   width: 20px;
   height: 20px;
+  margin-right: 8px;
 
   border: 1px solid var(--gray-200);
   border-radius: 3px;
@@ -33,9 +45,3 @@
   }
 }
 
-
-.checkbox_label {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-}

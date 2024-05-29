@@ -2,8 +2,8 @@ import React from 'react';
 import {clsx} from "clsx";
 import {NavLink} from "react-router-dom";
 import {useAppSelector} from "@/hooks/useTypedReduxHooks.ts";
-import classes from "./styles.module.scss";
 import { genresSelectors } from '@/store/genres';
+import classes from "./styles.module.scss";
 
 function Genres() {
   const genres = useAppSelector(genresSelectors.genres);

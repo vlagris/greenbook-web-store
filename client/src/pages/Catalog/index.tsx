@@ -1,30 +1,32 @@
 import { useEffect, useState } from "react";
-import {Books, Genre} from "@/types.ts";
+import {useParams} from "react-router-dom";
+import {Books, FiltersType, Genre} from "@/types.ts";
 import {CATALOG_CARD_LIMIT} from "@/constants.ts";
 import * as api from "@/services/api";
-
 import useApi from "@/hooks/useApi.ts";
 import Loader from "@components/Loader";
 import CatalogMain from "@pages/Catalog/components/CatalogMain.tsx";
 import { useAppSelector } from "@/hooks/useTypedReduxHooks.ts";
 import { genresSelectors } from "@/store/genres";
 import CatalogBreadcrumbs from "@pages/Catalog/components/CatalogBreadcrumbs.tsx";
-import useFilters from "@pages/Catalog/useFilters.ts";
-import {useParams} from "react-router-dom";
+import useQueryParams from "@/hooks/useQueryParams.ts";
 import CatalogHeader from "@pages/Catalog/components/CatalogHeader.tsx";
 
 
 
 function Catalog() {
+  const {pathName} = useParams();
   const genres = useAppSelector(genresSelectors.genres);
   const [genre, setGenre] = useState<Genre>();
-  const {filters, setFilters, filtersParams, filtersLoading} = useFilters();
-  const {data: booksData, error, loading, query} = useApi<Books>();
-  const {pathName} = useParams();
+  const books = useApi<Books>();
+  const filters = useApi<FiltersType>();
+  const {queryParams, setQueryParams, queryLoading} = useQueryParams(
+    ["page", "sort", "price", "authors"]
+  );
 
 
   useEffect(() => {
-    if (!genres) {
+    if (!pathName || !genres) {
       return;
     }
     const currentGenre = genres.find(genre => genre.pathName === pathName);
@@ -33,26 +35,34 @@ function Catalog() {
 
 
   useEffect(() => {
-    if(!pathName || filtersLoading) {
+    if(!pathName || queryLoading) {
       return;
     }
-    const {page, ...otherFiltersParams} = filtersParams;
+    const {page, ...otherFiltersParams} = queryParams;
     const offset = ((Number(page) || 1) - 1) * CATALOG_CARD_LIMIT
 
-    query(() => api.getBooksByGenre({
+    books.apiQuery(() => api.getBooksByGenre({
       pathName,
       offset,
       limit: CATALOG_CARD_LIMIT,
       ...otherFiltersParams
     }));
-  }, [filtersLoading, filtersParams, pathName]);
+  }, [queryLoading, queryParams, pathName]);
+
+
+  useEffect(() => {
+    if(!pathName) {
+      return;
+    }
+    filters.apiQuery(() => api.getBooksFilters({pathName}));
+  }, [pathName]);
 
 
 
   return (
     <main>
-      <Loader isLoading={loading} error={error}>
-        {booksData &&
+      <Loader isLoading={books.loading} error={books.error} data={!!books.data}>
+        {books.data && filters.data &&
           <div className="container">
             <CatalogBreadcrumbs
               genres={genres}
@@ -61,13 +71,14 @@ function Catalog() {
 
             <CatalogHeader
               title={genre?.name}
-              total={booksData.total}
+              total={books.data.total}
             />
 
             <CatalogMain
-              books={booksData}
-              filters={filters}
-              setFilters={setFilters}
+              books={books.data}
+              filters={filters.data}
+              queryParams={queryParams}
+              setQueryParams={setQueryParams}
             />
           </div>
         }

@@ -9,11 +9,11 @@ import classes from "./../styles.module.scss";
 
 
 function ProductList() {
-  const {data, loading, query} = useApi<Book[]>()
+  const {data, loading, apiQuery} = useApi<Book[]>();
 
 
   useEffect(() => {
-    query(() => api.getBooksRecommended({limit: 40}));
+    apiQuery(() => api.getBooksRecommended({limit: 40}));
   }, []);
 
 

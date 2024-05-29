@@ -1,47 +1,49 @@
 import React from 'react';
-import {useSearchParams} from "react-router-dom";
-import {Books} from "@/types.ts";
-import {Filters} from "@pages/Catalog/useFilters.ts";
+import {Books, FiltersType} from "@/types.ts";
+import {QueryParams} from "@/hooks/useQueryParams.ts";
 import {CATALOG_CARD_LIMIT} from "@/constants.ts";
-import Filter from "@pages/Catalog/components/Filter";
 import ProductList from "@pages/Catalog/components/ProductList.tsx";
 import Pagination from "@components/Pagination";
 import Sorting from "@pages/Catalog/components/Sorting.tsx";
+import Filters from "@pages/Catalog/components/Filters";
 import classes from "@pages/Catalog/styles.module.scss";
+
 
 
 interface CatalogMainProps {
   books: Books,
-  filters: Filters,
-  setFilters:  React.Dispatch<React.SetStateAction<Filters>>,
+  filters?: FiltersType,
+  queryParams: QueryParams,
+  setQueryParams: React.Dispatch<React.SetStateAction<QueryParams>>,
 }
 
-function CatalogMain({books, filters, setFilters}: CatalogMainProps) {
+function CatalogMain({filters, books, queryParams, setQueryParams}: CatalogMainProps) {
   const paginationTotal = Math.ceil(books.total / CATALOG_CARD_LIMIT);
 
 
-  const paginationClick = (_: any, page: number) => setFilters({...filters, page});
+  function paginationClick(_: any, page: number) {
+    return setQueryParams({...queryParams, page: page.toString()})
+  }
 
 
   return (
     <div className={classes.main}>
-      <Filter
-        minPrice={books.minPrice}
-        maxPrice={books.maxPrice}
+      <Filters
         filters={filters}
-        setFilters={setFilters}
+        queryParams={queryParams}
+        setQueryParams={setQueryParams}
       />
 
       <div className={classes.content}>
         <Sorting
-          filters={filters}
-          setFilters={setFilters}
+          queryParams={queryParams}
+          setQueryParams={setQueryParams}
         />
         <ProductList books={books.items}/>
         <div className={classes.pagination_wrap}>
           <Pagination
             total={paginationTotal}
-            page={filters.page || 1}
+            page={Number(queryParams.page) || 1}
             onClick={paginationClick}
           />
         </div>

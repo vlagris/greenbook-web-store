@@ -4,25 +4,15 @@
   margin-right: 24px;
 }
 
-.accordion {
+.item {
   width: 100%;
-}
-
-.accordion_item {
-  padding-bottom: 24px;
   margin-bottom: 20px;
-
+  padding-bottom: 24px;
   border-bottom: 1px solid var(--gray-100);
 }
 
-.accordion_btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.item_title {
   margin-bottom: 12px;
-}
-
-.accordion_btn_title {
   color: var(--gray-900);
   font-size: 18px;
   font-weight: 500;
@@ -30,8 +20,6 @@
 }
 
 .genres_list {
-  max-height: 186px;
-  overflow: auto;
 }
 
 .genres_item {
@@ -75,19 +63,29 @@
   line-height: 1.5;
 }
 
-.price_input {
+
+.checkbox_list {
   width: 100%;
-  padding: 6px 12px;
+}
 
-  color: var(--gray-900);
-  font-size: 14px;
-  line-height: 1.5;
+.checkbox_list_search {
+  margin-bottom: 16px;
+}
 
-  border: 1px solid var(--gray-100);
-  border-radius: 6px;
+.checkbox_list_list {
+  max-height: 200px;
 
-  &:focus-visible {
-    outline: none;
+  overflow-y: scroll;
+}
+
+.checkbox_list_item {
+
+  &:not(:first-child) {
+    margin-top: 12px;
   }
+}
+
+.checkbox_list_text {
+  margin-right: 4px;
 }
 

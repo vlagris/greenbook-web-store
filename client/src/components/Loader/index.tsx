@@ -8,14 +8,15 @@ interface LoaderProps {
   children: React.ReactNode,
   isLoading: boolean
   error?: HttpError | null
+  data?: boolean
 }
 
-function Loader({children, isLoading, error}: LoaderProps) {
+function Loader({children, isLoading, error, data}: LoaderProps) {
 
 
   return (
     <>
-      {isLoading?
+      {isLoading && !data ?
         <div className={classes.wrap}>
           <div className={classes.loader}></div>
         </div>

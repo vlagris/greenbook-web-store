@@ -1,41 +1,99 @@
 import {mainApi} from "@/services/api/mainApi.ts";
-import {Book, Books, BookResponse} from "@/types.ts";
+import {Book, BookResponse, Books, Filter, FilterItem, FiltersType, FilterType} from "@/types.ts";
 import {createHttpError} from "@/utils/createHttpError.ts";
 
 
 type BooksResponse = {
   items: BookResponse[],
   total: number,
-  maxPrice: number,
-  minPrice: number,
 };
 
 
-function bookResponseAdepter(data: BookResponse): Book {
-    return {
-      id: data.id,
-      title: data.title,
-      price: data.price,
-      genres: data.Genres,
-      authors: data.Authors,
-      image: data.image,
-      rating: {
-        rate: data.rating_rate,
-        count: data.rating_count,
-      }
-    }
+
+type FilterItemResponse = {
+  id: string,
+  name: string
+};
+
+export type FilterPriceResponse = {
+  type: FilterType.range,
+  key: string,
+  name: string,
+  minPrice: number,
+  maxPrice: number,
 }
+
+export type FilterSelectResponse = {
+  type: FilterType.select,
+  key: string,
+  name: string,
+  items: FilterItemResponse[],
+  maxSelect: number
+}
+
+type FilterResponse = FilterPriceResponse | FilterSelectResponse;
+
+type FiltersResponse = {
+  items: FilterResponse[],
+  total: number
+};
+
+
+function BooksResponseAdepter(data: BookResponse[]): Book[] {
+  return data.map((book): Book => ({
+      id: book.id,
+      title: book.title,
+      price: book.price,
+      genres: book.Genres,
+      authors: book.Authors,
+      image: book.image,
+      rating: {
+        rate: book.rating_rate,
+        count: book.rating_count,
+      }
+    }));
+}
+
 function BooksByGenreResponseAdepter(data: BooksResponse): Books {
-  const items = data.items.map((book): Book => bookResponseAdepter(book));
   return {
-    items,
+    items: BooksResponseAdepter(data.items),
     total: data.total,
-    maxPrice: data.maxPrice,
-    minPrice: data.minPrice,
   }
 }
-function BooksResponseAdepter(data: BookResponse[]): Book[] {
-  return data.map((book): Book => bookResponseAdepter(book));
+
+function filterItemsResponseAdepter(data: FilterItemResponse[]): FilterItem[] {
+  return data.map(filterItem => ({
+    id: filterItem.id,
+    name: filterItem.name
+  }))
+}
+
+function filterResponseAdepter(data: FilterResponse): Filter {
+  const filterCommon = {
+    key: data.key,
+    name: data.name,
+  }
+  if (data.type === FilterType.select ) {
+    return {
+      ...filterCommon,
+      type: data.type,
+      maxSelect: data.maxSelect,
+      items: filterItemsResponseAdepter(data.items)
+    }
+  }
+  return {
+    ...filterCommon,
+    type: data.type,
+    minPrice: data.minPrice,
+    maxPrice: data.maxPrice
+  }
+}
+
+function filtersResponseAdepter(data: FiltersResponse): FiltersType {
+  return {
+    items: data.items.map(filter => filterResponseAdepter(filter)),
+    total: data.total
+  }
 }
 
 
@@ -46,11 +104,25 @@ export type GetBooksByGenre = {
   offset?: number,
   sort?: string,
   price?: string,
+  authors?: string,
 }
 export async function getBooksByGenre(requestData: GetBooksByGenre) {
   try {
     const res = await mainApi.get<BooksResponse>('/books/', {params: requestData});
     return BooksByGenreResponseAdepter(res.data);
+  } catch (err) {
+    return createHttpError(err as Error);
+  }
+}
+
+export type GetBooksFilters = {
+  pathName: string,
+}
+
+export async function getBooksFilters(requestData: GetBooksFilters) {
+  try {
+    const res = await mainApi.get<FiltersResponse>('/books/filters', {params: requestData});
+    return filtersResponseAdepter(res.data);
   } catch (err) {
     return createHttpError(err as Error);
   }
