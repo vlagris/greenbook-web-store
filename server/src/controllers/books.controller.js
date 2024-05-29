@@ -19,17 +19,27 @@ export async function getByGenre(req, res) {
     const genrePathName = req.query.pathName;
     const sort = booksOrdersMap[req.query.sort] || booksOrdersMap["popular"];
     const price = req.query.price?.split("-");
+    const authors = req.query.authors?.split(",");
 
+    console.log(authors)
 
     if(!genrePathName) {
       return res.status(404).json(errors.BAD_REQUEST);
     }
 
 
-    const where = {};
+    const optionsWhere = {};
+    const AuthorsOptionsWhere = {};
+
     if (price) {
-      where.price = {
+      optionsWhere.price = {
         [Op.between]: price
+      }
+    }
+
+    if (authors) {
+      AuthorsOptionsWhere.id = {
+        [Op.or]: authors
       }
     }
 
@@ -38,10 +48,11 @@ export async function getByGenre(req, res) {
       limit: limit,
       offset: skip,
       order: sort,
-      where: where,
+      where: optionsWhere,
       include: [
         {
           model: authorModel,
+          where: AuthorsOptionsWhere,
           attributes: ["id", "name", "pathName"],
           through: { attributes: [] }
         },
@@ -60,51 +71,16 @@ export async function getByGenre(req, res) {
     }
 
 
-    const maxPrice = await bookModel.max("price", {
-      include: [
-        {
-          model: authorModel,
-          attributes: ["id", "name", "pathName"],
-          through: { attributes: [] }
-        },
-        {
-          where: { pathName: genrePathName },
-          model: genreModel,
-          attributes: ["id", "name", "pathName"],
-          through: { attributes: [] }
-        },
-      ],
-    });
-
-
-    const minPrice = await bookModel.min("price", {
-      include: [
-        {
-          model: authorModel,
-          attributes: ["id", "name", "pathName"],
-          through: { attributes: [] }
-        },
-        {
-          where: { pathName: genrePathName },
-          model: genreModel,
-          attributes: ["id", "name", "pathName"],
-          through: { attributes: [] }
-        },
-      ],
-    });
-
-
     res.status(200).json({
       items: books,
       total: count,
-      maxPrice,
-      minPrice
     });
   } catch (err) {
     console.log(err);
     res.status(500).json(errors.SERVER_ERROR);
   }
 }
+
 
 
 export async function getRecommended(req, res) {
@@ -129,6 +105,90 @@ export async function getRecommended(req, res) {
 
 
     res.status(200).json(books);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(errors.SERVER_ERROR);
+  }
+}
+
+
+
+export async function getBooksFilters(req, res) {
+  try {
+    const genrePathName = req.query.pathName;
+
+
+    if(!genrePathName) {
+      return res.status(404).json(errors.BAD_REQUEST);
+    }
+
+
+    const optionsInclude = [
+      {
+        model: authorModel,
+        attributes: [],
+        through: { attributes: [] }
+      },
+      {
+        where: { pathName: genrePathName },
+        model: genreModel,
+        attributes: [],
+        through: { attributes: [] }
+      },
+    ]
+
+
+    const maxPrice = await bookModel.max("price", {
+      include: optionsInclude,
+    });
+
+    const minPrice = await bookModel.min("price", {
+      include: optionsInclude,
+    });
+
+    const totalCount = await bookModel.count({
+      include: optionsInclude,
+    });
+
+
+    // const  {count, rows: authors} = await authorModel.findAndCountAll({
+    const authors = await authorModel.findAll({
+      where: {
+        "$Books.Genres.pathName$": genrePathName
+      },
+      attributes: ["id", "name"],
+      include: {
+        model: bookModel,
+        attributes: [],
+        through: { attributes: [] },
+        include: {
+          model: genreModel,
+          attributes: [],
+          through: { attributes: [] }
+        }
+      },
+    });
+
+
+    res.status(200).json({
+      items: [
+        {
+          name: "Цены",
+          key: "price",
+          type: "range",
+          minPrice,
+          maxPrice,
+        },
+        {
+          items: authors,
+          name: "Авторы",
+          key: "authors",
+          type: "select",
+          maxSelect: 10
+        },
+      ],
+      total: totalCount,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(errors.SERVER_ERROR);
