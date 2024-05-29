@@ -41,8 +41,6 @@ export type Book = {
 export type Books = {
   items: Book[],
   total: number,
-  minPrice: number,
-  maxPrice: number,
 }
 
 export type BookResponse = {
@@ -132,3 +130,41 @@ export type HttpError = {
   message?: string
 }
 
+
+
+export enum FilterType {
+  select = "select",
+  range = "range",
+  // selectOne = "selectOne",
+  // toggle = "toggle"
+}
+
+export type FilterItem = {
+  id: string,
+  name: string
+}
+
+export type FilterCommon = {
+  type: FilterType,
+  key: string,
+  name: string,
+}
+
+export type FilterPrice = FilterCommon & {
+  type: FilterType.range,
+  minPrice: number,
+  maxPrice: number,
+}
+
+export type FilterSelect = FilterCommon & {
+  type: FilterType.select,
+  items: FilterItem[],
+  maxSelect: number
+}
+
+export type Filter = FilterPrice | FilterSelect;
+
+export type FiltersType = {
+  items: Filter[],
+  total: number
+}
