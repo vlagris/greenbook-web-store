@@ -1,5 +1,4 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {Filters} from "@pages/Catalog/useFilters.ts";
 import { Dropdown, DropdownButton, DropdownIcon, DropdownItem, DropdownMenu, DropdownToggle } from "@components/UI/Dropdown";
 import classes from "@pages/Catalog/styles.module.scss";
 import {QueryParams} from "@/hooks/useQueryParams.ts";
