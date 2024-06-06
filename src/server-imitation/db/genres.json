@@ -1,0 +1,43 @@
+[
+  {
+    "id": "872945",
+    "name": "Детективы",
+    "pathName": "detektivy"
+  },
+  {
+    "id": "327900",
+    "name": "Фантастика",
+    "pathName": "fantastika"
+  },
+  {
+    "id": "617372",
+    "name": "Фэнтези",
+  "pathName": "fentezi"
+  },
+  {
+    "id": "168699",
+    "name": "Ужасы",
+    "pathName": "uzhasy"
+  },
+  {
+    "id": "405713",
+    "name": "Любовные романы",
+    "pathName": "lyubovnye-romany"
+  },
+  {
+    "id": "390264",
+    "name": "Триллеры",
+    "pathName": "trillery"
+  },
+  {
+    "id": "899999",
+    "name": "Мистика",
+    "pathName": "mistika"
+  }
+]
+
+
+
+
+
+

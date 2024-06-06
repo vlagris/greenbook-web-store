@@ -1,0 +1,863 @@
+[
+  {
+    "id": "7930077",
+    "title": "Убийство в «Восточном экспрессе»",
+    "price": 519,
+    "author": [
+      "415371"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv5.litres.ru/pub/c/cover_200/62718058.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 83
+    }
+  },
+  {
+    "id": "6372706",
+    "title": "Десять негритят",
+    "price": 499,
+    "author": [
+      "415371"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv4.litres.ru/pub/c/cover_200/27066343.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 212
+    }
+  },
+  {
+    "id": "6134312",
+    "title": "Смерть на Ниле",
+    "price": 409,
+    "author": [
+      "415371"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv7.litres.ru/pub/c/cover_200/64932377.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 109
+    }
+  },
+  {
+    "id": "0664415",
+    "title": "Остаток дня",
+    "price": 659,
+    "author": [
+      "415371"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/56412224.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 41
+    }
+  },
+  {
+    "id": "4988170",
+    "title": "Убийство Роджера Экройда",
+    "price": 379,
+    "author": [
+      "415371"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv7.litres.ru/pub/c/cover_200/64932377.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 52
+    }
+  },
+  {
+    "id": "5051742",
+    "title": "Эркюль Пуаро и Путаница в Гриншоре",
+    "price": 429,
+    "author": [
+      "415371"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/8368224.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 470
+    }
+  },
+  {
+    "id": "3142994",
+    "title": "Последний сеанс",
+    "price": 359,
+    "author": [
+      "415371"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv6.litres.ru/pub/c/cover_200/66217762.webp",
+    "rating": {
+      "rate": 4.4,
+      "count": 127
+    }
+  },
+  {
+    "id": "8565313",
+    "title": "Зло под солнцем",
+    "price": 429,
+    "author": [
+      "415371"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/51882228.webp",
+    "rating": {
+      "rate": 4.9,
+      "count": 107
+    }
+  },
+  {
+    "id": "7154902",
+    "title": "Драма в Гриффин-холле, или Отравленный уикенд",
+    "price": 538,
+    "author": [
+      "043301"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv8.litres.ru/pub/c/cover_200/63429581.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 700
+    }
+  },
+  {
+    "id": "0336015",
+    "title": "Леди из Фроингема",
+    "price": 519,
+    "author": [
+      "043301"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/66846728.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 321
+    }
+  },
+  {
+    "id": "9271423",
+    "title": "Мюзик-холл на Гроув-Лейн",
+    "price": 556,
+    "author": [
+      "043301"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv7.litres.ru/pub/c/cover_200/68639170.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 242
+    }
+  },
+  {
+    "id": "3488373",
+    "title": "Мисс Мортон и убийство на званом вечере",
+    "price": 339,
+    "author": [
+      "088550"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/70158925.webp",
+    "rating": {
+      "rate": 4.3,
+      "count": 96
+    }
+  },
+  {
+    "id": "6628298",
+    "title": "Потерянное наследство тамплиера",
+    "price": 599,
+    "author": [
+      "483138"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv0.litres.ru/pub/c/cover_200/64624001.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 218
+    }
+  },
+  {
+    "id": "2879937",
+    "title": "Ложь без срока годности",
+    "price": 599,
+    "author": [
+      "483138"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/51836224.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 184
+    }
+  },
+  {
+    "id": "2898661",
+    "title": "Забытая легенда Ольхона",
+    "price": 479,
+    "author": [
+      "483138"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/67247025.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 256
+    }
+  },
+  {
+    "id": "3785370",
+    "title": "Проклятие принцессы Алтая",
+    "price": 549,
+    "author": [
+      "483138"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/69212824.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 480
+    }
+  },
+  {
+    "id": "7660066",
+    "title": "Остров тринадцати приговоренных",
+    "price": 549,
+    "author": [
+      "483138"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv6.litres.ru/pub/c/cover_200/66665566.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 239
+    }
+  },
+  {
+    "id": "4393202",
+    "title": "Волшебное свечение Ладоги",
+    "price": 449,
+    "author": [
+      "483138"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv3.litres.ru/pub/c/cover_200/63215737.webp",
+    "rating": {
+      "rate": 4.9,
+      "count": 493
+    }
+  },
+  {
+    "id": "0117617",
+    "title": "Темная сторона души",
+    "price": 579,
+    "author": [
+      "264583"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv5.litres.ru/pub/c/cover_200/169454.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 254
+    }
+  },
+  {
+    "id": "0599850",
+    "title": "Пока медведица на небе",
+    "price": 409,
+    "author": [
+      "483138"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv6.litres.ru/pub/c/cover_200/48409367.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 653
+    }
+  },
+  {
+    "id": "6930301",
+    "title": "Неизвестный псевдоним Бога",
+    "price": 549,
+    "author": [
+      "483138"
+    ],
+    "genre": [
+      "872945"
+    ],
+    "image": "https://cv7.litres.ru/pub/c/cover_200/57284178.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 401
+    }
+  },
+  {
+    "id": "1910613",
+    "title": "Гордость и предубеждение",
+    "price": 409,
+    "author": [
+      "608655"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv4.litres.ru/pub/c/cover_200/11280949.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 1653
+    }
+  },
+  {
+    "id": "4568204",
+    "title": "Анна Каренина",
+    "price": 599,
+    "author": [
+      "104809"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv5.litres.ru/pub/c/cover_200/28057851.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 137
+    }
+  },
+  {
+    "id": "9001969",
+    "title": "Бесы",
+    "price": 309,
+    "author": [
+      "798046"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv3.litres.ru/pub/c/cover_200/22489936.webp",
+    "rating": {
+      "rate": 4.2,
+      "count": 523
+    }
+  },
+  {
+    "id": "3327191",
+    "title": "Воскресение",
+    "price": 409,
+    "author": [
+      "104809"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/23803525.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 358
+    }
+  },
+  {
+    "id": "4251348",
+    "title": "Дамское счастье",
+    "price": 399,
+    "author": [
+      "788230"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv4.litres.ru/pub/c/cover_200/49227749.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 30
+    }
+  },
+  {
+    "id": "3388576",
+    "title": "Лунный камень",
+    "price": 599,
+    "author": [
+      "277633"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv6.litres.ru/pub/c/cover_200/32543568.webp",
+    "rating": {
+      "rate": 4.1,
+      "count": 49
+    }
+  },
+  {
+    "id": "2868281",
+    "title": "Повесть о двух городах",
+    "price": 499,
+    "author": [
+      "149520"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv9.litres.ru/pub/c/cover_200/62649591.webp",
+    "rating": {
+      "rate": 4.5,
+      "count": 23
+    }
+  },
+  {
+    "id": "5731423",
+    "title": "Унесенные ветром. Том 1",
+    "price": 639,
+    "author": [
+      "584187"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv4.litres.ru/pub/c/cover_200/131243.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 2407
+    }
+  },
+  {
+    "id": "1280733",
+    "title": "Унесенные ветром. Том 2",
+    "price": 559,
+    "author": [
+      "584187"
+    ],
+    "genre": [
+      "405713"
+    ],
+    "image": "https://cv4.litres.ru/pub/c/cover_200/131244.webp",
+    "rating": {
+      "rate": 4.9,
+      "count": 1877
+    }
+  },
+  {
+    "id": "5181315",
+    "title": "Институт",
+    "price": 499,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "327900",
+      "168699",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv8.litres.ru/pub/c/cover_200/51598283.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 3898
+    }
+  },
+  {
+    "id": "0070102",
+    "title": "Сияние",
+    "price": 649,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "168699",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/17195427.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 822
+    }
+  },
+  {
+    "id": "7040083",
+    "title": "Позже",
+    "price": 579,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "872945",
+      "168699",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv6.litres.ru/pub/c/cover_200/66079668.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 3448
+    }
+  },
+  {
+    "id": "5639705",
+    "title": "Будет кровь",
+    "price": 499,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "168699",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv8.litres.ru/pub/c/cover_200/63062882.webp",
+    "rating": {
+      "rate": 4.5,
+      "count": 929
+    }
+  },
+  {
+    "id": "3274256",
+    "title": "Под Куполом",
+    "price": 549,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "327900"
+    ],
+    "image": "https://cv8.litres.ru/pub/c/cover_200/4387285.webp",
+    "rating": {
+      "rate": 4.5,
+      "count": 2017
+    }
+  },
+  {
+    "id": "8687829",
+    "title": "Билли Саммерс",
+    "price": 699,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "872945",
+      "390264"
+    ],
+    "image": "https://cv6.litres.ru/pub/c/cover_200/67303161.webp",
+    "rating": {
+      "rate": 4.5,
+      "count": 2068
+    }
+  },
+  {
+    "id": "5481107",
+    "title": "Мистер Мерседес",
+    "price": 749,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "872945",
+      "390264"
+    ],
+    "image": "https://cv4.litres.ru/pub/c/cover_200/8345044.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 2579
+    }
+  },
+  {
+    "id": "8137432",
+    "title": "Чужак",
+    "price": 699,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "872945",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv3.litres.ru/pub/c/cover_200/40848833.webp",
+    "rating": {
+      "rate": 4.5,
+      "count": 3699
+    }
+  },
+  {
+    "id": "6330375",
+    "title": "Стрелок",
+    "price": 549,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "617372"
+    ],
+    "image": "https://cv0.litres.ru/pub/c/cover_200/122201.webp",
+    "rating": {
+      "rate": 4.5,
+      "count": 1988
+    }
+  },
+  {
+    "id": "3770730",
+    "title": "Пост сдал",
+    "price": 649,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "872945",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv9.litres.ru/pub/c/cover_200/22074995.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 2583
+    }
+  },
+  {
+    "id": "0193472",
+    "title": "Доктор Сон",
+    "price": 449,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "872945",
+      "168699",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv8.litres.ru/pub/c/cover_200/6707289.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 1889
+    }
+  },
+  {
+    "id": "8051667",
+    "title": "Кто нашел, берет себе",
+    "price": 699,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "872945",
+      "168699",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/12483328.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 1958
+    }
+  },
+  {
+    "id": "2134830",
+    "title": "Темная Башня",
+    "price": 549,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "617372"
+    ],
+    "image": "https://cv8.litres.ru/pub/c/cover_200/4887784.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 1398
+    }
+  },
+  {
+    "id": "4976584",
+    "title": "Мёртвая зона",
+    "price": 679,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "168699",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv3.litres.ru/pub/c/cover_200/4387335.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 1973
+    }
+  },
+  {
+    "id": "8122362",
+    "title": "Нужные вещи",
+    "price": 549,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "899999"
+    ],
+    "image": "https://cv5.litres.ru/pub/c/cover_200/18371557.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 594
+    }
+  },
+  {
+    "id": "6512269",
+    "title": "Возрождение",
+    "price": 579,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "168699",
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv7.litres.ru/pub/c/cover_200/9361072.webp",
+    "rating": {
+      "rate": 4.7,
+      "count": 1495
+    }
+  },
+  {
+    "id": "4163370",
+    "title": "Бесплодные земли",
+    "price": 599,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "617372"
+    ],
+    "image": "https://cv0.litres.ru/pub/c/cover_200/122207.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 779
+    }
+  },
+  {
+    "id": "9863335",
+    "title": "Кэрри",
+    "price": 619,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "168699",
+      "899999"
+    ],
+    "image": "https://cv5.litres.ru/pub/c/cover_200/122354.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 1409
+    }
+  },
+  {
+    "id": "0076360",
+    "title": "Спящие красавицы",
+    "price": 449,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "390264",
+      "899999"
+    ],
+    "image": "https://cv2.litres.ru/pub/c/cover_200/37837423.webp",
+    "rating": {
+      "rate": 4.1,
+      "count": 780
+    }
+  },
+  {
+    "id": "9657907",
+    "title": "Долорес Клейборн",
+    "price": 549,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "872945",
+      "390264"
+    ],
+    "image": "https://cv6.litres.ru/pub/c/cover_200/122360.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 494
+    }
+  },
+  {
+    "id": "2942140",
+    "title": "Извлечение троих",
+    "price": 599,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "617372"
+    ],
+    "image": "https://cv0.litres.ru/pub/c/cover_200/122202.webp",
+    "rating": {
+      "rate": 4.8,
+      "count": 891
+    }
+  },
+  {
+    "id": "2401768",
+    "title": "Песнь Сюзанны",
+    "price": 549,
+    "author": [
+      "852177"
+    ],
+    "genre": [
+      "617372"
+    ],
+    "image": "https://cv8.litres.ru/pub/c/cover_200/123986.webp",
+    "rating": {
+      "rate": 4.6,
+      "count": 631
+    }
+  }
+]
