@@ -51,7 +51,7 @@ function Footer() {
         </div>
 
         <div className={classes.footer_bottom}>
-          <p className={classes.copyright}>GreenBook eCommerce © 2021. All Rights Reserved</p>
+          <p className={classes.copyright}>GreenBook eCommerce © 2024. All Rights Reserved</p>
         </div>
 
       </div>

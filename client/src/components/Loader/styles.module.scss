@@ -1,9 +1,9 @@
-.wrap {
+.loader_container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 128px);
+  min-height: calc(100vh - 128px);
 }
 
 .loader {

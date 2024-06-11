@@ -9,7 +9,7 @@ import classes from "./styles.module.scss";
 
 
 interface FiltersProps {
-  filters?: FiltersType,
+  filters: FiltersType | null,
   queryParams: QueryParams,
   setQueryParams: React.Dispatch<React.SetStateAction<QueryParams>>,
 }

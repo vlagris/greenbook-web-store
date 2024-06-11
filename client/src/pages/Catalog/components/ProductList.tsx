@@ -5,7 +5,7 @@ import classes from "./../styles.module.scss";
 
 
 interface ProductListProps {
-  books: Book[],
+  books: Book[] | undefined,
 }
 
 function ProductList({books}: ProductListProps) {
@@ -13,7 +13,7 @@ function ProductList({books}: ProductListProps) {
   return (
     <div className={classes.product_list_wrap}>
       <div className={classes.product_list}>
-        {books.map((book) =>
+        {books && books.map((book) =>
           <Card key={book.id} book={book}/>
         )}
       </div>

@@ -1,26 +1,33 @@
-import React from 'react';
-import classes from "./styles.module.scss";
-import Error from "@pages/Error";
+import React, {useEffect, useState} from 'react';
 import { HttpError } from "@/types.ts";
+import Error from "@pages/Error";
+import classes from "./styles.module.scss";
+
+
+
+type LoaderState = {
+  isLoading: boolean
+  error: HttpError | null
+  loaded: boolean
+}
 
 
 interface LoaderProps {
   children: React.ReactNode,
-  isLoading: boolean
+  isLoading?: boolean
   error?: HttpError | null
-  data?: boolean
+  loaded?: boolean
 }
 
-function Loader({children, isLoading, error, data}: LoaderProps) {
-
+function Loader({children, isLoading = false, error = null, loaded = false}: LoaderProps) {
 
   return (
     <>
-      {isLoading && !data ?
-        <div className={classes.wrap}>
+      {isLoading || !loaded ?
+        <div className={classes.loader_container}>
           <div className={classes.loader}></div>
         </div>
-          :
+        :
         <>
           {error ?
             <Error/>

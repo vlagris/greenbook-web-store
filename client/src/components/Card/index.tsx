@@ -6,7 +6,7 @@ import {currency} from "@/constants.ts";
 import classes from "./styles.module.scss";
 
 import StarIcon from '@assets/icons/star.svg?react';
-import HeartIcon from '@assets/icons/heart.svg?react';
+// import HeartIcon from '@assets/icons/heart.svg?react';
 
 
 function Card({book}: {book: Book}) {
@@ -30,10 +30,6 @@ function Card({book}: {book: Book}) {
           </div>
         </div>
 
-        <button className={classes.btn_wish}>
-          <HeartIcon className={classes.btn_wish_icon}/>
-        </button>
-
         <div className={classes.info}>
           <div className={classes.price}>
             {book.price + " " + currency.RUB.symbol}
@@ -53,6 +49,10 @@ function Card({book}: {book: Book}) {
             В корзину
           </button>
         </div>
+
+        {/*<button className={classes.btn_wish}>*/}
+        {/*  <HeartIcon className={classes.btn_wish_icon}/>*/}
+        {/*</button>*/}
       </div>
     </div>
     </div>
