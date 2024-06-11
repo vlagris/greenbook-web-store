@@ -76,7 +76,7 @@ export async function addCartItem(requestData: string) {
     return cartItemResponseAdapter(res.data);
   } catch (err) {
     return createHttpError(err as Error);
-}
+  }
 }
 
 export async function removeCartItem(requestData: string) {
@@ -85,12 +85,12 @@ export async function removeCartItem(requestData: string) {
     return cartItemResponseAdapter(res.data);
   } catch (err) {
     return createHttpError(err as Error);
-}
+  }
 }
 
 export async function updateCartItem(requestData: UpdateCartItem) {
   try {
-    const res = await mainApi.patch<CartItemResponse>(`/cart/${requestData.id}`, {quantity: requestData.quantity});
+    const res = await mainApi.patch<CartItemResponse>(`/cart/`, requestData);
     return cartItemResponseAdapter(res.data);
   } catch (err) {
     return createHttpError(err as Error);

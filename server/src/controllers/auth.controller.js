@@ -63,9 +63,6 @@ export async function login(req, res) {
     // const userData = filterUser(user._doc);
     const {accessToken, refreshToken} = await generateTokens(user);
 
-    console.log(refreshToken)
-
-
 
     res.cookie(cookies.refreshToken.name, refreshToken, cookies.refreshToken.options)
       .status(200)

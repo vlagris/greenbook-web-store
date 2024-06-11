@@ -119,7 +119,7 @@ export async function addItem(req, res) {
 export async function updateItem(req, res) {
   try {
     const userId = req.userId;
-    const bookId = req.params.id;
+    const bookId = req.body.id;
     const quantity = req.body.quantity;
 
     if (!bookId || !quantity) {
