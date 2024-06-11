@@ -3,10 +3,12 @@ import {HttpError} from "@/types.ts";
 
 
 
-function useApi<R>() {
+
+function useApi<R = any>() {
   const [data, setData] = useState<R | null>(null);
   const [error, setError] = useState<HttpError | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [refreshIndex, setRefreshIndex] = useState(0);
 
 
@@ -14,13 +16,17 @@ function useApi<R>() {
     setRefreshIndex(prev => prev + 1);
   }
 
-
-  const apiQuery = useCallback((apiFunction: () => Promise<R>) => {
+  const apiQuery = useCallback((api: () => Promise<R>) => {
     setLoading(true);
-    apiFunction()
+    api()
       .then(
-        (response) => setData(response),
-        (err) => setError(err as HttpError)
+        (response) => {
+          setLoaded(true)
+          setData(response)
+        },
+        (err) => {
+          setError(err as HttpError)
+        }
       )
       .finally(
         () => setLoading(false)
@@ -28,7 +34,9 @@ function useApi<R>() {
   }, [refreshIndex]);
 
 
-  return {data, error, loading, apiQuery, refresh};
+  return {data, error, loading, loaded, apiQuery, refresh};
 }
 
 export default useApi;
+
+
