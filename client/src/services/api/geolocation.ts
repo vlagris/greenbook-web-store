@@ -8,7 +8,7 @@ export type UserIp = {
 
 export async function getUserIp() {
   try {
-    const res = await axios.get<UserIp>("/ipify")
+    const res = await axios.get<UserIp>("https://api.ipify.org?format=json")
     return res.data
   } catch (err) {
     return Promise.reject(err);

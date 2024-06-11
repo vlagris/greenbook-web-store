@@ -7,18 +7,12 @@ import * as path from 'path';
 export default defineConfig({
   server: {
     proxy: {
-      "/ipify": {
+      "https://api.ipify.org": {
         target: 'https://api.ipify.org?format=json',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/ipify/, ""),
+        rewrite: (path) => path.replace(/^https:\/\/api.ipify.org/, ""),
       }
-      // "/dadata": {
-      //   target: 'http://suggestions.dadata.ru/suggestions/api/4_1/rs/iplocate/address',
-      //   changeOrigin: true,
-      //   secure: false,
-      //   rewrite: (path) => path.replace(/^\/dadata/, ""),
-      // }
     }
   },
   plugins: [react(), svgr()],
