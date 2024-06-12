@@ -11,14 +11,14 @@ import classes from "@pages/Catalog/styles.module.scss";
 
 
 interface CatalogMainProps {
-  books: Books,
-  filters?: FiltersType,
+  books: Books | null,
+  filters: FiltersType | null,
   queryParams: QueryParams,
   setQueryParams: React.Dispatch<React.SetStateAction<QueryParams>>,
 }
 
 function CatalogMain({filters, books, queryParams, setQueryParams}: CatalogMainProps) {
-  const paginationTotal = Math.ceil(books.total / CATALOG_CARD_LIMIT);
+  const paginationTotal = books?.total ? Math.ceil(books?.total / CATALOG_CARD_LIMIT) : 1;
 
 
   function paginationClick(_: any, page: number) {
@@ -39,7 +39,9 @@ function CatalogMain({filters, books, queryParams, setQueryParams}: CatalogMainP
           queryParams={queryParams}
           setQueryParams={setQueryParams}
         />
-        <ProductList books={books.items}/>
+
+        <ProductList books={books?.items}/>
+
         <div className={classes.pagination_wrap}>
           <Pagination
             total={paginationTotal}

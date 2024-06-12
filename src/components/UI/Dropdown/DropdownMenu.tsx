@@ -1,7 +1,7 @@
 import React, {useContext, useLayoutEffect, useRef, useState} from 'react';
 import {clsx} from "clsx";
-import classes from "@components/UI/Dropdown/styles.module.scss";
 import {DropdownContext} from "@components/UI/Dropdown/DropdownContext.ts";
+import classes from "@components/UI/Dropdown/styles.module.scss";
 
 
 interface DropdownMenuProps {

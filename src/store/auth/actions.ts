@@ -86,7 +86,7 @@ export const fetchToken = createAppAsyncThunk(
 
     dispatch(setLoading(true));
     try {
-      const token = await api.getToken({id: authSelectors.userId(getState())});
+      const token = await api.getToken();
       dispatch(setToken(token));
 
     } catch (err) {

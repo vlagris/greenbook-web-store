@@ -7,10 +7,10 @@ import EmptyCart from "@pages/Cart/components/EmptyCart.tsx";
 
 function Cart() {
   const cart = useAppSelector(cartSelectors.cart);
-  const cartLoading = useAppSelector(cartSelectors.loading);
+  // const cartLoading = useAppSelector(cartSelectors.loading);
 
   return (
-    <Loader isLoading={cartLoading}>
+    <Loader loaded={!!cart}>
       {cart.items.length ?
         <CartForm cart={cart}/>
         :

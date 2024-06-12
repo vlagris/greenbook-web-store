@@ -2,8 +2,8 @@ import {isAxiosError} from "axios";
 import {ErrorType} from "@/types.ts";
 
 
-export function createHttpError(error: any) {
-  // if (isAxiosError(error)) {
+export function createHttpError(error: Error) {
+  if (isAxiosError(error)) {
     switch (error.response?.status) {
       case 400:
         return Promise.reject({
@@ -26,6 +26,6 @@ export function createHttpError(error: any) {
           message: error.response?.data?.error_message
         });
     }
-  // }
+  }
   return Promise.reject(error);
 }

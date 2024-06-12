@@ -20,13 +20,27 @@
   border-radius: 3px;
   appearance: none;
 
+  &:hover {
+    border: 1px solid var(--primary);
+  }
+
   &:checked {
     background: var(--primary);
     border: none;
 
+    &:hover:after {
+      background: #ffffff;
+      width: 12px;
+      height: 2px;
+
+      border-radius: 20px;
+    }
+
     &:after {
       opacity: 1;
     }
+
+
   }
 
   &:after {

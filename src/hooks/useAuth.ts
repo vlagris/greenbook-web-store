@@ -1,5 +1,5 @@
-import { useAppSelector } from "./useTypedReduxHooks";
-import { authSelectors } from "../store/auth";
+import { useAppSelector } from "@/hooks/useTypedReduxHooks";
+import { authSelectors } from "@/store/auth";
 
 
 function useAuth() {

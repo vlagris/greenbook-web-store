@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import { useEffect } from "react";
-import { router } from "@/router.tsx";
+import { router } from "@/routes";
 import { useAppDispatch } from "@/hooks/useTypedReduxHooks.ts";
 import { fetchGenres } from "@/store/genres";
 import { fetchCart } from "@/store/cart";

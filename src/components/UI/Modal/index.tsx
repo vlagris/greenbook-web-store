@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {clsx} from "clsx";
-import Portal from "@components/UI/Modal/Portal";
+import Portal from "@components/UI/Portal";
 import classes from "./styles.module.scss";
 
 interface ModalProps {

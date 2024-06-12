@@ -11,7 +11,7 @@ function DropdownToggle({ children }: DropdownToggleProps) {
   const {show, setShow} = useContext(DropdownContext);
 
   function handleClick() {
-    setShow(prev => !prev);
+    setShow(!show);
   }
 
   return (

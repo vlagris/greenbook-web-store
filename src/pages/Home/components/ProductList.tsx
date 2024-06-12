@@ -1,30 +1,22 @@
-import {useEffect} from "react";
+import React from "react";
 import {Book} from "@/types.ts";
-import useApi from "@/hooks/useApi.ts";
 import Card from "@components/Card";
-import Loader from "@components/Loader";
-import * as api from "@/services/api";
 import classes from "./../styles.module.scss";
 
 
 
-function ProductList() {
-  const {data, loading, apiQuery} = useApi<Book[]>();
+interface ProductListProps {
+  books: Book[] | null
+}
 
-
-  useEffect(() => {
-    apiQuery(() => api.getBooksRecommended({limit: 40}));
-  }, []);
-
+function ProductList({books}: ProductListProps) {
 
   return (
-    <Loader isLoading={loading}>
       <div className={classes.product_list}>
-        {data && data.map((book) =>
+        {books && books.map((book) =>
           <Card key={book.id} book={book}/>
         )}
       </div>
-    </Loader>
   );
 }
 
