@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {Books, FiltersType, Genre, HttpError} from "@/types.ts";
+import {Books, FiltersType, Genre} from "@/types.ts";
 import {CATALOG_CARD_LIMIT} from "@/constants.ts";
 import * as api from "@/services/api";
 import useApi from "@/hooks/useApi.ts";
@@ -13,12 +13,6 @@ import useQueryParams from "@/hooks/useQueryParams.ts";
 import CatalogHeader from "@pages/Catalog/components/CatalogHeader.tsx";
 
 
-
-type LoaderState = {
-  loading: boolean
-  error: HttpError | null
-  data: boolean
-}
 
 function Catalog() {
   const {queryParams, setQueryParams, queryLoading} = useQueryParams(

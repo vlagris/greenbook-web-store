@@ -66,7 +66,7 @@ function getData({method, url, data, config}: GetData): any {
   const userIdJson = localStorage.getItem("userId");
 
   if (userIdJson) {
-  request.userId = JSON.parse(userIdJson);
+    request.userId = JSON.parse(userIdJson);
   }
 
 

@@ -68,13 +68,9 @@ export async function logout() {
 }
 
 
-interface GetToken {
-  id: string
-}
-
-export async function getToken(requestData: GetToken) {
+export async function getToken() {
   try {
-    const res = await mainApi.get<TokenResponse>('/auth/token', requestData);
+    const res = await mainApi.get<TokenResponse>('/auth/token');
     return tokenResponseAdapter(res.data);
   } catch (err) {
     return createHttpError(err as Error);
