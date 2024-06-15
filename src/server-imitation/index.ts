@@ -22,7 +22,7 @@ interface GetData {
   config?: any
 }
 
-function getData({method, url, data, config}: GetData): any {
+async function getData({method, url, data, config}: GetData): Promise<any> {
   const request: any = {
     params: {},
     body: data,
@@ -73,6 +73,11 @@ function getData({method, url, data, config}: GetData): any {
   const result = route.controller(request);
 
 
+  const delay = 300 + Math.floor(Math.random() * 300);
+
+  await new Promise(r => setTimeout(r, delay))
+
+
   if (result.status === 200) {
     return result;
   }
@@ -84,27 +89,27 @@ function getData({method, url, data, config}: GetData): any {
 
 const api: API = {
   async post(url, data, config) {
-    const result = getData({ method: "post", url, data, config })
+    const result = await getData({ method: "post", url, data, config })
     // console.log(result)
     return result;
   },
   async get(url, config) {
-    const result = getData({ method: "get", url, config })
+    const result = await getData({ method: "get", url, config })
     // console.log(result)
     return result;
   },
   async put(url, data, config) {
-    const result = getData({ method: "put", url, data, config })
+    const result = await getData({ method: "put", url, data, config })
     // console.log(result)
     return result;
   },
   async patch(url, data, config) {
-    const result = getData({ method: "patch", url, data, config })
+    const result = await getData({ method: "patch", url, data, config })
     // console.log(result)
     return result;
     },
   async delete(url, config) {
-    const result = getData({ method: "delete", url, config })
+    const result = await getData({ method: "delete", url, config })
     // console.log(result)
     return result;
   },
