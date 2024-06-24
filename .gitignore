@@ -18,6 +18,9 @@ lerna-debug.log*
 *.sln
 *.sw?
 
+__tests__
+
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -141,6 +144,3 @@ dist
 .pnp.*
 <<<<<<< HEAD
 =======
-
-
-__tests__
