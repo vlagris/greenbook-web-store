@@ -1,2 +1,2 @@
-export * from "./filterUser.js";
+export * from "./getUserWithoutPasswordHash.js";
 export * from "./generateTokens.js";

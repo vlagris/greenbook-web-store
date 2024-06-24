@@ -44,7 +44,7 @@ export async function getByGenre(req, res) {
     }
 
 
-    const {count, rows: books} = await bookModel.findAndCountAll({
+    const books = await bookModel.findAll({
       limit: limit,
       offset: skip,
       order: sort,
@@ -71,10 +71,7 @@ export async function getByGenre(req, res) {
     }
 
 
-    res.status(200).json({
-      items: books,
-      total: count,
-    });
+    res.status(200).json(books);
   } catch (err) {
     console.log(err);
     res.status(500).json(errors.SERVER_ERROR);
@@ -116,10 +113,38 @@ export async function getRecommended(req, res) {
 export async function getBooksFilters(req, res) {
   try {
     const genrePathName = req.query.pathName;
+    const price = req.query.price?.split("-");
+    const authors = req.query.authors?.split(",");
 
 
     if(!genrePathName) {
       return res.status(404).json(errors.BAD_REQUEST);
+    }
+
+
+    const priceOptionsWhere = {};
+    const totalOptionsWhere = {};
+    const authorsOptionsWhere = {
+      "$Books.Genres.pathName$": genrePathName
+    };
+
+
+    if (price) {
+      totalOptionsWhere.price = {
+        [Op.between]: price
+      };
+      authorsOptionsWhere["$Books.price$"] = {
+        [Op.between]: price
+      };
+    }
+
+
+    if (authors) {
+      const authorsWhere = {
+        [Op.or]: authors
+      }
+      priceOptionsWhere["$Authors.id$"] = authorsWhere;
+      totalOptionsWhere["$Authors.id$"] = authorsWhere;
     }
 
 
@@ -139,23 +164,23 @@ export async function getBooksFilters(req, res) {
 
 
     const maxPrice = await bookModel.max("price", {
+      where: priceOptionsWhere,
       include: optionsInclude,
     });
 
     const minPrice = await bookModel.min("price", {
+      where: priceOptionsWhere,
       include: optionsInclude,
     });
 
     const totalCount = await bookModel.count({
+      where: totalOptionsWhere,
       include: optionsInclude,
     });
 
 
-    // const  {count, rows: authors} = await authorModel.findAndCountAll({
-    const authors = await authorModel.findAll({
-      where: {
-        "$Books.Genres.pathName$": genrePathName
-      },
+    const authorsData = await authorModel.findAll({
+      where: authorsOptionsWhere,
       attributes: ["id", "name"],
       include: {
         model: bookModel,
@@ -180,7 +205,7 @@ export async function getBooksFilters(req, res) {
           maxPrice,
         },
         {
-          items: authors,
+          items: authorsData,
           name: "Авторы",
           key: "authors",
           type: "select",

@@ -4,8 +4,17 @@ import {errors} from "../constants.js";
 
 function checkAuth(req, res, next) {
   const token = (req.headers.authorization || "").replace(/Bearer\s?/, "");
-  if (!token) {
+  const refreshToken = req.cookies.refreshToken || null;
+
+  console.log("access", token)
+  console.log("refresh", refreshToken)
+
+  if (!refreshToken) {
     return res.status(403).json(errors.NOT_AUTH);
+  }
+
+  if (!token) {
+    return res.status(401).json(errors.NOT_AUTH);
   }
 
   jwt.verify(
@@ -13,7 +22,7 @@ function checkAuth(req, res, next) {
     process.env.ACCESS_TOKEN_SECRET_KEY,
     (err, decode) => {
     if (err) {
-      return res.status(403).json(errors.NOT_AUTH);
+      return res.status(401).json(errors.NOT_AUTH);
     }
     req.userId = decode.id;
     next();

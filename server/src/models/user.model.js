@@ -15,6 +15,14 @@ const userModel = sequelize.define(
       unique: true,
       allowNull: false,
     },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     passwordHash: {
       type: DataTypes.STRING,
       allowNull: false,

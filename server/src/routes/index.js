@@ -3,11 +3,13 @@ import authRoutes from "./auth.routes.js";
 import cartRoutes from "./cart.routes.js";
 import booksRoutes from "./books.routes.js";
 import genresRoutes from "./genres.routes.js";
+import userRoutes from "./user.routes.js";
 
 
 const router = express.Router();
 
 router.use('/auth', authRoutes);
+router.use('/user', userRoutes);
 router.use('/books', booksRoutes);
 router.use('/genres', genresRoutes);
 router.use('/cart', cartRoutes);

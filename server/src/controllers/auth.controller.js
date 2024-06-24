@@ -1,15 +1,16 @@
 import bcrypt from "bcrypt";
-import {userModel, userSessionModel} from "../models/index.js";
 import jwt from "jsonwebtoken";
-import { generateTokens, filterUser } from "../utils/index.js";
 import {cookies, errors} from "../constants.js";
+import {userModel, userSessionModel} from "../models/index.js";
+import { generateTokens, getUserWithoutPasswordHash } from "../utils/index.js";
 
 
 
 export async function signup(req, res) {
   try {
-    const email = req.body.email;
-    const password = req.body.password;
+    // const email = req.body.email;
+    // const password = req.body.password;
+    const {email, password} = req.body;
 
     const isUseEmail = await userModel.findOne({ where: { email } });
 
@@ -26,12 +27,13 @@ export async function signup(req, res) {
     });
 
     const {accessToken, refreshToken} = await generateTokens(user);
+    const userWithoutPasswordHash = getUserWithoutPasswordHash(user);
 
 
     res.cookie(cookies.refreshToken.name, refreshToken, cookies.refreshToken.options)
       .status(200)
       .json({
-        user: user,
+        user: userWithoutPasswordHash,
         accessToken,
       });
   } catch (err) {
@@ -60,14 +62,15 @@ export async function login(req, res) {
       return res.status(400).json(errors.INVALID_DATA);
     }
 
-    // const userData = filterUser(user._doc);
     const {accessToken, refreshToken} = await generateTokens(user);
+    const userWithoutPasswordHash = getUserWithoutPasswordHash(user);
+
 
 
     res.cookie(cookies.refreshToken.name, refreshToken, cookies.refreshToken.options)
       .status(200)
       .json({
-        user: user,
+        user: userWithoutPasswordHash,
         accessToken,
       });
   } catch (err) {
@@ -126,7 +129,7 @@ export async function refreshToken(req, res) {
     });
 
 
-    const user = userSession.User || null;
+    const user = userSession?.User || null;
 
 
     if (!userSession || !user) {
