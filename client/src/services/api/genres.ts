@@ -1,17 +1,28 @@
-import {mainApi} from "@/services/api/mainApi.ts";
-import {Genre, GenreResponse} from "@/types.ts";
-import {createHttpError} from "@/utils/createHttpError.ts";
+import { mainApi } from "@/services/api/mainApi.ts";
+import { GenreResponse, Genre } from "@/types";
+import { serverApi } from "@/services/api/serverApi.ts";
+import { createHttpError } from "@/utils/createHttpError.ts";
+import { genresResponseAdepter } from "@/services/api/adapters";
 
 
-function genresResponseAdepter(data: GenreResponse[]): Genre[] {
-  return data.map((genre): Genre => {
-    return {
-      id: genre.id,
-      name: genre.name,
-      pathName: genre.pathName
-    }
-  });
-}
+
+export const {
+  useGetGenresQuery,
+  endpoints: genresEndpoints
+} = serverApi.injectEndpoints({
+  endpoints: (build) => ({
+    getGenres: build.query<Genre[], void>({
+      query: (args) => ({
+        url: '/genres/',
+        method: "get",
+        params: { ids: args }
+      }),
+      transformResponse: (response: GenreResponse[]) => genresResponseAdepter(response),
+    })
+  })
+});
+
+
 
 
 export async function getGenres() {
@@ -19,6 +30,6 @@ export async function getGenres() {
     const res = await mainApi.get<GenreResponse[]>('/genres/');
     return genresResponseAdepter(res.data);
   } catch (err) {
-    return createHttpError(err as Error);
+    return Promise.reject(createHttpError(err as Error));
   }
 }

@@ -1,54 +1,47 @@
-import {mainApi} from "@/services/api/mainApi.ts";
-import {BookResponse, Cart, CartItem, UpdateCartItem} from "@/types.ts";
-import {createHttpError} from "@/utils/createHttpError.ts";
-
-
-type CartItemResponse = BookResponse & {
-  itemQuantity: {
-    quantity: number
-  }
-};
-
-type CartItemRequest = {
-  bookId: string,
-  quantity: number
-};
-type CartResponse = {
-  Books: CartItemResponse[]
-};
-
-type CartRequest = CartItemRequest[];
+import { mainApi } from "@/services/api/mainApi.ts";
+import { AddToCart, Cart, CartResponse } from "@/types";
+import { createHttpError } from "@/utils/createHttpError.ts";
+import { cartResponseAdapter } from "@/services/api/adapters";
+import { serverApi } from "@/services/api/serverApi.ts";
 
 
 
-function cartItemResponseAdapter(data: CartItemResponse): CartItem {
-  return {
-    id: data.id,
-    title: data.title,
-    price: data.price,
-    image: data.image,
-    quantity: data.itemQuantity.quantity
-  }
-}
-function cartResponseAdapter(data: CartResponse): Cart {
-  let totalQuantity = 0;
-  const items = data.Books.map(item => {
-    totalQuantity += item.itemQuantity.quantity;
-    return cartItemResponseAdapter(item)
-  });
-  return {
-    items,
-    totalQuantity
-  }
-}
+export const {
+  useGetCartQuery,
+  useAddToCartMutation,
+  useRemoveFromCartMutation,
+  endpoints: cartEndpoints
+} = serverApi.injectEndpoints({
+  endpoints: (build) => ({
 
+    getCart: build.query<Cart, void>({
+      query: () => ({
+        url: '/cart/',
+        method: "get",
+      }),
+      transformResponse: (response: CartResponse) => cartResponseAdapter(response),
+    }),
 
-function cartRequestAdapter(data: CartItem[]): CartRequest {
-  return data.map(item => ({
-    bookId: item.id,
-    quantity: item.quantity
-  }));
-}
+    addToCart: build.mutation<Cart, AddToCart>({
+      query: () => ({
+        url: '/cart/items',
+        method: "post",
+      }),
+      transformResponse: (response: CartResponse) => cartResponseAdapter(response),
+    }),
+
+    removeFromCart: build.mutation<boolean, string[]>({
+      query: (args) => ({
+        url: '/cart/items',
+        method: "delete",
+        params: { ids: args }
+      }),
+      transformResponse: () => true,
+    }),
+
+  })
+})
+
 
 
 export async function getCart() {
@@ -56,9 +49,10 @@ export async function getCart() {
     const res = await mainApi.get<CartResponse>('/cart/');
     return cartResponseAdapter(res.data);
   } catch (err) {
-    return createHttpError(err as Error);
+    return Promise.reject(createHttpError(err as Error));
   }
 }
+
 
 export async function createCart(requestData: CartItem[]) {
   try {
@@ -66,33 +60,36 @@ export async function createCart(requestData: CartItem[]) {
     const res = await mainApi.post<CartResponse>('/cart/', formattedRequestData);
     return cartResponseAdapter(res.data);
   } catch (err) {
-    return createHttpError(err as Error);
+    return Promise.reject(createHttpError(err as Error));
   }
 }
+
 
 export async function addCartItem(requestData: string) {
   try {
     const res = await mainApi.post<CartItemResponse>(`/cart/${requestData}`);
     return cartItemResponseAdapter(res.data);
   } catch (err) {
-    return createHttpError(err as Error);
+    return Promise.reject(createHttpError(err as Error));
   }
 }
 
-export async function removeCartItem(requestData: string) {
-  try {
-    const res = await mainApi.delete<CartItemResponse>(`/cart/${requestData}`);
-    return cartItemResponseAdapter(res.data);
-  } catch (err) {
-    return createHttpError(err as Error);
-  }
-}
 
 export async function updateCartItem(requestData: UpdateCartItem) {
   try {
     const res = await mainApi.patch<CartItemResponse>(`/cart/`, requestData);
     return cartItemResponseAdapter(res.data);
   } catch (err) {
-    return createHttpError(err as Error);
+    return Promise.reject(createHttpError(err as Error));
+  }
+}
+
+
+export async function removeCartItem(requestData: string) {
+  try {
+    const res = await mainApi.delete<CartItemResponse>(`/cart/${requestData}`);
+    return cartItemResponseAdapter(res.data);
+  } catch (err) {
+    return Promise.reject(createHttpError(err as Error));
   }
 }

@@ -1,16 +1,17 @@
-import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import { jwtDecode } from "jwt-decode";
-import { API_URL } from "@/constants.ts";
-import { store, authSelectors, setToken, setTokenLoading, removeAuth, removeCart } from "@/store";
+import axios, {AxiosResponse, InternalAxiosRequestConfig} from "axios";
+import {API_URL} from "@/constants.ts";
+import {authSelectors, removeAuth, removeCart, setToken, setTokenLoading, store} from "@/store";
 import {TokenResponse} from "@/types";
 import {tokenResponseAdapter} from "@/services/api/adapters";
+import {jwtDecode} from "jwt-decode";
 
 
 
-export const mainApi = axios.create({
+export const axiosMainApi = axios.create({
   withCredentials: true,
   baseURL: API_URL
 });
+
 
 
 async function getToken() {
@@ -44,14 +45,13 @@ export function onFulfilledRequest(config: InternalAxiosRequestConfig) {
   return config;
 }
 
-mainApi.interceptors.request.use(onFulfilledRequest);
+axiosMainApi.interceptors.request.use(onFulfilledRequest);
 
 
 
 
 export function onFulfilledResponse(response: AxiosResponse) {
   const {user, token} = authSelectors.state(store.getState());
-
 
   if (!user.id) {
     return response;
@@ -72,9 +72,9 @@ export function onFulfilledResponse(response: AxiosResponse) {
   if (expTime - curTime <= 120000) {
     getToken()
   }
-
   return response;
 }
+
 
 
 export async function onRejectedResponse(error: any) {
@@ -87,10 +87,9 @@ export async function onRejectedResponse(error: any) {
     !error.config._isRetry
   ) {
     await getToken();
-    return mainApi.request(originalRequest);
+    return axiosMainApi.request(originalRequest);
   }
-
   return Promise.reject(error);
 }
 
-mainApi.interceptors.response.use(onFulfilledResponse, onRejectedResponse);
+axiosMainApi.interceptors.response.use(onFulfilledResponse, onRejectedResponse);

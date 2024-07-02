@@ -20,7 +20,7 @@ export async function getUserIp() {
 export async function getUserGeolocation(requestData: UserIp) {
   try {
     const res = await axios.post(
-        "http://suggestions.dadata.ru/suggestions/api/4_1/rs/iplocate/address",
+        "https://suggestions.dadata.ru/suggestions/api/4_1/rs/iplocate/address",
         requestData,
         {
           headers: {
