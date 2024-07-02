@@ -18,9 +18,6 @@ lerna-debug.log*
 *.sln
 *.sw?
 
-__tests__
-
-
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -36,6 +33,11 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
+
+# tests
+__tests__
+__mocks__
+*.snap
 
 # nyc test coverage
 .nyc_output
