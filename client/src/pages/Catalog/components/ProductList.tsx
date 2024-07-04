@@ -1,6 +1,5 @@
 import Card from "@components/Card";
-import {Book} from "@/types.ts";
-import Pagination from "@components/Pagination";
+import {Book} from "@/types";
 import classes from "./../styles.module.scss";
 
 

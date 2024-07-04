@@ -9,7 +9,9 @@ function Layout({children}:{children?: React.ReactNode}) {
   return (
     <>
       <Header/>
-      {children ?? <Outlet/>}
+      <main>
+        {children ?? <Outlet/>}
+      </main>
       <Footer/>
     </>
   );

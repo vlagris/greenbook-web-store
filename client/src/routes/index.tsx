@@ -6,6 +6,8 @@ import Login from "@pages/Login";
 import Signup from "@pages/Signup";
 import Error from "@pages/Error";
 import Cart from "@pages/Cart";
+import Account from "@pages/Account";
+import PrivateRoute from "@/routes/PrivateRoute.tsx";
 
 
 export const router = createBrowserRouter([
@@ -38,6 +40,16 @@ export const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart/>,
+      },
+      {
+        path: "/account",
+        element: <PrivateRoute path="/login"/>,
+        children: [
+          {
+            path: "/account/settings",
+            element: <Account/>,
+          },
+        ]
       },
     ]
   },

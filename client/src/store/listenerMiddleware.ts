@@ -1,6 +1,6 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
-import { cartSelectors } from "@/store/cart";
-import { authSelectors } from "@/store/auth";
+import { cartSelectors} from "@/store/cart";
+import { authSelectors} from "@/store/auth";
 import { objectLocalStorage } from "@/services/objectLocalStorage";
 import type { RootState, AppDispatch } from "@/store/store.ts";
 

@@ -2,7 +2,7 @@
   box-shadow: 0 0 2px rgba(0,0,0,.24), 2px 4px 8px rgba(0,0,0,.04);
 }
 
-.cart_wrap {
+.cart_button {
   position: relative;
 }
 
@@ -114,11 +114,12 @@
 .user_menu_item {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .user_menu_icon {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   margin: 0 10px 0 0;
 
   fill: var(--gray-700);

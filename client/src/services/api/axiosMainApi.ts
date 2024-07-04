@@ -26,7 +26,6 @@ async function getToken() {
       { withCredentials: true }
     );
     const token = tokenResponseAdapter(response.data);
-    console.log("token", token);
     store.dispatch(setToken(token));
     return token;
   } catch (err) {

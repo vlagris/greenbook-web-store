@@ -1,5 +1,5 @@
 import React from 'react';
-import {Books, FiltersType} from "@/types.ts";
+import {Book, FiltersType} from "@/types";
 import {QueryParams} from "@/hooks/useQueryParams.ts";
 import {CATALOG_CARD_LIMIT} from "@/constants.ts";
 import ProductList from "@pages/Catalog/components/ProductList.tsx";
@@ -11,14 +11,14 @@ import classes from "@pages/Catalog/styles.module.scss";
 
 
 interface CatalogMainProps {
-  books: Books | null,
-  filters: FiltersType | null,
+  books: Book[] | undefined,
+  filters: FiltersType | undefined,
   queryParams: QueryParams,
   setQueryParams: React.Dispatch<React.SetStateAction<QueryParams>>,
 }
 
 function CatalogMain({filters, books, queryParams, setQueryParams}: CatalogMainProps) {
-  const paginationTotal = books?.total ? Math.ceil(books?.total / CATALOG_CARD_LIMIT) : 1;
+  const paginationTotal = filters?.total ? Math.ceil(filters?.total / CATALOG_CARD_LIMIT) : 1;
 
 
   function paginationClick(_: any, page: number) {
@@ -40,7 +40,7 @@ function CatalogMain({filters, books, queryParams, setQueryParams}: CatalogMainP
           setQueryParams={setQueryParams}
         />
 
-        <ProductList books={books?.items}/>
+        <ProductList books={books}/>
 
         <div className={classes.pagination_wrap}>
           <Pagination

@@ -2,10 +2,11 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {Link, useNavigate} from "react-router-dom";
 import {ErrorType, HttpError} from "@/types";
-import {formErrorMessage} from "@/constants.ts";
-import {register as userRegister} from "@/store/auth";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {Form, FormButton, FormCheckbox, FormInput, FormInputPassword} from "@components/AuthForm";
+import { formErrorMessage } from "@/constants.ts";
+import { useAddToCartMutation, useRegisterMutation } from "@/services/api";
+import { useAppSelector } from "@/hooks/useTypedReduxHooks.ts";
+import { cartSelectors } from "@/store";
+import { Form, FormButton, FormCheckbox, FormInput, FormInputPassword } from "@components/AuthForm";
 import classes from "@pages/Signup/styles.module.scss";
 
 
@@ -16,9 +17,10 @@ type SignupFormValues = {
   confirmPass: string
 }
 
-
 function Signup() {
-  const dispatch = useAppDispatch();
+  const [registration] = useRegisterMutation();
+  const [addToCart] = useAddToCartMutation();
+  const cart = useAppSelector(cartSelectors.cart);
   const navigate = useNavigate();
   const {
     register,
@@ -31,19 +33,24 @@ function Signup() {
 
   const onSubmit: SubmitHandler<SignupFormValues> = async (data) => {
     try {
-      await dispatch(userRegister({email: data.email, password: data.pass})).unwrap();
+      await registration({email: data.email, password: data.pass}).unwrap();
+      await addToCart(cart.items).unwrap();
       navigate("/");
     } catch (err) {
       const {type} = err as HttpError;
       switch (type) {
-        // case ErrorType.BAD_REQUEST:
-        // case ErrorType.INVALID_DATA:
-        // case ErrorType.NOT_VALIDATION:
         case ErrorType.EMAIL_BUSY:
-          setError("email", {type: "custom" , message: formErrorMessage.EMAIL_BUSY})
+          setError("email", {
+            type: "custom" ,
+            message: formErrorMessage.EMAIL_BUSY
+          });
           break;
-        // case ErrorType.SERVER_ERROR:
-        //   break;
+        case ErrorType.SERVER_ERROR:
+          setError("root", {
+            type: "custom",
+            message: "Техническая ошибка"
+          });
+          break;
       }
     }
   }
@@ -74,6 +81,10 @@ function Signup() {
   return (
     <div className={classes.signup}>
       <Form title="Зарегистрироваться" onSubmit={handleSubmit(onSubmit)}>
+
+        {errors.root &&
+          <p className={classes.global_error}>{errors.root.message}</p>
+        }
 
         <div className={classes.input_wrap}>
           <FormInput

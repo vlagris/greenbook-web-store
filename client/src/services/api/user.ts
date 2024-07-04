@@ -1,7 +1,5 @@
 import { mainApi } from "@/services/api/mainApi.ts";
-import { serverApi } from "@/services/api/serverApi.ts";
 import { User, UserResponse } from "@/types";
-import { createHttpError } from "@/utils/createHttpError.ts";
 import { userResponseAdapter } from "@/services/api/adapters";
 
 
@@ -16,13 +14,7 @@ export interface UpdatePassword {
 }
 
 
-export const {
-  useGetUserQuery,
-  useUpdateUserMutation,
-  useUpdateEmailMutation,
-  useUpdatePasswordMutation,
-  endpoints: userEndpoints
-} = serverApi.injectEndpoints({
+export const userMainApi = mainApi.injectEndpoints({
   endpoints: (build) => ({
 
     getUser: build.query<User, void>({
@@ -63,45 +55,10 @@ export const {
   })
 })
 
-
-
-
-export async function getUser() {
-  try {
-    const res = await mainApi.get<UserResponse>('/user/');
-    return userResponseAdapter(res.data);
-  } catch (err) {
-    return Promise.reject(createHttpError(err as Error));
-  }
-}
-
-
-export async function updateUser(requestData: UpdateUser) {
-  try {
-    console.log(requestData);
-    const res = await mainApi.patch<UserResponse>('/user/', requestData);
-    return userResponseAdapter(res.data);
-  } catch (err) {
-    return Promise.reject(createHttpError(err as Error));
-  }
-}
-
-
-export async function updateEmail(requestData: UpdateEmail) {
-  try {
-    const res = await mainApi.patch<UserResponse>('/user/email', requestData);
-    return userResponseAdapter(res.data);
-  } catch (err) {
-    return Promise.reject(createHttpError(err as Error));
-  }
-}
-
-
-export async function updatePassword(requestData: UpdatePassword) {
-  try {
-    const res = await mainApi.patch('/user/password', requestData);
-    return true;
-  } catch (err) {
-    return Promise.reject(createHttpError(err as Error));
-  }
-}
+export const {
+  useGetUserQuery,
+  useUpdateUserMutation,
+  useUpdateEmailMutation,
+  useUpdatePasswordMutation,
+  endpoints: userEndpoints
+} = userMainApi;

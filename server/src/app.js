@@ -3,7 +3,6 @@ import 'dotenv/config'
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import routes from "./routes/index.js";
-// import "./models/associations.js";
 
 
 const app = express();
@@ -18,7 +17,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-
+app.use('/static', express.static('public'))
 app.use('/api', routes);
 
 

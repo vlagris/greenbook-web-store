@@ -1,49 +1,115 @@
-import { createReducer } from "@reduxjs/toolkit";
-import { authState } from "@/types.ts";
-import { setUser, setToken, setLoading, removeAuth } from "@/store/auth/actions.ts";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AuthState, Auth, User } from "@/types";
 import { objectLocalStorage } from "@/services/objectLocalStorage";
+import { authEndpoints, userEndpoints } from "@/services/api";
 
 
 
-const emptyState: authState  = {
+function setAuthPendingMatcher(state: AuthState) {
+  state.isLoading = true
+}
+
+function setAuthRejectedMatcher(state: AuthState) {
+  state.isLoading = false
+}
+
+function setAuthFulfilledMatcher(state: AuthState, {payload}: PayloadAction<Auth>) {
+  state.user = payload.user;
+  state.token = payload.token;
+  state.isLoading = false;
+  state.isSuccess = true;
+}
+
+function setLogoutFulfilledMatcher(state: AuthState) {
+  state.user = emptyState.user;
+  state.token = emptyState.token;
+  state.isLoading = false;
+  state.isSuccess = false;
+}
+
+function setUserFulfilledMatcher(state: AuthState, {payload}: PayloadAction<User>) {
+  state.user = payload;
+}
+
+
+
+
+
+const emptyState: AuthState  = {
   user: {
     id: "",
+    firstName: null,
+    lastName: null,
+    avatar: null,
     email: ""
   },
   token: {
     value: "",
   },
-  loading: false,
+  isLoading: false,
+  isSuccess: false,
 }
-const initialState: authState  = {
+const initialState: AuthState  = {
   user: {
     id: objectLocalStorage.userId.get() || "",
+    firstName: null,
+    lastName: null,
+    avatar: null,
     email: ""
   },
   token: {
     value: "",
   },
-  loading: false,
+  isLoading: false,
+  isSuccess: false,
 }
 
 
-
-export const authReducer = createReducer(
+export const authSlice = createSlice({
+  name: "auth",
   initialState,
-  (builder) => {
+  reducers: {
+    setUser: (state: AuthState, {payload}) => {
+      state.user = payload;
+    },
+    setToken: (state: AuthState, {payload}) => {
+      state.token = payload;
+      state.isSuccess = true;
+    },
+    setTokenLoading: (state: AuthState, {payload}) => {
+      state.isLoading = payload;
+    },
+    removeAuth: (state: AuthState) => {
+      state.user = emptyState.user;
+      state.token = emptyState.token;
+    }
+  },
+  extraReducers: (builder) => {
     builder
-      .addCase(setUser, (state: authState, {payload}) => {
-        state.user = payload;
-      })
-      .addCase(setToken, (state: authState, {payload}) => {
-        state.token = payload;
-      })
-      .addCase(setLoading, (state: authState, {payload}) => {
-        state.loading = payload;
-      })
-      .addCase(removeAuth, (state: authState) => {
-        state.user = emptyState.user;
-        state.token = emptyState.token;
-      })
+      .addMatcher(authEndpoints.register?.matchPending, setAuthPendingMatcher)
+      .addMatcher(authEndpoints.register?.matchFulfilled, setAuthFulfilledMatcher)
+      .addMatcher(authEndpoints.register?.matchRejected, setAuthRejectedMatcher)
+
+      .addMatcher(authEndpoints.login?.matchPending, setAuthPendingMatcher)
+      .addMatcher(authEndpoints.login?.matchFulfilled, setAuthFulfilledMatcher)
+      .addMatcher(authEndpoints.login?.matchRejected, setAuthRejectedMatcher)
+
+      .addMatcher(authEndpoints.logout?.matchPending, setAuthPendingMatcher)
+      .addMatcher(authEndpoints.logout?.matchFulfilled, setLogoutFulfilledMatcher)
+      .addMatcher(authEndpoints.logout?.matchRejected, setAuthRejectedMatcher)
+
+      .addMatcher(userEndpoints.getUser?.matchFulfilled, setUserFulfilledMatcher)
+
+      .addMatcher(userEndpoints.updateUser?.matchFulfilled, setUserFulfilledMatcher)
+
+      .addMatcher(userEndpoints.updateEmail?.matchFulfilled, setUserFulfilledMatcher)
+  }
 });
 
+export const {
+  setUser,
+  setToken,
+  setTokenLoading,
+  removeAuth
+} = authSlice.actions;
+export const authReducer =  authSlice.reducer;

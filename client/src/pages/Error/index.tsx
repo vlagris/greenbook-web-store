@@ -5,9 +5,9 @@ import NotFound from "@pages/Error/NotFound.tsx";
 
 function Error() {
   return (
-    <main className={classes.error}>
+    <div className={classes.error}>
       <NotFound/>
-    </main>
+    </div>
   );
 }
 

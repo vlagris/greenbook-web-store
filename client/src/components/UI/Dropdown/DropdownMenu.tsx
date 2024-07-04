@@ -29,7 +29,10 @@ function DropdownMenu({ children }: DropdownMenuProps) {
 
 
   return (
-    <div ref={menuRef} className={clsx(classes.dropdown_menu, classPos, show && classes.dropdown_menu_show)}>
+    <div
+      ref={menuRef}
+      className={clsx(classes.dropdown_menu, classPos, show && classes.dropdown_menu_show)}
+    >
       <ul className={classes.dropdown_list}>
         {children}
       </ul>

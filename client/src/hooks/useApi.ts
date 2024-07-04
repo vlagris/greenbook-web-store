@@ -1,5 +1,5 @@
 import {useCallback, useState} from 'react';
-import {HttpError} from "@/types.ts";
+import {HttpError} from "@/types";
 
 
 
@@ -7,8 +7,9 @@ import {HttpError} from "@/types.ts";
 function useApi<R = any>() {
   const [data, setData] = useState<R | null>(null);
   const [error, setError] = useState<HttpError | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess , setIsSuccess ] = useState(false);
   const [refreshIndex, setRefreshIndex] = useState(0);
 
 
@@ -16,25 +17,30 @@ function useApi<R = any>() {
     setRefreshIndex(prev => prev + 1);
   }
 
-  const apiQuery = useCallback((api: () => Promise<R>) => {
-    setLoading(true);
+  const queryFn = useCallback((api: () => Promise<R>) => {
+    setIsLoading(true);
     api()
       .then(
         (response) => {
-          setLoaded(true)
+          setIsSuccess(true)
           setData(response)
+          setError(null)
+          setIsError(false)
         },
         (err) => {
+          setIsSuccess(false)
+          setData(null)
           setError(err as HttpError)
+          setIsError(true)
         }
       )
       .finally(
-        () => setLoading(false)
+        () => setIsLoading(false)
       );
   }, [refreshIndex]);
 
 
-  return {data, error, loading, loaded, apiQuery, refresh};
+  return {data, error, isError, isLoading, isSuccess, queryFn, refresh};
 }
 
 export default useApi;

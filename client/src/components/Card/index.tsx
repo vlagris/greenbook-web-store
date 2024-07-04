@@ -1,23 +1,40 @@
-import React from "react";
-import {Book} from "@/types";
-import {addItemToCart} from "@/store/cart";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {currency} from "@/constants.ts";
+import React, {useRef} from "react";
+import { Book } from "@/types";
+import { useAddToCartMutation } from "@/services/api";
+import { addCartItem, cartSelectors } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/hooks/useTypedReduxHooks.ts";
+import { currency } from "@/constants.ts";
 import classes from "./styles.module.scss";
-
 import StarIcon from '@assets/icons/star.svg?react';
-// import HeartIcon from '@assets/icons/heart.svg?react';
+import useAuth from "@/hooks/useAuth.ts";
+
 
 
 function Card({book}: {book: Book}) {
   const dispatch = useAppDispatch();
+  const {isAuth} = useAuth();
+  const cart = useAppSelector(cartSelectors.cart);
+  const [addToCart] = useAddToCartMutation();
+  const requestAbort = useRef(() => {});
+
 
   function handleAddToCart() {
-    dispatch(addItemToCart(book))
+    const item = cart.items.find(item => item.id === book.id);
+    const quantity = item?.quantity ?? 0;
+
+    requestAbort.current();
+    dispatch(addCartItem(book))
+
+    if (isAuth) {
+      const request = addToCart([
+        { id: book.id, quantity: quantity + 1 }
+      ]);
+      requestAbort.current = request.abort
+    }
   }
 
+
   return (
-    <div>
     <div className={classes.card}>
       <div className={classes.wrap}>
         <div className={classes.top}>
@@ -49,12 +66,7 @@ function Card({book}: {book: Book}) {
             В корзину
           </button>
         </div>
-
-        {/*<button className={classes.btn_wish}>*/}
-        {/*  <HeartIcon className={classes.btn_wish_icon}/>*/}
-        {/*</button>*/}
       </div>
-    </div>
     </div>
   );
 }

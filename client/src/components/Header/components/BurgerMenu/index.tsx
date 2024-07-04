@@ -1,6 +1,5 @@
 import {useState} from "react";
-import { genresSelectors } from "@/store/genres";
-import {useAppSelector} from "@/hooks/useTypedReduxHooks.ts";
+import {useGetGenresQuery} from "@/services/api";
 import Modal from "@components/UI/Modal";
 import BurgerButton from "@components/Header/components/BurgerMenu/BurgerButton.tsx";
 import BurgerMenuItem from "@components/Header/components/BurgerMenu/BurgerMenuItem.tsx";
@@ -9,9 +8,8 @@ import classes from "./styles.module.scss";
 
 
 function BurgerMenu() {
-  const genres = useAppSelector(genresSelectors.genres);
+  const {data: genres} = useGetGenresQuery();
   const [show, setShow] = useState(false);
-
 
   function handleClick(state: boolean) {
     return () => setShow(state);
@@ -30,7 +28,7 @@ function BurgerMenu() {
         <div className={classes.menu}>
           <ul>
 
-            {genres.map((genre) => (
+            {genres && genres.map((genre) => (
               <BurgerMenuItem
                 key={genre.id}
                 to={`/catalog/${genre.pathName}`}

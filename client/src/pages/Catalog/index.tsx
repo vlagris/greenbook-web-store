@@ -1,34 +1,31 @@
-import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {Books, FiltersType, Genre, HttpError} from "@/types.ts";
-import {CATALOG_CARD_LIMIT} from "@/constants.ts";
-import * as api from "@/services/api";
-import useApi from "@/hooks/useApi.ts";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Genre } from "@/types";
+import { CATALOG_CARD_LIMIT } from "@/constants.ts";
+import { useGetBooksByGenreMutation, useGetGenresQuery, useGetBooksFiltersMutation } from "@/services/api";
 import Loader from "@components/Loader";
 import CatalogMain from "@pages/Catalog/components/CatalogMain.tsx";
-import { useAppSelector } from "@/hooks/useTypedReduxHooks.ts";
-import { genresSelectors } from "@/store/genres";
 import CatalogBreadcrumbs from "@pages/Catalog/components/CatalogBreadcrumbs.tsx";
 import useQueryParams from "@/hooks/useQueryParams.ts";
 import CatalogHeader from "@pages/Catalog/components/CatalogHeader.tsx";
 
 
 
-type LoaderState = {
-  loading: boolean
-  error: HttpError | null
-  data: boolean
-}
-
 function Catalog() {
   const {queryParams, setQueryParams, queryLoading} = useQueryParams(
     ["page", "sort", "price", "authors"]
   );
   const {pathName} = useParams();
-  const genres = useAppSelector(genresSelectors.genres);
+  const { data: genres } = useGetGenresQuery();
   const [genre, setGenre] = useState<Genre>();
-  const books = useApi<Books>();
-  const filters = useApi<FiltersType>();
+  const [getBooksByGenres, booksResult] = useGetBooksByGenreMutation();
+  const [getBooksFilters, filtersResult] = useGetBooksFiltersMutation();
+
+  useEffect(() => {
+    if (pathName && genres) {
+      setGenre(genres.find(genre => genre.pathName === pathName));
+    }
+  }, [genres, pathName]);
 
 
   useEffect(() => {
@@ -38,46 +35,45 @@ function Catalog() {
     const {page, ...otherFiltersParams} = queryParams;
     const offset = ((Number(page) || 1) - 1) * CATALOG_CARD_LIMIT
 
-    books.apiQuery(() => api.getBooksByGenre({
+    getBooksByGenres({
       pathName,
       offset,
       limit: CATALOG_CARD_LIMIT,
       ...otherFiltersParams
-    }));
-    filters.apiQuery(() => api.getBooksFilters({pathName}));
+    })
+    getBooksFilters({
+      pathName,
+      price: queryParams.price || undefined,
+      authors: queryParams.authors || undefined
+    })
   }, [queryLoading, queryParams, pathName]);
 
 
-  useEffect(() => {
-    if (pathName || genres) {
-      setGenre(genres.find(genre => genre.pathName === pathName));
-    }
-  }, [genres, pathName]);
-
-
   return (
-    <main>
-      <Loader error={books.error} loaded={!!books.data}>
-          <div className="container">
-            <CatalogBreadcrumbs
-              genres={genres}
-              pathName={pathName}
-            />
+    <Loader
+      isLoading={booksResult.isLoading}
+      loaded={booksResult.isSuccess}
+      error={booksResult.error}
+    >
+      <div className="container">
+        <CatalogBreadcrumbs
+          genres={genres}
+          pathName={pathName}
+        />
 
-            <CatalogHeader
-              title={genre?.name}
-              total={books.data?.total}
-            />
+        <CatalogHeader
+          title={genre?.name}
+          total={filtersResult.data?.total}
+        />
 
-            <CatalogMain
-              books={books.data}
-              filters={filters.data}
-              queryParams={queryParams}
-              setQueryParams={setQueryParams}
-            />
-          </div>
-      </Loader>
-    </main>
+        <CatalogMain
+          books={booksResult.data}
+          filters={filtersResult.data}
+          queryParams={queryParams}
+          setQueryParams={setQueryParams}
+        />
+      </div>
+    </Loader>
   );
 }
 

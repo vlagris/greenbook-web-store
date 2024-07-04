@@ -1,11 +1,13 @@
-import {CartItem} from "@/types.ts";
-import {currency} from "@/constants.ts";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import {removeItemFromCart} from "@/store/cart";
+import { CartItem } from "@/types";
+import { currency } from "@/constants.ts";
+import { useAppDispatch } from "@/hooks/useTypedReduxHooks.ts";
+import { removeCartItem } from "@/store";
+import { useRemoveFromCartMutation } from "@/services/api";
+import { formatPrice } from "@/utils/formatPrice.ts";
 import Count from "@pages/Cart/components/CartList/Count.tsx";
-import {formatPrice} from "@/utils/formatPrice.ts";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
 import CloseIcon from "@assets/icons/close.svg?react";
+import useAuth from "@/hooks/useAuth.ts";
 
 
 
@@ -15,11 +17,16 @@ interface ItemProps {
 
 function Item({item}: ItemProps) {
   const dispatch = useAppDispatch();
+  const {isAuth} = useAuth();
+  const [removeFromCart] = useRemoveFromCartMutation()
   const subtotal = formatPrice(item.price * item.quantity);
 
 
   function handleRemove() {
-    dispatch(removeItemFromCart(item.id));
+    dispatch(removeCartItem(item.id));
+    if (isAuth) {
+      removeFromCart([item.id]);
+    }
   }
 
 

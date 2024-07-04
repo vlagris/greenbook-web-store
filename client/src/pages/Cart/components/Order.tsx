@@ -30,7 +30,7 @@ function Order({total}: {total: number}) {
         </div>
       </div>
 
-      <button className={clsx("btn-large", classes.order_btn)}>
+      <button className={clsx("btn-large btn-fill", classes.order_btn)}>
         Перейти к оформлению
       </button>
 

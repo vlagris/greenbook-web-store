@@ -1,10 +1,9 @@
 import React from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {SubmitHandler, useForm} from "react-hook-form";
-import {HttpError} from "@/types";
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import { useForm } from "react-hook-form";
+import {ErrorType, HttpError} from "@/types";
 import {formErrorMessage} from "@/constants.ts";
-import {login} from "@/store/auth";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
+import {useLoginMutation} from "@/services/api";
 import {Form, FormButton, FormCheckbox, FormInput, FormInputPassword} from "@components/AuthForm";
 import classes from "@pages/Login/styles.module.scss";
 
@@ -16,7 +15,8 @@ type LoginFormValues = {
 }
 
 function Login() {
-  const dispatch = useAppDispatch();
+  const [login] = useLoginMutation();
+  const location = useLocation();
   const navigate = useNavigate();
   const {
     register,
@@ -26,22 +26,28 @@ function Login() {
   } = useForm<LoginFormValues>();
 
 
-
   async function onSubmit(data: LoginFormValues){
     try {
-      await dispatch(login({email: data.email, password: data.pass})).unwrap();
-      navigate("/");
+      await login({email: data.email, password: data.pass}).unwrap();
+      const navigatePath = location.state?.from?.pathname ?? "/";
+      navigate(navigatePath);
     } catch (err) {
       const {type} = err as HttpError;
       switch (type) {
-        // case ErrorType.BAD_REQUEST:
-        // case ErrorType.INVALID_DATA:
-        // case ErrorType.NOT_VALIDATION:
-        // case ErrorType.EMAIL_BUSY:
-        //   setError("email", {type: "custom" , message: formErrorMessage.EMAIL_BUSY})
-        //   break;
-        // case ErrorType.SERVER_ERROR:
-        //   break;
+        case ErrorType.INVALID_DATA:
+          setError("root", {
+            type: "custom",
+            message: "Не верный логин или пароль"
+          })
+          setError("email", { type: "custom" })
+          setError("pass", { type: "custom" })
+          break;
+        case ErrorType.SERVER_ERROR:
+          setError("root", {
+            type: "custom",
+            message: "Техническая ошибка"
+          });
+          break;
       }
     }
   }
@@ -51,12 +57,17 @@ function Login() {
     <div className={classes.login}>
       <Form title="Войти" onSubmit={handleSubmit(onSubmit)}>
 
+        {errors.root &&
+          <p className={classes.global_error}>{errors.root.message}</p>
+        }
+
         <div className={classes.input_wrap}>
           <FormInput
             type="text"
             placeholder="Электронная почта"
             formRegister={register("email", {required: formErrorMessage.EMAIL_NONE})}
             errorMessage={errors.email?.message}
+            isError={!!errors.email}
           />
         </div>
         <div className={classes.input_wrap}>
@@ -64,6 +75,7 @@ function Login() {
             placeholder="Пароль"
             formRegister={register("pass", {required: formErrorMessage.PASSWORD_NONE})}
             errorMessage={errors.pass?.message}
+            isError={!!errors.pass}
           />
         </div>
 

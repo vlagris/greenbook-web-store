@@ -4,6 +4,7 @@ import {DropdownContext} from "@components/UI/Dropdown/DropdownContext.ts";
 import classes from "@components/UI/Dropdown/styles.module.scss";
 
 
+
 interface DropdownItemProps {
   children?: React.ReactNode,
   id: number | string,
@@ -12,34 +13,45 @@ interface DropdownItemProps {
 }
 
 function DropdownItem({ children, id, active, onClick }: DropdownItemProps) {
-  const {setShow, itemStates, setItemStates} = useContext(DropdownContext);
+  const {
+    setShow,
+    itemsState,
+    setItemsState
+  } = useContext(DropdownContext);
+
 
   useEffect(() => {
     if (active) {
-      setItemStates({ active: id, focus: id });
+      setItemsState(prev => (
+        {...prev, active: id, focus: id }
+      ));
     }
   }, [active]);
 
+
     function handleClick() {
-      setShow(false);
-      setItemStates({ active: id, focus: id });
       if (onClick) {
         onClick()
       }
+      setShow(false);
+      setItemsState(prev => (
+        {...prev, active: id, focus: id }
+      ));
   }
 
-  function handleMouse(id: number | string) {
-      return () => {
-        setItemStates(prev => ({ ...prev, focus: id }));
-      }
+  function toggleItemFocus(id: number | string) {
+    return () => setItemsState(prev => (
+      { ...prev, focus: id }
+    ));
   }
+
 
   return (
     <li
-      className={clsx(classes.dropdown_item, itemStates.focus === id && classes.dropdown_item_active)}
+      className={clsx(classes.dropdown_item, itemsState.focus === id && classes.dropdown_item_active)}
       onClick={handleClick}
-      onMouseEnter={handleMouse(id)}
-      onMouseLeave={handleMouse(itemStates.active)}
+      onMouseEnter={toggleItemFocus(id)}
+      onMouseLeave={toggleItemFocus(itemsState.type === "focus"? "" : itemsState.active)}
     >
       {children}
     </li>

@@ -1,21 +1,14 @@
-import {CartItem} from "@/types.ts";
-import {fetchCart} from "@/store/cart";
-import {useAppDispatch} from "@/hooks/useTypedReduxHooks.ts";
-import Item from "@pages/Cart/components/CartList/Item.tsx";
+import { CartItem } from "@/types";
+import Item from "@pages/Cart/components/CartList/CartItem.tsx";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
 
 
 interface CartListProps {
-  items: CartItem[]
+  items: CartItem[],
+  refreshCart: () => void
 }
-function CartList({items}: CartListProps) {
-  const dispatch = useAppDispatch();
+function CartList({items, refreshCart}: CartListProps) {
   const colsNames = ["Товар", "Цена", "Количество", "Итог"]
-
-
-  function handleCartUpdate() {
-    dispatch(fetchCart());
-  }
 
 
   return (
@@ -38,7 +31,7 @@ function CartList({items}: CartListProps) {
 
       <div className={classes.bottom}>
         <button className={classes.btn}>Вернуться в католог</button>
-        <button className={classes.btn} onClick={handleCartUpdate} role="cartUpdate">
+        <button className={classes.btn} onClick={refreshCart} role="cartUpdate">
           Обновить
         </button>
       </div>

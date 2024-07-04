@@ -5,7 +5,9 @@ import classes from "./styles.module.scss";
 
 interface CustomInputProps {
   size?: "small" | "default",
-  status?: "default" | "error" ,
+  status?: "default" | "error",
+  formRegister?: any,
+
   className?: string,
   type?: string,
   name?: string,
@@ -15,7 +17,8 @@ interface CustomInputProps {
   onBlur?:  React.FocusEventHandler<HTMLInputElement>
 }
 
-function CustomInput({ className, size = "default", status = "default", ...otherProps }: CustomInputProps) {
+function CustomInput({ className, size = "default", status = "default", formRegister, ...otherProps }: CustomInputProps) {
+
   return (
     <input
       className={clsx(
@@ -26,6 +29,7 @@ function CustomInput({ className, size = "default", status = "default", ...other
       )}
       autoComplete="off"
       {...otherProps}
+      {...formRegister}
     />
 
   );

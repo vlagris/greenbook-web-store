@@ -1,12 +1,12 @@
 import React from "react";
-import {Book} from "@/types.ts";
+import {Book} from "@/types";
 import Card from "@components/Card";
 import classes from "./../styles.module.scss";
 
 
 
 interface ProductListProps {
-  books: Book[] | null
+  books: Book[] | undefined
 }
 
 function ProductList({books}: ProductListProps) {

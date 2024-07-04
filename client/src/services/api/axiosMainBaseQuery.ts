@@ -1,6 +1,7 @@
 import { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn } from "@reduxjs/toolkit/query/react";
-import {axiosMainApi} from "@/services/api/axiosMainApi.ts";
+import { axiosMainApi } from "@/services/api/axiosMainApi.ts";
+import {createHttpError} from "@/utils/createHttpError.ts";
 
 
 
@@ -22,10 +23,11 @@ export const axiosMainBaseQuery = (): BaseQueryFn<
     } catch (axiosError) {
       const err = axiosError as AxiosError
       return {
-        error: {
-          status: err.response?.status,
-          data: err.response?.data || err.message,
-        },
+        error: createHttpError(err)
+      //   {
+      //     status: err.response?.status,
+      //     data: err.response?.data || err.message,
+      //   },
       }
     }
   }

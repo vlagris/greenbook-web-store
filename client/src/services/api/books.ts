@@ -1,7 +1,5 @@
-import { mainApi } from "@/services/api/mainApi.ts";
-import {serverApi} from "@/services/api/serverApi.ts";
+import {mainApi} from "@/services/api/mainApi.ts";
 import { Book, BookResponse, FiltersResponse, FiltersType } from "@/types";
-import { createHttpError } from "@/utils/createHttpError.ts";
 import { BooksResponseAdepter, filtersResponseAdepter } from "@/services/api/adapters";
 
 
@@ -26,12 +24,7 @@ export interface GetBooksRecommended {
 }
 
 
-export const {
-  useGetBooksByGenreMutation,
-  useGetBooksFiltersMutation,
-  useGetBooksRecommendedQuery,
-  endpoints: booksEndpoints
-} = serverApi.injectEndpoints({
+export const booksMainApi = mainApi.injectEndpoints({
   endpoints: (build) => ({
 
     getBooksRecommended: build.query<Book[], GetBooksRecommended>({
@@ -64,36 +57,9 @@ export const {
   })
 })
 
-
-
-export async function getBooksByGenre(requestData: GetBooksByGenre) {
-  try {
-    const res = await mainApi.get<BookResponse[]>('/books/', {params: requestData});
-    return BooksResponseAdepter(res.data);
-  } catch (err) {
-    return Promise.reject(createHttpError(err as Error));
-  }
-}
-
-
-export async function getBooksFilters(requestData: GetBooksFilters) {
-  try {
-    const res = await mainApi.get<FiltersResponse>('/books/filters', {params: requestData});
-    return filtersResponseAdepter(res.data);
-  } catch (err) {
-    return Promise.reject(createHttpError(err as Error));
-  }
-}
-
-
-export async function getBooksRecommended(requestData: GetBooksRecommended) {
-  try {
-    const res = await mainApi.get<BookResponse[]>('/books/recommended', {params: requestData});
-    return BooksResponseAdepter(res.data);
-  } catch (err) {
-    return Promise.reject(createHttpError(err as Error));
-  }
-}
-
-
-
+export const {
+  useGetBooksByGenreMutation,
+  useGetBooksFiltersMutation,
+  useGetBooksRecommendedQuery,
+  endpoints: booksEndpoints
+} = booksMainApi;
