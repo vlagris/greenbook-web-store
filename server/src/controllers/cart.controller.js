@@ -1,19 +1,27 @@
 import {errors} from "../constants.js";
 import {bookModel, cartModel, cartItemModel} from "../models/index.js";
+import {Sequelize} from "sequelize";
 
 
 export async function getCart(req, res) {
   try {
+    const userId = req.userId;
+
     const cart = await cartModel.findOne({
-      where: { userId: req.userId },
+      where: { userId: userId },
       include: {
         model: bookModel,
         through: {
-          attributes: ['quantity'],
-          as: 'itemQuantity'
+          attributes: [],
+          as: 'cartItem'
+        },
+        attributes: {
+          include: [[Sequelize.literal('`Books->cartItem`.`quantity`'), 'quantity']]
         }
       }
     });
+
+    console.log(JSON.stringify(cart));
 
     res.json(cart);
   } catch (err) {
@@ -23,92 +31,55 @@ export async function getCart(req, res) {
 }
 
 
-export async function createCart(req, res) {
+
+export async function addToCart(req, res) {
   try {
     const userId = req.userId;
-    const cartItemsData = req.body || [];
+    const items = req.body;
 
 
-     const emptyCart = await cartModel.create(
-      { userId: userId }
-    );
+    if (!items) {
+      return res.status(400).json(errors.BAD_REQUEST);
+    }
+
+    let cart = await cartModel.findOne({ where: { userId } });
 
 
-    const cartItems = cartItemsData.map(item => {
+    if (!cart) {
+      cart = await cartModel.create({ userId: userId });
+    }
+
+
+    const cartItems = items.map(item => {
       return {
-        bookId: item.bookId,
-        cartId: emptyCart.id,
+        bookId: item.id,
+        cartId: cart.id,
         quantity: item.quantity,
       }
     })
 
 
-    await cartItemModel.bulkCreate(cartItems);
+    await cartItemModel.bulkCreate(cartItems, {
+      updateOnDuplicate: ["quantity"]
+    });
 
 
-    const cart = await cartModel.findOne({
+    const newCart = await cartModel.findOne({
       where: { userId },
       include: {
         model: bookModel,
         through: {
-          attributes: ['quantity'],
-          as: 'itemQuantity'
+          attributes: [],
+          as: 'cartItem'
+        },
+        attributes: {
+          include: [[Sequelize.literal('`Books->cartItem`.`quantity`'), 'quantity']]
         }
       }
     });
 
 
-    res.json(cart);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(errors.SERVER_ERROR);
-  }
-}
-
-export async function addItem(req, res) {
-  try {
-    const userId = req.userId;
-    const bookId = req.params.id;
-
-    if (!bookId) {
-      return res.status(400).json(errors.BAD_REQUEST);
-    }
-
-    const cart = await cartModel.findOne({ where: { userId } });
-
-    const cartItem = await cartItemModel.findOne({
-      where: {
-        bookId: bookId,
-        cartId: cart.id,
-      }
-    });
-
-
-    if (cartItem) {
-      await cartItemModel.update({
-        quantity: cartItem.quantity + 1
-      }, {
-        where: {
-          bookId: bookId,
-          cartId: cart.id,
-        }
-      });
-    } else {
-      await cartItemModel.create({
-        cartId: cart.id,
-        bookId: bookId
-      });
-    }
-
-
-    const newCartItem = await cartItemModel.findOne({
-      where: {
-        bookId: bookId,
-        cartId: cart.id,
-      }
-    });
-
-    res.status(200).json(newCartItem);
+    res.status(200).json(newCart);
   } catch (err) {
     console.log(err);
     res.status(500).json(errors.SERVER_ERROR);
@@ -116,74 +87,19 @@ export async function addItem(req, res) {
 }
 
 
-export async function updateItem(req, res) {
+
+export async function removeFromCart(req, res) {
   try {
     const userId = req.userId;
-    const bookId = req.body.id;
-    const quantity = req.body.quantity;
+    const booksIds = req.query.ids;
 
-    if (!bookId || !quantity) {
+    if (!booksIds.length) {
       return res.status(400).json(errors.BAD_REQUEST);
     }
 
 
     const cart = await cartModel.findOne({
-      where: { userId },
-      include: {
-        model: bookModel,
-        where: { id: bookId },
-      }
-    });
-
-
-    if (!cart) {
-      return res.status(400).json({
-        message: "Item not found"
-      });
-    }
-
-
-    await cartItemModel.update({
-      quantity
-    }, {
-      where: {
-        bookId: bookId,
-        cartId: cart.id,
-      }
-    });
-
-
-    const cartItem = await cartItemModel.findOne({
-      where: {
-        bookId: bookId,
-        cartId: cart.id,
-      }
-    });
-
-
-  res.status(200).json(cartItem);
-  } catch (err) {
-    res.status(500).json(errors.SERVER_ERROR);
-  }
-}
-
-
-export async function removeItem(req, res) {
-  try {
-    const userId = req.userId;
-    const bookId = req.params.id;
-
-    if (!bookId) {
-      return res.status(400).json(errors.BAD_REQUEST);
-    }
-
-
-    const cart = await cartModel.findOne({
-      where: { userId },
-      include: {
-        model: bookModel,
-        where: { id: bookId },
-      }
+      where: { userId }
     });
 
 
@@ -196,13 +112,13 @@ export async function removeItem(req, res) {
 
     await cartItemModel.destroy({
       where: {
-        bookId: bookId,
+        bookId: booksIds,
         cartId: cart.id,
       }
     });
 
 
-    res.status(200).end();
+    res.status(200).json(true);
   } catch (err) {
     console.log(err);
     res.status(500).json(errors.SERVER_ERROR);

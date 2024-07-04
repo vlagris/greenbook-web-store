@@ -15,6 +15,10 @@ const userModel = sequelize.define(
       unique: true,
       allowNull: false,
     },
+    avatarImage: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: true,

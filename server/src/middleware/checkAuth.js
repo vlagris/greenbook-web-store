@@ -6,9 +6,6 @@ function checkAuth(req, res, next) {
   const token = (req.headers.authorization || "").replace(/Bearer\s?/, "");
   const refreshToken = req.cookies.refreshToken || null;
 
-  console.log("access", token)
-  console.log("refresh", refreshToken)
-
   if (!refreshToken) {
     return res.status(403).json(errors.NOT_AUTH);
   }

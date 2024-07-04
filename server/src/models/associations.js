@@ -41,11 +41,13 @@ cartModel.belongsTo(userModel, {
 
 
 bookModel.belongsToMany(cartModel, {
+  // as: 'cart',
   through: cartItemsModel,
   foreignKey: 'bookId',
   otherKey: 'cartId'
 });
 cartModel.belongsToMany(bookModel, {
+  // as: 'items',
   through: cartItemsModel ,
   foreignKey: 'cartId',
   otherKey: 'bookId'
