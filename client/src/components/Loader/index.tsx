@@ -1,15 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { HttpError } from "@/types";
 import Error from "@pages/Error";
 import classes from "./styles.module.scss";
 
-
-
-type LoaderState = {
-  isLoading: boolean
-  error: HttpError | null
-  loaded: boolean
-}
 
 
 interface LoaderProps {

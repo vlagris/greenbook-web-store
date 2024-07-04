@@ -1,8 +1,8 @@
 import { fireEvent, screen } from "@testing-library/react";
 import { renderWithProviders } from "@/utils/utilsForTests.tsx";
 import * as reduxHooks from "@/hooks/useTypedReduxHooks.ts";
-import * as cartActions from "@/store/cart/actions.ts";
-import Item from "@pages/Cart/components/CartList/Item.tsx";
+import * as cartActions from "@/store/cart";
+import CartItem from "@pages/Cart/components/CartList/CartItem.tsx";
 
 
 
@@ -20,7 +20,7 @@ describe('Card Item component', () => {
 
   it('should call the remove button', () => {
     const mockedRemoveItemFromCart = jest.spyOn(cartActions, "removeItemFromCart").mockReturnValue(jest.fn())
-    const component = renderWithProviders(<Item item={cartItem}/>);
+    const component = renderWithProviders(<CartItem item={cartItem}/>);
 
     expect(component).toMatchSnapshot();
 

@@ -3,7 +3,6 @@ import { cartReducer } from "@/store/cart";
 import { authReducer } from "@/store/auth";
 import { mainApi } from "@/services/api";
 import { listenerMiddleware } from "@/store/listenerMiddleware.ts";
-import {setupListeners} from "@reduxjs/toolkit/query";
 
 
 

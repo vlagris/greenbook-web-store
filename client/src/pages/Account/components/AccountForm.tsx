@@ -22,7 +22,7 @@ interface AccountFormProps {
 }
 
 function AccountForm({user}: AccountFormProps) {
-  const [updateUser, updateUserResult] = useUpdateUserMutation()
+  const [updateUser] = useUpdateUserMutation()
   const [avatarDeleted, setAvatarDeleted] = useState(false);
   const {
     register,

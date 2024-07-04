@@ -1,36 +1,28 @@
-import React, {useEffect} from 'react';
-import {UserIp} from "@/services/api";
-import useApi from "@/hooks/useApi.ts";
-import * as api from "@/services/api"
+import React, { useEffect } from 'react';
+import { useGetUserGeolocationMutation, useGetUserIpQuery } from "@/services/api";
 import classes from "@components/Header/styles.module.scss";
 import MapPinIcon from '@assets/icons/map-pin.svg?react';
 
 
 function Geolocation() {
-  const userIp = useApi<UserIp>();
-  const userGeolocation = useApi();
-
-
-  useEffect(() => {
-    userIp.apiQuery( () => api.getUserIp());
-  }, []);
+  const userIp = useGetUserIpQuery();
+  const [GetUserGeolocation, userGeolocationResult] = useGetUserGeolocationMutation();
 
 
   useEffect(() => {
     if (!userIp.data) {
       return;
     }
-    // @ts-ignore
-    userGeolocation.apiQuery(() => api.getUserGeolocation(userIp.data))
+    GetUserGeolocation(userIp.data);
   }, [userIp.data]);
 
 
   return (
     <div>
-      {userGeolocation.data?.location?.data?.city &&
+      {userGeolocationResult.data?.location?.data.city &&
         <div className={classes.location_button}>
           <MapPinIcon className={classes.location_icon}/>
-          <p className={classes.top_text}>{userGeolocation.data?.location?.data?.city}</p>
+          <p className={classes.top_text}>{userGeolocationResult.data.location.data.city}</p>
         </div>
       }
     </div>

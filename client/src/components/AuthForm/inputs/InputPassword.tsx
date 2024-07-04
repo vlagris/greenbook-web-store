@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {clsx} from "clsx";
 import CustomInput from "@components/UI/CustomInput";
 import classes from "./styles.module.scss";
 import EyeOn from "@assets/icons/eye-open.svg?react";
