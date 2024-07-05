@@ -8,3 +8,4 @@ export * from "@/types/genre.ts";
 export * from "@/types/token.ts";
 export * from "@/types/user.ts";
 export * from "@/types/redux.ts";
+export * from "@/types/storage.ts";

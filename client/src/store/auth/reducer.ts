@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState, Auth, User } from "@/types";
-import { objectLocalStorage } from "@/services/objectLocalStorage";
+import { storage } from "@/services/storage";
 import { authEndpoints, userEndpoints } from "@/services/api";
 
 
@@ -51,7 +51,7 @@ const emptyState: AuthState  = {
 }
 const initialState: AuthState  = {
   user: {
-    id: objectLocalStorage.userId.get() || "",
+    id: storage.local.userId.get() || "",
     firstName: null,
     lastName: null,
     avatar: null,

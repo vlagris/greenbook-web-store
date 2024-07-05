@@ -1,7 +1,7 @@
 import {createEntityAdapter, createSlice} from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Cart, CartItem, CartState } from "@/types";
-import { objectLocalStorage } from "@/services/objectLocalStorage";
+import { storage } from "@/services/storage";
 import { cartEndpoints } from "@/services/api";
 
 
@@ -33,10 +33,10 @@ const emptyState: CartState =  {
 };
 
 const initialState: CartState = {
-  items: objectLocalStorage.cart.get()?.items ?? emptyState.items,
-  totalQuantity: objectLocalStorage.cart.get()?.totalQuantity ?? emptyState.totalQuantity,
+  items: storage.local.cart.get()?.items ?? emptyState.items,
+  totalQuantity: storage.local.cart.get()?.totalQuantity ?? emptyState.totalQuantity,
   isLoading: false,
-  isSuccess: !objectLocalStorage.userId.get()
+  isSuccess: !storage.local.userId.get()
 
 }
 
