@@ -1,10 +1,11 @@
 import {routes} from "@/server-imitation/routes.ts";
 import {MethodsName} from "@/server-imitation/types.ts";
 
+
+
 type apiResponse<R> = Promise<{
   data: R
 }>
-
 
 type API = {
   post: <R>(url: string, data?: any, config?: any) => apiResponse<R>
@@ -14,13 +15,13 @@ type API = {
   delete: <R>(url: string, config?: any) => apiResponse<R>
 }
 
-
 interface GetData {
   method: MethodsName,
   url: string,
   data?: any,
   config?: any
 }
+
 
 async function getData({method, url, data, config}: GetData): Promise<any> {
   const request: any = {
@@ -70,7 +71,7 @@ async function getData({method, url, data, config}: GetData): Promise<any> {
   }
 
 
-  const result = route.controller(request);
+  const result = await route.controller(request);
 
 
   const delay = 300 + Math.floor(Math.random() * 300);
@@ -87,32 +88,38 @@ async function getData({method, url, data, config}: GetData): Promise<any> {
   });
 }
 
-const api: API = {
-  async post(url, data, config) {
-    const result = await getData({ method: "post", url, data, config })
-    // console.log(result)
-    return result;
-  },
-  async get(url, config) {
-    const result = await getData({ method: "get", url, config })
-    // console.log(result)
-    return result;
-  },
-  async put(url, data, config) {
-    const result = await getData({ method: "put", url, data, config })
-    // console.log(result)
-    return result;
-  },
-  async patch(url, data, config) {
-    const result = await getData({ method: "patch", url, data, config })
-    // console.log(result)
-    return result;
-    },
-  async delete(url, config) {
-    const result = await getData({ method: "delete", url, config })
-    // console.log(result)
-    return result;
-  },
+// const api: API = {
+//   async post(url, data, config) {
+//     const result = await getData({ method: "post", url, data, config })
+//     // console.log(result)
+//     return result;
+//   },
+//   async get(url, config) {
+//     const result = await getData({ method: "get", url, config })
+//     // console.log(result)
+//     return result;
+//   },
+//   async put(url, data, config) {
+//     const result = await getData({ method: "put", url, data, config })
+//     // console.log(result)
+//     return result;
+//   },
+//   async patch(url, data, config) {
+//     const result = await getData({ method: "patch", url, data, config })
+//     // console.log(result)
+//     return result;
+//     },
+//   async delete(url, config) {
+//     const result = await getData({ method: "delete", url, config })
+//     // console.log(result)
+//     return result;
+//   },
+// }
+
+const api = async ({url, method, data, params}: any) => {
+  const result = await getData({ method, url, data, config: {params} })
+  // console.log(result)
+  return result;
 }
 
 export default api;

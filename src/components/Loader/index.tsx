@@ -1,5 +1,5 @@
 import React from 'react';
-import { HttpError } from "@/types.ts";
+import { HttpError } from "@/types";
 import Error from "@pages/Error";
 import classes from "./styles.module.scss";
 
@@ -8,7 +8,7 @@ import classes from "./styles.module.scss";
 interface LoaderProps {
   children: React.ReactNode,
   isLoading?: boolean
-  error?: HttpError | null
+  error?: HttpError | any | null
   loaded?: boolean
 }
 

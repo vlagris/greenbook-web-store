@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { clsx } from "clsx";
 import { useAppDispatch } from "@/hooks/useTypedReduxHooks.ts";
-import { updateItemInCart } from "@/store/cart";
+import {updateCartItem} from "@/store";
 import classes from "@pages/Cart/components/CartList/styles.module.scss";
+import {useAddToCartMutation} from "@/services/api";
+import useAuth from "@/hooks/useAuth.ts";
 
 
 
@@ -12,8 +14,12 @@ interface CountProps {
 }
 
 function Count({quantity: initialQuantity, id}: CountProps) {
-  const [quantity, setQuantity] = useState(initialQuantity);
   const dispatch = useAppDispatch();
+  const {isAuth} = useAuth();
+  const [addToCart] = useAddToCartMutation();
+  const [quantity, setQuantity] = useState(initialQuantity);
+  const requestAbort = useRef(() => {});
+
 
 
   useEffect(() => {
@@ -21,11 +27,22 @@ function Count({quantity: initialQuantity, id}: CountProps) {
   }, [initialQuantity]);
 
 
+  function updateItem({ id, quantity }: {id: string, quantity: number}) {
+    requestAbort.current();
+    dispatch(updateCartItem({id, quantity: quantity }));
+
+    if (isAuth) {
+      const request = addToCart([{id, quantity }])
+      requestAbort.current = request.abort;
+    }
+  }
+
+
   function handleButton(newQuantity: number) {
     return () => {
       if (newQuantity > 0) {
-        dispatch(updateItemInCart({id, quantity: newQuantity }));
         setQuantity(newQuantity);
+        updateItem({id, quantity: newQuantity});
       }
     }
   }
@@ -39,10 +56,10 @@ function Count({quantity: initialQuantity, id}: CountProps) {
 
   function handleBlur() {
     if (quantity < 1) {
-      dispatch(updateItemInCart({id, quantity: 1 }));
       setQuantity(1);
+      updateItem({id, quantity: 1});
     } else {
-      dispatch(updateItemInCart({id, quantity: quantity }));
+      updateItem({id, quantity: quantity});
     }
   }
 

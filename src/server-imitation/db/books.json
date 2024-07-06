@@ -3,10 +3,10 @@
     "id": "7930077",
     "title": "Убийство в «Восточном экспрессе»",
     "price": 519,
-    "author": [
+    "authors": [
       "415371"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv5.litres.ru/pub/c/cover_200/62718058.webp",
@@ -19,10 +19,10 @@
     "id": "6372706",
     "title": "Десять негритят",
     "price": 499,
-    "author": [
+    "authors": [
       "415371"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv4.litres.ru/pub/c/cover_200/27066343.webp",
@@ -35,10 +35,10 @@
     "id": "6134312",
     "title": "Смерть на Ниле",
     "price": 409,
-    "author": [
+    "authors": [
       "415371"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv7.litres.ru/pub/c/cover_200/64932377.webp",
@@ -51,10 +51,10 @@
     "id": "0664415",
     "title": "Остаток дня",
     "price": 659,
-    "author": [
+    "authors": [
       "415371"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv2.litres.ru/pub/c/cover_200/56412224.webp",
@@ -67,10 +67,10 @@
     "id": "4988170",
     "title": "Убийство Роджера Экройда",
     "price": 379,
-    "author": [
+    "authors": [
       "415371"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv7.litres.ru/pub/c/cover_200/64932377.webp",
@@ -83,10 +83,10 @@
     "id": "5051742",
     "title": "Эркюль Пуаро и Путаница в Гриншоре",
     "price": 429,
-    "author": [
+    "authors": [
       "415371"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv2.litres.ru/pub/c/cover_200/8368224.webp",
@@ -99,10 +99,10 @@
     "id": "3142994",
     "title": "Последний сеанс",
     "price": 359,
-    "author": [
+    "authors": [
       "415371"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv6.litres.ru/pub/c/cover_200/66217762.webp",
@@ -115,10 +115,10 @@
     "id": "8565313",
     "title": "Зло под солнцем",
     "price": 429,
-    "author": [
+    "authors": [
       "415371"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv2.litres.ru/pub/c/cover_200/51882228.webp",
@@ -131,10 +131,10 @@
     "id": "7154902",
     "title": "Драма в Гриффин-холле, или Отравленный уикенд",
     "price": 538,
-    "author": [
+    "authors": [
       "043301"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv8.litres.ru/pub/c/cover_200/63429581.webp",
@@ -147,10 +147,10 @@
     "id": "0336015",
     "title": "Леди из Фроингема",
     "price": 519,
-    "author": [
+    "authors": [
       "043301"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv2.litres.ru/pub/c/cover_200/66846728.webp",
@@ -163,10 +163,10 @@
     "id": "9271423",
     "title": "Мюзик-холл на Гроув-Лейн",
     "price": 556,
-    "author": [
+    "authors": [
       "043301"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv7.litres.ru/pub/c/cover_200/68639170.webp",
@@ -179,10 +179,10 @@
     "id": "3488373",
     "title": "Мисс Мортон и убийство на званом вечере",
     "price": 339,
-    "author": [
+    "authors": [
       "088550"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv2.litres.ru/pub/c/cover_200/70158925.webp",
@@ -195,10 +195,10 @@
     "id": "6628298",
     "title": "Потерянное наследство тамплиера",
     "price": 599,
-    "author": [
+    "authors": [
       "483138"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv0.litres.ru/pub/c/cover_200/64624001.webp",
@@ -211,10 +211,10 @@
     "id": "2879937",
     "title": "Ложь без срока годности",
     "price": 599,
-    "author": [
+    "authors": [
       "483138"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv2.litres.ru/pub/c/cover_200/51836224.webp",
@@ -227,10 +227,10 @@
     "id": "2898661",
     "title": "Забытая легенда Ольхона",
     "price": 479,
-    "author": [
+    "authors": [
       "483138"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv2.litres.ru/pub/c/cover_200/67247025.webp",
@@ -243,10 +243,10 @@
     "id": "3785370",
     "title": "Проклятие принцессы Алтая",
     "price": 549,
-    "author": [
+    "authors": [
       "483138"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv2.litres.ru/pub/c/cover_200/69212824.webp",
@@ -259,10 +259,10 @@
     "id": "7660066",
     "title": "Остров тринадцати приговоренных",
     "price": 549,
-    "author": [
+    "authors": [
       "483138"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv6.litres.ru/pub/c/cover_200/66665566.webp",
@@ -275,10 +275,10 @@
     "id": "4393202",
     "title": "Волшебное свечение Ладоги",
     "price": 449,
-    "author": [
+    "authors": [
       "483138"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv3.litres.ru/pub/c/cover_200/63215737.webp",
@@ -291,10 +291,10 @@
     "id": "0117617",
     "title": "Темная сторона души",
     "price": 579,
-    "author": [
+    "authors": [
       "264583"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv5.litres.ru/pub/c/cover_200/169454.webp",
@@ -307,10 +307,10 @@
     "id": "0599850",
     "title": "Пока медведица на небе",
     "price": 409,
-    "author": [
+    "authors": [
       "483138"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv6.litres.ru/pub/c/cover_200/48409367.webp",
@@ -323,10 +323,10 @@
     "id": "6930301",
     "title": "Неизвестный псевдоним Бога",
     "price": 549,
-    "author": [
+    "authors": [
       "483138"
     ],
-    "genre": [
+    "genres": [
       "872945"
     ],
     "image": "https://cv7.litres.ru/pub/c/cover_200/57284178.webp",
@@ -339,10 +339,10 @@
     "id": "1910613",
     "title": "Гордость и предубеждение",
     "price": 409,
-    "author": [
+    "authors": [
       "608655"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv4.litres.ru/pub/c/cover_200/11280949.webp",
@@ -355,10 +355,10 @@
     "id": "4568204",
     "title": "Анна Каренина",
     "price": 599,
-    "author": [
+    "authors": [
       "104809"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv5.litres.ru/pub/c/cover_200/28057851.webp",
@@ -371,10 +371,10 @@
     "id": "9001969",
     "title": "Бесы",
     "price": 309,
-    "author": [
+    "authors": [
       "798046"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv3.litres.ru/pub/c/cover_200/22489936.webp",
@@ -387,10 +387,10 @@
     "id": "3327191",
     "title": "Воскресение",
     "price": 409,
-    "author": [
+    "authors": [
       "104809"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv2.litres.ru/pub/c/cover_200/23803525.webp",
@@ -403,10 +403,10 @@
     "id": "4251348",
     "title": "Дамское счастье",
     "price": 399,
-    "author": [
+    "authors": [
       "788230"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv4.litres.ru/pub/c/cover_200/49227749.webp",
@@ -419,10 +419,10 @@
     "id": "3388576",
     "title": "Лунный камень",
     "price": 599,
-    "author": [
+    "authors": [
       "277633"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv6.litres.ru/pub/c/cover_200/32543568.webp",
@@ -435,10 +435,10 @@
     "id": "2868281",
     "title": "Повесть о двух городах",
     "price": 499,
-    "author": [
+    "authors": [
       "149520"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv9.litres.ru/pub/c/cover_200/62649591.webp",
@@ -451,10 +451,10 @@
     "id": "5731423",
     "title": "Унесенные ветром. Том 1",
     "price": 639,
-    "author": [
+    "authors": [
       "584187"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv4.litres.ru/pub/c/cover_200/131243.webp",
@@ -467,10 +467,10 @@
     "id": "1280733",
     "title": "Унесенные ветром. Том 2",
     "price": 559,
-    "author": [
+    "authors": [
       "584187"
     ],
-    "genre": [
+    "genres": [
       "405713"
     ],
     "image": "https://cv4.litres.ru/pub/c/cover_200/131244.webp",
@@ -483,10 +483,10 @@
     "id": "5181315",
     "title": "Институт",
     "price": 499,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "327900",
       "168699",
       "390264",
@@ -502,10 +502,10 @@
     "id": "0070102",
     "title": "Сияние",
     "price": 649,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "168699",
       "390264",
       "899999"
@@ -520,10 +520,10 @@
     "id": "7040083",
     "title": "Позже",
     "price": 579,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "872945",
       "168699",
       "390264",
@@ -539,10 +539,10 @@
     "id": "5639705",
     "title": "Будет кровь",
     "price": 499,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "168699",
       "390264",
       "899999"
@@ -557,10 +557,10 @@
     "id": "3274256",
     "title": "Под Куполом",
     "price": 549,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "327900"
     ],
     "image": "https://cv8.litres.ru/pub/c/cover_200/4387285.webp",
@@ -573,10 +573,10 @@
     "id": "8687829",
     "title": "Билли Саммерс",
     "price": 699,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "872945",
       "390264"
     ],
@@ -590,10 +590,10 @@
     "id": "5481107",
     "title": "Мистер Мерседес",
     "price": 749,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "872945",
       "390264"
     ],
@@ -607,10 +607,10 @@
     "id": "8137432",
     "title": "Чужак",
     "price": 699,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "872945",
       "390264",
       "899999"
@@ -625,10 +625,10 @@
     "id": "6330375",
     "title": "Стрелок",
     "price": 549,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "617372"
     ],
     "image": "https://cv0.litres.ru/pub/c/cover_200/122201.webp",
@@ -641,10 +641,10 @@
     "id": "3770730",
     "title": "Пост сдал",
     "price": 649,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "872945",
       "390264",
       "899999"
@@ -659,10 +659,10 @@
     "id": "0193472",
     "title": "Доктор Сон",
     "price": 449,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "872945",
       "168699",
       "390264",
@@ -678,10 +678,10 @@
     "id": "8051667",
     "title": "Кто нашел, берет себе",
     "price": 699,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "872945",
       "168699",
       "390264",
@@ -697,10 +697,10 @@
     "id": "2134830",
     "title": "Темная Башня",
     "price": 549,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "617372"
     ],
     "image": "https://cv8.litres.ru/pub/c/cover_200/4887784.webp",
@@ -713,10 +713,10 @@
     "id": "4976584",
     "title": "Мёртвая зона",
     "price": 679,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "168699",
       "390264",
       "899999"
@@ -731,10 +731,10 @@
     "id": "8122362",
     "title": "Нужные вещи",
     "price": 549,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "899999"
     ],
     "image": "https://cv5.litres.ru/pub/c/cover_200/18371557.webp",
@@ -747,10 +747,10 @@
     "id": "6512269",
     "title": "Возрождение",
     "price": 579,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "168699",
       "390264",
       "899999"
@@ -765,10 +765,10 @@
     "id": "4163370",
     "title": "Бесплодные земли",
     "price": 599,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "617372"
     ],
     "image": "https://cv0.litres.ru/pub/c/cover_200/122207.webp",
@@ -781,10 +781,10 @@
     "id": "9863335",
     "title": "Кэрри",
     "price": 619,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "168699",
       "899999"
     ],
@@ -798,10 +798,10 @@
     "id": "0076360",
     "title": "Спящие красавицы",
     "price": 449,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "390264",
       "899999"
     ],
@@ -815,10 +815,10 @@
     "id": "9657907",
     "title": "Долорес Клейборн",
     "price": 549,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "872945",
       "390264"
     ],
@@ -832,10 +832,10 @@
     "id": "2942140",
     "title": "Извлечение троих",
     "price": 599,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "617372"
     ],
     "image": "https://cv0.litres.ru/pub/c/cover_200/122202.webp",
@@ -848,10 +848,10 @@
     "id": "2401768",
     "title": "Песнь Сюзанны",
     "price": 549,
-    "author": [
+    "authors": [
       "852177"
     ],
-    "genre": [
+    "genres": [
       "617372"
     ],
     "image": "https://cv8.litres.ru/pub/c/cover_200/123986.webp",

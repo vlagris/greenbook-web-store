@@ -1,17 +1,7 @@
-import genresData from "@/server-imitation/db/genres.json";
-import authorsData from "@/server-imitation/db/authors.json";
-import booksData from "@/server-imitation/db/books.json";
 import {errors} from "@/server-imitation/constants.ts";
+import {db} from "@/server-imitation/db/indexedDB.ts";
 
 
-function isBookByPathnameGenre(book: any, pathname: string) {
-  return genresData.some(genreData => {
-    if (genreData.pathName === pathname) {
-      return book.genre.includes(genreData.id)
-    }
-    return false;
-  })
-}
 
 function isBookInPrice(book: any, priceRange: string[]) {
   return book.price >= Number(priceRange[0]) && book.price <= Number(priceRange[1]);
@@ -19,25 +9,20 @@ function isBookInPrice(book: any, priceRange: string[]) {
 
 function isBookByAuthors(book: any, authors: string[]) {
   return authors.some(author => {
-    return book.author.includes(author);
+    return book.authors.includes(author);
   })
 }
 
 
 const booksOrdersMap = {
-  popular: (a: any, b: any) => b.rating.count - a.rating.count,
+  popular: (a: any, b: any) => b.rating_count - a.rating_count,
   new: () => -1,
   price_desc: (a: any, b: any) => b.price - a.price,
   price_asc: (a: any, b: any) => a.price - b.price,
-  rating: (a: any, b: any) => b.rating.rate - a.rating.rate,
-  // popular: [['rating_count', 'DESC']],
-  // new: [['createdAt', 'DESC']],
-  // price_desc: [['price', 'DESC']],
-  // price_asc: [['price', 'ASC']],
-  // rating: [['rating_rate', 'DESC']],
+  rating: (a: any, b: any) => b.rating_rate - a.rating_rate,
 }
 
-export function getByGenre(req: any) {
+export async function getByGenre(req: any) {
   const skip = req.query.offset || 0;
   const limit = req.query.limit || 15;
   const genrePathName = req.query.pathName;
@@ -55,21 +40,22 @@ export function getByGenre(req: any) {
   }
 
 
-  const rawBooks = booksData.filter(book => {
-    if (genrePathName && !isBookByPathnameGenre(book, genrePathName)) {
-        return false
-    }
+  const genre = await db.getFromIndex("genres", "pathName", genrePathName);
 
-    if (price && !isBookInPrice(book, price)) {
-      return false;
+  let rawBooks = [];
+  let cursor = await db.transaction('books')
+    .store.index("genres").openCursor(genre.id);
+  while (cursor) {
+    if (
+      !(price && !isBookInPrice(cursor.value, price)) &&
+      !(authors && !isBookByAuthors(cursor.value, authors))
+    ) {
+      rawBooks.push(cursor.value);
     }
+    cursor = await cursor.continue();
+  }
 
-    if (authors && !isBookByAuthors(book, authors)) {
-      return false;
-    }
-
-    return true;
-  }).sort(sort);
+  const books = rawBooks.sort(sort).slice(skip, (skip + limit));
 
 
   if(!rawBooks) {
@@ -82,19 +68,16 @@ export function getByGenre(req: any) {
 
   return {
     status: 200,
-    data: {
-      items: rawBooks.slice(skip, (skip + limit)),
-      total: rawBooks.length,
-    }
+    data: books
   }
 }
 
 
 
-export function getRecommended(req: any) {
+export async function getRecommended(req: any) {
   const limit = req.query.limit || 50;
 
-  const books = booksData.slice(0, limit);
+  const books = await db.getAll("books", null, limit);
 
   return {
     status: 200,
@@ -104,9 +87,10 @@ export function getRecommended(req: any) {
 
 
 
-export function getBooksFilters(req: any) {
+export async function getBooksFilters(req: any) {
   const genrePathName = req.query.pathName;
-
+  const priceFilter = req.query.price?.split("-");
+  const authorsFilter = req.query.authors?.split(",");
 
   if(!genrePathName) {
     return {
@@ -116,23 +100,35 @@ export function getBooksFilters(req: any) {
   }
 
 
-  const rawBooks = booksData.filter(book => {
-    if (genrePathName && !isBookByPathnameGenre(book, genrePathName)) {
-      return false
+  const genre = await db.getFromIndex("genres", "pathName", genrePathName);
+  let books = [];
+  let booksForPrice = [];
+  let booksForAuthors = [];
+  let cursor = await db.transaction('books')
+    .store.index("genres").openCursor(genre.id);
+  while (cursor) {
+    if (!(authorsFilter && !isBookByAuthors(cursor.value, authorsFilter))) {
+      booksForPrice.push(cursor.value);
     }
-    return true;
-  });
 
-  const maxPrice = Math.max(...rawBooks.map(book => book.price));
-  const minPrice = Math.min(...rawBooks.map(book => book.price));
-  const totalCount = rawBooks.length;
+    if (!(priceFilter && !isBookInPrice(cursor.value, priceFilter))) {
+      booksForAuthors.push(cursor.value);
+    }
+    if (
+      !(priceFilter && !isBookInPrice(cursor.value, priceFilter)) &&
+      !(authorsFilter && !isBookByAuthors(cursor.value, authorsFilter))
+    ) {
+      books.push(cursor.value);
+    }
+    cursor = await cursor.continue();
+  }
 
-  const booksAuthors = rawBooks.reduce((result: string[], book) => {
-    return result.concat(book.author)
-  }, [])
-  const authors = authorsData.filter(authorData => {
-    return booksAuthors.includes(authorData.id);
-  })
+
+  const authors = await db.getAll("authors");
+  const maxPrice = Math.max(...booksForPrice.map((item: any) => item.price));
+  const minPrice = Math.min(...booksForPrice.map((item: any) => item.price));
+  const booksAuthors = booksForAuthors.reduce((result: string[], item) => result.concat(item.authors), []);
+  const authorsForFilters = authors.filter((item) => booksAuthors.concat(authorsFilter).includes(item.id));
 
 
   return {
@@ -147,14 +143,14 @@ export function getBooksFilters(req: any) {
           maxPrice,
         },
         {
-          items: authors,
+          items: authorsForFilters,
           name: "Авторы",
           key: "authors",
           type: "select",
           maxSelect: 10
         },
       ],
-      total: totalCount,
+      total: books.length,
     }
   }
 }

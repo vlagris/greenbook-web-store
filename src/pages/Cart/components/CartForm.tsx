@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
-import { Cart } from "@/types.ts";
+import { Cart } from "@/types";
 import CartList from "@pages/Cart/components/CartList";
 import Order from "@pages/Cart/components/Order.tsx";
 import { formatPrice } from "@/utils/formatPrice.ts";
 import classes from "@pages/Cart/styles.module.scss";
 
 
-function CartForm({cart}: {cart: Cart}) {
+
+interface CartFormProps {
+  cart: Cart,
+  refreshCart: () => void
+}
+
+function CartForm({cart, refreshCart}: CartFormProps) {
   const [total, setTotal] = useState(0);
+
 
   useEffect(() => {
     let result = 0;
@@ -26,7 +33,10 @@ function CartForm({cart}: {cart: Cart}) {
 
           <div className={classes.left}>
             <div className={classes.section}>
-              <CartList items={cart.items}/>
+              <CartList
+                items={cart.items}
+                refreshCart={refreshCart}
+              />
             </div>
           </div>
 

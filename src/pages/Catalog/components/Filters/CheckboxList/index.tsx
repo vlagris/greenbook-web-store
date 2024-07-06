@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {QueryParams} from "@/hooks/useQueryParams.ts";
-import {FilterItem, FilterSelect} from "@/types.ts";
+import {FilterItem, FilterSelect} from "@/types";
 import CustomInput from "@components/UI/CustomInput";
 import CheckboxListItem from "@pages/Catalog/components/Filters/CheckboxList/CheckboxListItem.tsx";
 import classes from "../styles.module.scss";

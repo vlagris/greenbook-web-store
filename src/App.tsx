@@ -1,24 +1,14 @@
+import React, {useLayoutEffect} from "react";
 import { RouterProvider } from "react-router-dom";
-import { useEffect } from "react";
 import { router } from "@/routes";
-import { useAppDispatch } from "@/hooks/useTypedReduxHooks.ts";
-import { fetchGenres } from "@/store/genres";
-import { fetchCart } from "@/store/cart";
-import { fetchToken } from "@/store/auth";
+import {authSelectors, setToken, store} from "@/store";
 
 
 
 function App() {
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const requestLoading = async () => {
-      dispatch(fetchGenres());
-      await dispatch(fetchToken());
-      dispatch(fetchCart());
-    }
-
-    requestLoading();
+  useLayoutEffect(() => {
+    store.dispatch(setToken(authSelectors.userId(store.getState())));
   }, []);
 
 

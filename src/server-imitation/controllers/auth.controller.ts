@@ -1,17 +1,14 @@
 import {nanoid} from "nanoid";
-import genresData from "@/server-imitation/db/genres.json";
 import {errors} from "@/server-imitation/constants.ts";
+import {db} from "@/server-imitation/db/indexedDB.ts";
 
 
-export function signup(req: any) {
-  const email = req.body.email;
-  const password = req.body.password;
+export async function signup(req: any) {
+  const { email, password } = req.body;
 
-  const usersData = JSON.parse(localStorage.getItem("usersData") || "[]");
 
-  const isUseEmail = usersData.some((userData: any) => {
-    return userData.email === email
-  })
+  const isUseEmail = await db.getFromIndex("users", "email", email);
+
 
   if (isUseEmail) {
     return {
@@ -27,22 +24,7 @@ export function signup(req: any) {
     password
   }
 
-  const newUsersData = usersData;
-
-  newUsersData.push(user);
-  if (newUsersData.length > 10) {
-    newUsersData.shift();
-  }
-  localStorage.setItem("usersData", JSON.stringify(newUsersData));
-
-  const cartsData = JSON.parse(localStorage.getItem("cartsData") || "[]");
-
-  if (cartsData.length > 10) {
-    cartsData.shift();
-  }
-
-  localStorage.setItem("cartsData", JSON.stringify(cartsData));
-
+  await db.add("users", user);
 
 
   return {
@@ -56,21 +38,15 @@ export function signup(req: any) {
 
 
 
-export function login(req: any) {
+export async function login(req: any) {
   const email = req.body.email;
   const password = req.body.password;
 
-  const usersData = localStorage.getItem("usersData") || "[]";
 
-  let user: any;
+  const user = await db.getFromIndex("users", "email", email);
 
-  JSON.parse(usersData).forEach((userData: any) => {
-    if (userData.email === email && userData.password === password) {
-      user = userData;
-    }
-  })
 
-  if (!user) {
+  if (!user && user.password !== password) {
     return {
       status: 400,
       data: errors.INVALID_DATA
@@ -100,7 +76,7 @@ export function logout() {
 
 
 
-export function refreshToken(req: any) {
+export async function refreshToken(req: any) {
   const userId = req.userId;
 
 
@@ -111,11 +87,9 @@ export function refreshToken(req: any) {
     };
   }
 
-  const usersData = localStorage.getItem("usersData") || "[]";
 
-  const isUserId = JSON.parse(usersData).some((userData: any) => {
-    return userData.id === userId
-  })
+  const isUserId = await db.get("users", userId);
+
 
   if (!isUserId) {
     return {

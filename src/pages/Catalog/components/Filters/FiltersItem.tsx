@@ -1,5 +1,5 @@
 import React from "react";
-import {Filter, FilterType} from "@/types.ts";
+import {Filter, FilterType} from "@/types";
 import {QueryParams} from "@/hooks/useQueryParams.ts";
 import Price from "@pages/Catalog/components/Filters/Price.tsx";
 import CheckboxList from "@pages/Catalog/components/Filters/CheckboxList";

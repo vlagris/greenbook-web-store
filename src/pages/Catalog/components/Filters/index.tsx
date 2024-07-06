@@ -1,5 +1,5 @@
 import React from "react";
-import {FiltersType} from "@/types.ts";
+import {FiltersType} from "@/types";
 import {QueryParams} from "@/hooks/useQueryParams.ts";
 import Genres from "@pages/Catalog/components/Filters/Genres.tsx";
 import FiltersItemWrapper from "@pages/Catalog/components/Filters/FiltersItemWrapper.tsx";
@@ -9,7 +9,7 @@ import classes from "./styles.module.scss";
 
 
 interface FiltersProps {
-  filters: FiltersType | null,
+  filters: FiltersType | undefined,
   queryParams: QueryParams,
   setQueryParams: React.Dispatch<React.SetStateAction<QueryParams>>,
 }

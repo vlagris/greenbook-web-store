@@ -1,5 +1,5 @@
-import classes from "./styles.module.scss";
 import Item from "@components/Breadcrumbs/Item";
+import classes from "./styles.module.scss";
 
 
 export type Crumb = {

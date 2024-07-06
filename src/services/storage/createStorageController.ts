@@ -1,4 +1,4 @@
-export function createLocalStorageController<T>(StorageName: string) {
+export function createStorageController<T>(StorageName: string) {
   return {
     storageName: StorageName,
     set(storageData: T) {

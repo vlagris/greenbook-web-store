@@ -1,9 +1,11 @@
-import genresData from "@/server-imitation/db/genres.json";
+import {db} from "@/server-imitation/db/indexedDB.ts";
 
 
-export function getAll() {
+export async function getAll() {
+  const genres = await db.getAll("genres");
+
   return {
     status: 200,
-    data: genresData
+    data: genres
   }
 }

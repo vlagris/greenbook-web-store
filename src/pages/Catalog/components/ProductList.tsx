@@ -1,5 +1,5 @@
 import Card from "@components/Card";
-import {Book} from "@/types.ts";
+import {Book} from "@/types";
 import classes from "./../styles.module.scss";
 
 

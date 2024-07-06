@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {QueryParams} from "@/hooks/useQueryParams.ts";
-import {FilterPrice} from "@/types.ts";
+import {FilterPrice} from "@/types";
 import CustomInput from "@components/UI/CustomInput";
 import classes from "./styles.module.scss";
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Genre} from "@/types.ts";
+import {Genre} from "@/types";
 import Breadcrumbs, {Crumb} from "@components/Breadcrumbs";
 
 

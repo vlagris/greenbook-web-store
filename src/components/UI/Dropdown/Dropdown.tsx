@@ -6,17 +6,23 @@ import classes from "@components/UI/Dropdown/styles.module.scss";
 export type ItemStates = {
   active: number | string,
   focus: number | string,
+  type: "focus" | "active"
 }
 
 
 interface CustomSelectProps {
   children?: React.ReactNode,
+  itemEffect?: "focus" | "active"
 }
 
-function Dropdown({ children }: CustomSelectProps) {
+function Dropdown({ children, itemEffect = "active" }: CustomSelectProps) {
   const [show, setShow] = useState(false);
-  const [itemStates, setItemStates] = useState<ItemStates>({ active: "", focus: "" });
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [itemsState, setItemsState] = useState<ItemStates>({
+    active: "",
+    focus: "",
+    type: itemEffect
+  });
 
 
   useEffect(() => {
@@ -35,13 +41,12 @@ function Dropdown({ children }: CustomSelectProps) {
     }
 
     window.addEventListener("click", handleWindowClick, {capture: true});
-
     return () => window.removeEventListener("click", handleWindowClick);
   }, [show]);
 
 
   return (
-    <DropdownContext.Provider value={{show, setShow, itemStates, setItemStates}}>
+    <DropdownContext.Provider value={{show, setShow, itemsState, setItemsState}}>
       <div ref={dropdownRef} className={classes.dropdown}>
           {children}
       </div>
