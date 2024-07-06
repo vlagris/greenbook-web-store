@@ -14,6 +14,10 @@ export async function getUser(req: any) {
 
   const user = await db.get("users", userId);
 
+  if (user.avatarImage) {
+    user.avatarImage = URL.createObjectURL(user.avatarImage)
+  }
+
 
   if (!user) {
     return {
@@ -65,12 +69,19 @@ export async function updateUser(req: any) {
     user.avatarImage = null;
   }
 
-  // if (avatarImageFIle) {
-  //   user.avatarImage = req.protocol + '://' + req.get('host') + "/static/uploads/" + avatarImageFIle.filename;
-  // }
+  if (avatarImageFIle) {
+    user.avatarImage = avatarImageFIle
+  }
+
+  if (avatarDeleted) {
+    user.avatarImage = null;
+  }
 
   await db.put("users", user);
 
+  if (user.avatarImage) {
+    user.avatarImage = URL.createObjectURL(user.avatarImage)
+  }
 
   return {
     status: 200,
@@ -117,6 +128,9 @@ export async function updateEmail(req: any) {
 
   await db.put("users", user);
 
+  if (user.avatarImage) {
+    user.avatarImage = URL.createObjectURL(user.avatarImage)
+  }
 
   return {
     status: 200,
