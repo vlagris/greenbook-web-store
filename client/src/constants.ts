@@ -8,7 +8,6 @@ export const formErrorMessage = {
   CONFIRM_PASSWORD_INVALID: "Нужно что бы пароли совпадали.",
   EMAIL_INVALID: "Введен некорректный адрес электронной почты.",
   EMAIL_BUSY: "Этот адрес электронной почты занят.",
-
 }
 
 

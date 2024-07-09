@@ -3,7 +3,6 @@ import {axiosMainBaseQuery} from "@/services/api/axiosMainBaseQuery.ts";
 
 
 
-
 export const mainApi = createApi({
   reducerPath: "serverApi",
   baseQuery: axiosMainBaseQuery(),

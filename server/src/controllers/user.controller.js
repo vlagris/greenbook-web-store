@@ -97,7 +97,6 @@ export async function updateEmail(req, res) {
       return res.status(400).json(errors.BAD_REQUEST);
     }
 
-    console.log(email)
 
     const newUser = await user.update({ email });
 

@@ -8,9 +8,7 @@ import { generateTokens, getUserWithoutPasswordHash } from "../utils/index.js";
 
 export async function signup(req, res) {
   try {
-    // const email = req.body.email;
-    // const password = req.body.password;
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
     const isUseEmail = await userModel.findOne({ where: { email } });
 
