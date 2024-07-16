@@ -1,15 +1,28 @@
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useGetGenresQuery} from "@/services/api";
+import Header from "@components/Header";
 import Modal from "@components/UI/Modal";
-import BurgerButton from "@components/Header/components/BurgerMenu/BurgerButton.tsx";
-import BurgerMenuItem from "@components/Header/components/BurgerMenu/BurgerMenuItem.tsx";
+import BurgerButton from "@components/BurgerMenu/BurgerButton.tsx";
+import BurgerMenuList from "@components/BurgerMenu/BurgerMenuList.tsx";
 import classes from "./styles.module.scss";
 
 
 
-function BurgerMenu() {
+interface BurgerMenuProps {
+  show?: boolean
+}
+
+function BurgerMenu({show: showProp}: BurgerMenuProps) {
   const {data: genres} = useGetGenresQuery();
   const [show, setShow] = useState(false);
+
+
+  useEffect(() => {
+    if (showProp !== undefined) {
+      setShow(showProp)
+    }
+  }, [showProp]);
+
 
   function handleClick(state: boolean) {
     return () => setShow(state);
@@ -25,19 +38,13 @@ function BurgerMenu() {
         onHide={handleClick(false)}
         show={show}
       >
+        <Header/>
+
         <div className={classes.menu}>
-          <ul>
-
-            {genres && genres.map((genre) => (
-              <BurgerMenuItem
-                key={genre.id}
-                to={`/catalog/${genre.pathName}`}
-                name={genre.name}
-                onClick={handleClick(false)}
-              />
-            ))}
-
-          </ul>
+          <BurgerMenuList
+            genres={genres}
+            onClick={handleClick(false)}
+          />
         </div>
       </Modal>
     </>

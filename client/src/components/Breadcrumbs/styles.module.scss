@@ -1,6 +1,6 @@
 .breadcrumbs {
   position: relative;
-  padding: 24px 0;
+  padding: 16px 0;
   overflow: hidden;
 }
 
@@ -12,7 +12,7 @@
 .item {
   display: flex;
   align-items: center;
-  margin-right: 12px;
+  margin-right: 8px;
 
   &:last-child {
     & .page_link {
@@ -28,16 +28,44 @@
 
 .page_link {
   color: var(--gray-600);
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
 .current_page {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--primary);
 }
 
 .arrow_icon {
-  margin-left: 12px;
+  margin-left: 8px;
   stroke: var(--gray-600);
 }
+
+
+
+@media (min-width: 640px) {
+  .breadcrumbs {
+    padding: 24px 0;
+  }
+
+  .page_link {
+    font-size: 14px;
+  }
+
+  .item {
+    margin-right: 12px;
+  }
+
+  .current_page {
+    font-size: 14px;
+  }
+
+  .arrow_icon {
+    margin-left: 12px;
+  }
+}
+
+@media (min-width: 1024px) {
+}
+

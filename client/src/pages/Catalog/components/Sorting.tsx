@@ -39,31 +39,29 @@ function Sorting({queryParams, setQueryParams}: SortingProps) {
 
 
   return (
-    <div className={classes.sorting}>
-        <Dropdown>
-          <DropdownToggle>
-            <DropdownButton>
-              {sorting.map(item => (
-                item.type === active && item.name
-              ))}
-              <DropdownIcon/>
-            </DropdownButton>
-          </DropdownToggle>
+    <Dropdown>
+      <DropdownToggle>
+        <DropdownButton>
+          {sorting.map(item => (
+            item.type === active && item.name
+          ))}
+          <DropdownIcon/>
+        </DropdownButton>
+      </DropdownToggle>
 
-          <DropdownMenu>
-            {sorting.map(item => (
-              <DropdownItem
-                key={item.id}
-                id={item.id}
-                onClick={createOnClick(item.type)}
-                active={item.type === active}
-              >
-                {item.name}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
-    </div>
+      <DropdownMenu>
+        {sorting.map(item => (
+          <DropdownItem
+            key={item.id}
+            id={item.id}
+            onClick={createOnClick(item.type)}
+            active={item.type === active}
+          >
+            {item.name}
+          </DropdownItem>
+        ))}
+      </DropdownMenu>
+    </Dropdown>
   );
 }
 

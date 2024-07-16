@@ -3,6 +3,7 @@ import {Book} from "@/types";
 import classes from "./../styles.module.scss";
 
 
+
 interface ProductListProps {
   books: Book[] | undefined,
 }
@@ -10,12 +11,10 @@ interface ProductListProps {
 function ProductList({books}: ProductListProps) {
 
   return (
-    <div className={classes.product_list_wrap}>
-      <div className={classes.product_list}>
-        {books && books.map((book) =>
-          <Card key={book.id} book={book}/>
-        )}
-      </div>
+    <div className={classes.product_list}>
+      {books && books.map((book) =>
+        <Card key={book.id} book={book}/>
+      )}
     </div>
   );
 }

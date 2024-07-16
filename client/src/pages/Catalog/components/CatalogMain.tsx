@@ -5,7 +5,7 @@ import {CATALOG_CARD_LIMIT} from "@/constants.ts";
 import ProductList from "@pages/Catalog/components/ProductList.tsx";
 import Pagination from "@components/Pagination";
 import Sorting from "@pages/Catalog/components/Sorting.tsx";
-import Filters from "@pages/Catalog/components/Filters";
+import { FiltersDesktop, FiltersMobile } from "@pages/Catalog/components/Filters";
 import classes from "@pages/Catalog/styles.module.scss";
 
 
@@ -28,17 +28,26 @@ function CatalogMain({filters, books, queryParams, setQueryParams}: CatalogMainP
 
   return (
     <div className={classes.main}>
-      <Filters
+      <FiltersDesktop
         filters={filters}
         queryParams={queryParams}
         setQueryParams={setQueryParams}
       />
 
       <div className={classes.content}>
-        <Sorting
-          queryParams={queryParams}
-          setQueryParams={setQueryParams}
-        />
+
+        <div className={classes.content_top}>
+          <FiltersMobile
+            filters={filters}
+            queryParams={queryParams}
+            setQueryParams={setQueryParams}
+          />
+
+          <Sorting
+            queryParams={queryParams}
+            setQueryParams={setQueryParams}
+          />
+        </div>
 
         <ProductList books={books}/>
 

@@ -8,13 +8,13 @@ interface CartListProps {
   refreshCart: () => void
 }
 function CartList({items, refreshCart}: CartListProps) {
-  const colsNames = ["Товар", "Цена", "Количество", "Итог"]
+  const colsNames = ["Товар", "Цена", "Количество"]
 
 
   return (
     <>
       <div className={classes.top}>
-        <div className={classes.cols_wrap}>
+        <div className={classes.row}>
           {colsNames.map(colName => (
             <div key={colName} className={classes.col}>
               <h4 className={classes.col_name}>{colName}</h4>
@@ -30,8 +30,8 @@ function CartList({items, refreshCart}: CartListProps) {
       </ul>
 
       <div className={classes.bottom}>
-        <button className={classes.btn}>Вернуться в католог</button>
-        <button className={classes.btn} onClick={refreshCart} role="cartUpdate">
+        <button className="btn btn-text">Вернуться в католог</button>
+        <button className={"btn btn-text"} onClick={refreshCart} role="cartUpdate">
           Обновить
         </button>
       </div>

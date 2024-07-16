@@ -4,13 +4,14 @@ import Portal from "@components/UI/Portal";
 import classes from "./styles.module.scss";
 
 interface ModalProps {
-  children: React.ReactNode,
+  children?: React.ReactNode,
   show: boolean,
   onHide: () => void,
   className?: string,
 }
 
 function Modal({ children, show, onHide, className }: ModalProps) {
+
 
   useEffect(() => {
     if (!show) {
