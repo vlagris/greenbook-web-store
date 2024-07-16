@@ -9,7 +9,7 @@ export const cartMainApi = mainApi.injectEndpoints({
 
     getCart: build.query<Cart, void>({
       query: () => ({
-        url: '/cart/',
+        url: '/cart',
         method: "get",
       }),
       transformResponse: (response: CartResponse) => cartResponseAdapter(response),

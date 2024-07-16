@@ -118,7 +118,7 @@ async function getData({method, url, data, config}: GetData): Promise<any> {
 
 const api = async ({url, method, data, params}: any) => {
   const result = await getData({ method, url, data, config: {params} })
-  // console.log(result)
+  console.log({url, method, data, params})
   return result;
 }
 
