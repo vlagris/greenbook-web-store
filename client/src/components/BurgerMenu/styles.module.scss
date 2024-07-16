@@ -13,6 +13,10 @@
   height: calc(100vh - var(--navbar-height));
 }
 
+.header {
+
+}
+
 .menu {
   flex-grow: 1;
   padding: 16px 12px;
@@ -65,6 +69,11 @@
     top: var(--header-height);
     height: calc(100vh - var(--header-height));
   }
+
+  .header {
+    display: none;
+  }
+
 
   .button {
     width: auto;

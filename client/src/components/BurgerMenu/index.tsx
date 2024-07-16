@@ -38,7 +38,9 @@ function BurgerMenu({show: showProp}: BurgerMenuProps) {
         onHide={handleClick(false)}
         show={show}
       >
-        <Header/>
+        <div className={classes.header}>
+          <Header/>
+        </div>
 
         <div className={classes.menu}>
           <BurgerMenuList

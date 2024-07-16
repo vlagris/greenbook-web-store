@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import {ErrorType, HttpError} from "@/types";
 import {formErrorMessage} from "@/constants.ts";
 import {useLoginMutation} from "@/services/api";
-import {Form, FormCheckbox, FormInput, FormInputPassword} from "@components/AuthForm";
+import {Form, FormInput, FormInputPassword} from "@components/AuthForm";
 import classes from "@pages/Login/styles.module.scss";
 import {clsx} from "clsx";
 
