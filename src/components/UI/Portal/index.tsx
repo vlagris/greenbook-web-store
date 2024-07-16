@@ -3,7 +3,11 @@ import {createPortal} from "react-dom";
 
 
 
-function Portal({ children }: {children: React.ReactNode}) {
+interface PortalProps {
+  children: React.ReactNode,
+}
+
+function Portal({ children }: PortalProps) {
 
   return createPortal(children, document.body);
 }

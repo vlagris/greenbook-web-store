@@ -6,8 +6,9 @@ import { formErrorMessage } from "@/constants.ts";
 import { useAddToCartMutation, useRegisterMutation } from "@/services/api";
 import { useAppSelector } from "@/hooks/useTypedReduxHooks.ts";
 import { cartSelectors } from "@/store";
-import { Form, FormButton, FormCheckbox, FormInput, FormInputPassword } from "@components/AuthForm";
+import { Form, FormInput, FormInputPassword } from "@components/AuthForm";
 import classes from "@pages/Signup/styles.module.scss";
+import {clsx} from "clsx";
 
 
 
@@ -86,45 +87,43 @@ function Signup() {
           <p className={classes.global_error}>{errors.root.message}</p>
         }
 
-        <div className={classes.input_wrap}>
+        <div className={classes.fields}>
           <FormInput
             type="text"
             placeholder="Электронная почта"
             formRegister={register("email", emailOption)}
             errorMessage={errors.email?.message}
           />
-        </div>
 
-        <div className={classes.input_wrap}>
           <FormInputPassword
             placeholder="Пароль"
             formRegister={register("pass", passOption)}
             errorMessage={errors.pass?.message}
+            autoComplete="new-password"
           />
-        </div>
 
-        <div className={classes.input_wrap}>
           <FormInputPassword
             placeholder="Пароль еще раз"
             formRegister={register("confirmPass", confirmPassOption)}
             errorMessage={errors.confirmPass?.message}
+            autoComplete="new-password"
           />
         </div>
 
-        <div className={classes.settings}>
-          <FormCheckbox>Принять все условия</FormCheckbox>
-        </div>
-
-        <FormButton>Зарегистрироваться</FormButton>
+        <button
+          type="submit"
+          className={clsx("btn", "btn-fill", classes.btn)}
+        >
+          Зарегистрироваться
+        </button>
 
         <div className={classes.login}>
-            <span className={classes.text}>
-              Уже есть аккаунт
-            </span>
+          <span className={classes.text}>Уже есть аккаунт</span>
           <Link to="/login" className={classes.link}>
             Войти
           </Link>
         </div>
+
       </Form>
     </div>
   );

@@ -1,7 +1,13 @@
 .login {
   display: flex;
   justify-content: center;
-  padding: 80px 0;
+  padding: 60px 0;
+}
+
+.fields {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .input_wrap {
@@ -29,8 +35,8 @@
 
 .settings {
   display: flex;
-  justify-content: space-between;
-  margin: 4px 0 20px 0;
+  justify-content: flex-end;
+  margin-bottom: 20px;
 }
 
 .global_error {
@@ -39,4 +45,29 @@
   color: var(--red);
   font-size: 15px;
   line-height: 1.5;
+}
+
+.btn {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+  .login {
+    padding: 80px 0;
+  }
+
+  .fields {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    margin-bottom: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+
 }

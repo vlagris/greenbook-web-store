@@ -1,0 +1,44 @@
+.navbar_mobile {
+  width: 100%;
+
+  background: var(--white);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(0,0,0,.1);
+}
+
+.wrapper {
+  display: flex;
+}
+
+.link {
+  display: block;
+  padding: 12px 0;
+  width: 100%;
+}
+
+.link_wrap {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.link_icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto;
+  stroke: var(--gray-900);
+}
+
+
+@media (min-width: 640px) {
+
+}
+
+@media (min-width: 1024px) {
+  .navbar_mobile {
+    display: none;
+  }
+}

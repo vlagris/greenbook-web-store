@@ -1,14 +1,18 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {DropdownContext} from "@components/UI/Dropdown/DropdownContext.ts";
-import classes from "@components/UI/Dropdown/styles.module.scss";
+
 
 
 export type ItemStates = {
   active: number | string,
   focus: number | string,
-  type: "focus" | "active"
+  type: "focus" | "active",
 }
 
+export type DropdownElements = {
+  toggle: HTMLButtonElement | null,
+  menu: HTMLDivElement | null,
+}
 
 interface CustomSelectProps {
   children?: React.ReactNode,
@@ -16,40 +20,44 @@ interface CustomSelectProps {
 }
 
 function Dropdown({ children, itemEffect = "active" }: CustomSelectProps) {
-  const [show, setShow] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [showDesktop, setShowDesktop] = useState(false);
+  const [showMobile, setShowMobile] = useState(false);
+  const [dropdownElements, setDropdownElements]  = useState<DropdownElements>({
+    toggle: null,
+    menu: null
+  });
   const [itemsState, setItemsState] = useState<ItemStates>({
     active: "",
     focus: "",
-    type: itemEffect
+    type: itemEffect,
   });
 
 
   useEffect(() => {
-    if (!show) {
-      return;
-    }
-
-    function handleWindowClick(event: MouseEvent) {
+    function handleClickOutside(event: MouseEvent) {
       const eventTarget = event.target as Element
-      if (!dropdownRef.current) {
-        return
-      }
-      if (!dropdownRef.current.outerHTML.includes(eventTarget.outerHTML)) {
-        setShow(false);
+      if (
+        dropdownElements.toggle &&
+        dropdownElements.menu &&
+        !dropdownElements.toggle.contains(eventTarget) &&
+        !dropdownElements.menu.contains(eventTarget)
+      ) {
+        setShowDesktop(false);
       }
     }
-
-    window.addEventListener("click", handleWindowClick, {capture: true});
-    return () => window.removeEventListener("click", handleWindowClick);
-  }, [show]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownElements]);
 
 
   return (
-    <DropdownContext.Provider value={{show, setShow, itemsState, setItemsState}}>
-      <div ref={dropdownRef} className={classes.dropdown}>
-          {children}
-      </div>
+    <DropdownContext.Provider value={{
+      showDesktop, setShowDesktop,
+      showMobile, setShowMobile,
+      itemsState, setItemsState,
+      dropdownElements, setDropdownElements
+    }}>
+      {children}
     </DropdownContext.Provider>
   );
 }

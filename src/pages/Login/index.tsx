@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import {ErrorType, HttpError} from "@/types";
 import {formErrorMessage} from "@/constants.ts";
 import {useLoginMutation} from "@/services/api";
-import {Form, FormButton, FormCheckbox, FormInput, FormInputPassword} from "@components/AuthForm";
+import {Form, FormInput, FormInputPassword} from "@components/AuthForm";
 import classes from "@pages/Login/styles.module.scss";
+import {clsx} from "clsx";
 
 
 
@@ -61,7 +62,7 @@ function Login() {
           <p className={classes.global_error}>{errors.root.message}</p>
         }
 
-        <div className={classes.input_wrap}>
+        <div className={classes.fields}>
           <FormInput
             type="text"
             placeholder="Электронная почта"
@@ -69,8 +70,7 @@ function Login() {
             errorMessage={errors.email?.message}
             isError={!!errors.email}
           />
-        </div>
-        <div className={classes.input_wrap}>
+
           <FormInputPassword
             placeholder="Пароль"
             formRegister={register("pass", {required: formErrorMessage.PASSWORD_NONE})}
@@ -80,13 +80,18 @@ function Login() {
         </div>
 
         <div className={classes.settings}>
-          <FormCheckbox>Запомнить меня</FormCheckbox>
+          {/*<FormCheckbox>Запомнить меня</FormCheckbox>*/}
           <Link to="/" className={classes.text}>
             Забыли пароль?
           </Link>
         </div>
 
-        <FormButton>Войти</FormButton>
+        <button
+          type="submit"
+          className={clsx("btn", "btn-fill", classes.btn)}
+        >
+          Войти
+        </button>
 
         <div className={classes.redirect}>
         <span className={classes.text}>

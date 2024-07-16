@@ -3,13 +3,15 @@ import {List, ListTitle, ListItem} from "@components/Footer/List";
 import classes from "./styles.module.scss";
 
 
+
 function Footer() {
 
   return (
     <footer className={classes.footer}>
       <div className="container">
         <div className={classes.footer_top}>
-          <div>
+
+          <div className={classes.info}>
             <p className={classes.logo}>
               Green
               <span>Book</span>
@@ -25,29 +27,31 @@ function Footer() {
             </div>
           </div>
 
-          <List>
-            <ListTitle>My Account</ListTitle>
-            <ListItem>My Account</ListItem>
-            <ListItem>Order History</ListItem>
-            <ListItem>Shopping Cart</ListItem>
-            <ListItem>Wishlist</ListItem>
-          </List>
+          {/*<div className={classes.lists}>*/}
+            <List>
+              <ListTitle>My Account</ListTitle>
+              <ListItem>My Account</ListItem>
+              <ListItem>Order History</ListItem>
+              <ListItem>Shopping Cart</ListItem>
+              <ListItem>Wishlist</ListItem>
+            </List>
 
-          <List>
-            <ListTitle>Helps</ListTitle>
-            <ListItem>Contact</ListItem>
-            <ListItem>Faqs</ListItem>
-            <ListItem>Terms & Condition</ListItem>
-            <ListItem>Privacy Policy</ListItem>
-          </List>
+            <List>
+              <ListTitle>Helps</ListTitle>
+              <ListItem>Contact</ListItem>
+              <ListItem>Faqs</ListItem>
+              <ListItem>Terms & Condition</ListItem>
+              <ListItem>Privacy Policy</ListItem>
+            </List>
 
-          <List>
-            <ListTitle>Proxy</ListTitle>
-            <ListItem>About</ListItem>
-            <ListItem>Shop</ListItem>
-            <ListItem>Product</ListItem>
-            <ListItem>Track Order</ListItem>
-          </List>
+            <List>
+              <ListTitle>Proxy</ListTitle>
+              <ListItem>About</ListItem>
+              <ListItem>Shop</ListItem>
+              <ListItem>Product</ListItem>
+              <ListItem>Track Order</ListItem>
+            </List>
+          {/*</div>*/}
         </div>
 
         <div className={classes.footer_bottom}>

@@ -1,7 +1,8 @@
 :root {
   --container: 1320px;
   --offset: 10px;
-  --header-height: 129px;
+  --header-height: 64px;
+  --navbar-height: 56px;
 
   --primary: #00B207;
   --primary-dark: #2C742F;
@@ -32,4 +33,16 @@
   --green-gray-700: #2B572E;
   --green-gray-800: #173B1A;
   --green-gray-900: #002603;
+}
+
+
+@media (min-width: 640px) {
+
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-height: 129px;
+    --navbar-height: 0px;
+  }
 }

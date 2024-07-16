@@ -14,7 +14,8 @@ interface DropdownItemProps {
 
 function DropdownItem({ children, id, active, onClick }: DropdownItemProps) {
   const {
-    setShow,
+    setShowDesktop,
+    setShowMobile,
     itemsState,
     setItemsState
   } = useContext(DropdownContext);
@@ -33,7 +34,8 @@ function DropdownItem({ children, id, active, onClick }: DropdownItemProps) {
       if (onClick) {
         onClick()
       }
-      setShow(false);
+      setShowDesktop(false);
+      setShowMobile(false);
       setItemsState(prev => (
         {...prev, active: id, focus: id }
       ));

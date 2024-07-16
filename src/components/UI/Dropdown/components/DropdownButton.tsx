@@ -10,10 +10,13 @@ interface DropdownButtonProps {
 }
 
 function DropdownButton({ children }: DropdownButtonProps) {
-  const {show, } = useContext(DropdownContext);
+  const {showDesktop, showMobile } = useContext(DropdownContext);
+  const show = showDesktop || showMobile;
 
   return (
-    <div className={clsx(classes.dropdown_btn, show && classes.dropdown_btn_active)}>
+    <div
+      className={clsx(classes.dropdown_btn, show && classes.dropdown_btn_active)}
+    >
       { children }
     </div>
   );

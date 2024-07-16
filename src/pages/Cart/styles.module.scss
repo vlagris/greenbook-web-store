@@ -1,19 +1,18 @@
 .cart {
-  padding: 40px 0 80px 0;
+  padding: 32px 0 52px 0;
 }
 
 .cart_empty {
-  min-height: calc(100vh - (128px + 363px));
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 60px 0;
 }
 
 .title {
-  margin: 0 0 32px;
-  font-size: 32px;
+  margin: 0 0 20px;
+  font-size: 24px;
   font-weight: 600;
   line-height: 1.2;
   color: var(--gray-900);
@@ -21,25 +20,26 @@
 }
 
 .description {
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 
   color: var(--gray-600);
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
   text-align: center;
 }
 
 .content {
   display: flex;
+  flex-direction: column;
 }
 
 .left {
-  margin: 0 24px 0 0;
-  width: 65%;
+  margin: 0 0 12px 0;
+  width: 100%;
 }
 
 .right {
-  width: 35%;
+  width: 100%;
 }
 
 .section {
@@ -48,16 +48,15 @@
 }
 
 .order {
-  padding: 24px;
+  padding: 16px;
 }
 
 .order_title {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: var(--gray-900);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.5;
-
 }
 
 .order_list {
@@ -68,28 +67,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
+  padding: 8px 0;
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--gray-100);
   }
-
 }
 
 .order_row_title {
   color: var(--gray-700);
+  font-size: 14px;
   line-height: 1.5;
 }
 
 .order_row_value {
   color: var(--gray-900);
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
 }
 
 .order_total_price {
   color: var(--gray-900);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.5;
 }
@@ -98,3 +98,66 @@
   width: 100%;
 }
 
+
+
+
+@media (min-width: 640px) {
+  .cart {
+    padding: 40px 0 80px 0;
+  }
+
+  .cart_empty {
+    padding: 80px 0;
+  }
+
+  .description {
+    margin-bottom: 24px;
+
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    margin: 0 0 32px;
+    font-size: 32px;
+  }
+
+  .content {
+    flex-direction: row;
+  }
+
+  .left {
+    margin: 0 24px 0 0;
+    width: 65%;
+  }
+
+  .right {
+    width: 35%;
+  }
+
+  .order {
+    padding: 24px;
+  }
+
+  .order_title {
+    font-size: 20px;
+    margin: 0 0 8px;
+  }
+
+  .order_item {
+    padding: 12px 0;
+  }
+
+  .order_row_title {
+    font-size: 16px;
+  }
+
+  .order_row_value {
+    font-size: 16px;
+  }
+
+  .order_total_price {
+    font-size: 16px;
+  }
+}

@@ -72,27 +72,29 @@ function AccountForm({user}: AccountFormProps) {
       </PanelHeader>
 
       <form className={classes.account_form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={classes.account_form_inputs}>
-          <TitleInputWrap title="Имя">
-            <CustomInput
-              formRegister={register("firstName", {required: ""})}
-              placeholder="Имя"
-            />
-          </TitleInputWrap>
-          <TitleInputWrap title="Фамилия">
-            <CustomInput
-              formRegister={register("lastName", {required: ""})}
-              placeholder="Фамилия"
-            />
-          </TitleInputWrap>
-        </div>
+        <div className={classes.account_form_top}>
+          <div className={classes.account_form_inputs}>
+            <TitleInputWrap title="Имя">
+              <CustomInput
+                formRegister={register("firstName", {required: ""})}
+                placeholder="Имя"
+              />
+            </TitleInputWrap>
+            <TitleInputWrap title="Фамилия">
+              <CustomInput
+                formRegister={register("lastName", {required: ""})}
+                placeholder="Фамилия"
+              />
+            </TitleInputWrap>
+          </div>
 
-        <ImageUploader
-          register={register("avatar")}
-          file={watch("avatar")[0]}
-          imageUrl={avatarDeleted ? "" : user.avatar}
-          onDelete={deleteAvatar}
-        />
+          <ImageUploader
+            register={register("avatar")}
+            file={watch("avatar")[0]}
+            imageUrl={avatarDeleted ? "" : user.avatar}
+            onDelete={deleteAvatar}
+          />
+        </div>
 
 
         <button type="submit" className={clsx(classes.form_btn, "btn", "btn-fill")}>

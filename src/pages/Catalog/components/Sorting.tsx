@@ -1,7 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
 import { Dropdown, DropdownButton, DropdownIcon, DropdownItem, DropdownMenu, DropdownToggle } from "@components/UI/Dropdown";
 import {QueryParams} from "@/hooks/useQueryParams.ts";
-import classes from "@pages/Catalog/styles.module.scss";
 
 
 
@@ -39,31 +38,29 @@ function Sorting({queryParams, setQueryParams}: SortingProps) {
 
 
   return (
-    <div className={classes.sorting}>
-        <Dropdown>
-          <DropdownToggle>
-            <DropdownButton>
-              {sorting.map(item => (
-                item.type === active && item.name
-              ))}
-              <DropdownIcon/>
-            </DropdownButton>
-          </DropdownToggle>
+    <Dropdown>
+      <DropdownToggle>
+        <DropdownButton>
+          {sorting.map(item => (
+            item.type === active && item.name
+          ))}
+          <DropdownIcon/>
+        </DropdownButton>
+      </DropdownToggle>
 
-          <DropdownMenu>
-            {sorting.map(item => (
-              <DropdownItem
-                key={item.id}
-                id={item.id}
-                onClick={createOnClick(item.type)}
-                active={item.type === active}
-              >
-                {item.name}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
-    </div>
+      <DropdownMenu>
+        {sorting.map(item => (
+          <DropdownItem
+            key={item.id}
+            id={item.id}
+            onClick={createOnClick(item.type)}
+            active={item.type === active}
+          >
+            {item.name}
+          </DropdownItem>
+        ))}
+      </DropdownMenu>
+    </Dropdown>
   );
 }
 

@@ -1,6 +1,6 @@
 .btn-small {
   display: inline-block;
-  padding: 8px 22px;
+  padding: 8px 18px;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.3;
@@ -10,7 +10,7 @@
 
 .btn {
   display: inline-block;
-  padding: 12px 30px;
+  padding: 10px 20px;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.2;
@@ -20,7 +20,7 @@
 
 .btn-large {
   display: inline-block;
-  padding: 14px 38px;
+  padding: 12px 24px;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2;
@@ -51,7 +51,6 @@
   }
 }
 
-
 .btn-text {
   color: var(--primary);
   background: rgb(86, 172, 89, 0.1);
@@ -62,4 +61,25 @@
     color: var(--primary-dark);
     background: rgb(44, 116, 47, 0.2);
   }
+}
+
+
+@media (min-width: 640px) {
+  .btn-small {
+    padding: 8px 22px;
+    font-size: 12px;
+  }
+
+  .btn {
+    padding: 12px 30px;
+    font-size: 14px;
+  }
+
+  .btn-large {
+    padding: 14px 38px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
 }

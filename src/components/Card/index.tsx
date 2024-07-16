@@ -3,10 +3,10 @@ import { Book } from "@/types";
 import { useAddToCartMutation } from "@/services/api";
 import { addCartItem, cartSelectors } from "@/store";
 import { useAppDispatch, useAppSelector } from "@/hooks/useTypedReduxHooks.ts";
+import useAuth from "@/hooks/useAuth.ts";
 import { currency } from "@/constants.ts";
 import classes from "./styles.module.scss";
 import StarIcon from '@assets/icons/star.svg?react';
-import useAuth from "@/hooks/useAuth.ts";
 
 
 

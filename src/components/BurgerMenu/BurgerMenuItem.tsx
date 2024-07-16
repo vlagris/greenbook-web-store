@@ -1,6 +1,6 @@
 import React from 'react';
-import classes from "@components/Header/components/BurgerMenu/styles.module.scss";
 import {NavLink} from "react-router-dom";
+import classes from "@components/BurgerMenu/styles.module.scss";
 
 
 
